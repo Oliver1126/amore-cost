@@ -1,0 +1,5 @@
+[SIMULATED — no ANTHROPIC_API_KEY configured, see mwp-matrix/.env.example]
+
+# "Margin % vs. Markup %: they're not the same number"
+
+This is a simulated placeholder standing in for a real AI-drafted post about: directly reuses the explanation now built into Costing & Pricing (decision 0019). A genuinely common point of confusion, worth a standalone explainer even for people who never open the app. Once a real ANTHROPIC_API_KEY is set in mwp-matrix/.env, this section will contain an actual draft grounded in Amore Cost's real ICP and the specific feature this topic names, following the tone rules in 01_input/instructions.md and validated against 01_input/schema.json before reaching the human-approval gate.

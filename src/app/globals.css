@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f2f3f0;
+  --surface: #ffffff;
+  --surface-muted: #f7f8f5;
+  --border: #e6e8e2;
+  --text: #1b1f18;
+  --text-muted: #7c8378;
+  --accent: #1e8a5c;
+  --accent-strong: #166b47;
+  --accent-soft: #e3f2e9;
+  --accent-ink: #ffffff;
+  --good: #1e8a5c;
+  --bad: #d64545;
+  --bad-soft: #fbe9e8;
+  /** Recipe cost emphasis (StatCards, decision 0039) — a warm amber-orange, distinct from the green accent/red-bad pair. */
+  --warn: #c8720e;
+  --warn-soft: #fbeedc;
+  /** Secondary profit metric (StatCards, decision 0039) — a calm blue, paired with --warn as the second new semantic tone. */
+  --info: #2f6fb0;
+  --info-soft: #e5eef8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14161a;
+    --surface: #1c1f24;
+    --surface-muted: #22262c;
+    --border: #2c3138;
+    --text: #edeee9;
+    --text-muted: #8d938d;
+    --accent: #35a578;
+    --accent-strong: #4fc491;
+    --accent-soft: #1c3229;
+    --accent-ink: #06140d;
+    --good: #35a578;
+    --bad: #e3776b;
+    --bad-soft: #3a1f1c;
+    --warn: #e0a050;
+    --warn-soft: #3a2a15;
+    --info: #5b9bd9;
+    --info-soft: #1c2c3d;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #14161a;
+  --surface: #1c1f24;
+  --surface-muted: #22262c;
+  --border: #2c3138;
+  --text: #edeee9;
+  --text-muted: #8d938d;
+  --accent: #35a578;
+  --accent-strong: #4fc491;
+  --accent-soft: #1c3229;
+  --accent-ink: #06140d;
+  --good: #35a578;
+  --bad: #e3776b;
+  --bad-soft: #3a1f1c;
+  --warn: #e0a050;
+  --warn-soft: #3a2a15;
+  --info: #5b9bd9;
+  --info-soft: #1c2c3d;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-good: var(--good);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --font-body: var(--font-body);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-display {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.font-num {
+  font-variant-numeric: tabular-nums;
+}
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 1px 2px rgba(20, 22, 18, 0.04);
+}
+
+/*
+ * A real, visible keyboard-focus ring, app-wide — most inputs/buttons
+ * pair `focus:outline-none` with only a border-color change
+ * (`focus:border-accent`), which is a weak signal on its own. This
+ * rule is unlayered CSS, so per the cascade-layers spec it wins over
+ * Tailwind's utility-layer `outline: none` without needing to touch
+ * every call site individually. `:focus-visible` (not `:focus`) so it
+ * only shows for keyboard/programmatic focus, not every mouse click.
+ * (If you check this in devtools right after a Tab press, give it
+ * ~150ms — most elements also transition color/outline-color, so the
+ * ring briefly renders mid-fade from the element's text color before
+ * settling on the accent color.)
+ */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
