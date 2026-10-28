@@ -18,6 +18,10 @@ fastest way to demo Amore Cost to a first business owner for Phase 1
 validation. Remaining audit gaps are backlog items 9–15. A comparison
 against KwentaPOS (a PH POS with recipe costing) is at
 [business/kwentapos-comparison.md](business/kwentapos-comparison.md).
+The plan for starting, scaling and winning against them is the new
+[roadmap/roadmap.md](roadmap/roadmap.md) (old 11-module roadmap archived): **next action is
+Stage 0 — deploy, add analytics + a feedback link — then Stage 1's
+20-owner validation with a pre-set gate.**
 
 **Latest (decision 0040):** the app is now **five pages** — Dashboard,
 Input, OPEX & Overhead, Receipt Simulator, Margin & POS Simulator —

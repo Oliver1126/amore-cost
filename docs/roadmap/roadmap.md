@@ -1,275 +1,295 @@
-# Roadmap
+# Roadmap: how Amore Cost starts, scales, and wins
 
-The full sequence, from where Amore Cost stands today through a validated
-launch and into growth. [next-steps.md](../next-steps.md) is the pinned
-excerpt of **Phase 0** below — read that first for the single most
-immediate action. This file is the whole map behind it.
+**Written:** 2026-10-28, after the cut to five pages (decision 0040), the
+pricing aids (decision 0041), and the
+[KwentaPOS comparison](../business/kwentapos-comparison.md).
+**It replaces** the old phase-by-phase roadmap, which described the
+11-module app. That version is archived at
+[../archive/eleven-modules-2026-10/roadmap.md](../archive/eleven-modules-2026-10/roadmap.md).
 
-**Current phase: 2, 3, and 4 are all built and the app is deployed;
-Phase 1 — Validate, still not run.** Fork, name, lead vertical, and
-visual direction are all resolved (see
-[business/decisions/](../business/decisions/CONTEXT.md) 0001, 0009,
-0004, 0010); the name due-diligence checklist is the one Phase 0 item
-still open. **Every module in every phase through Phase 4 is now real,
-working code** (see [decision 0006](../business/decisions/0006-all-modules-built-local-only.md)),
-**and it's reachable at https://amore-cost.vercel.app** (decision
-0031, 2026-08-21) — built and shipped entirely ahead of Phase 1
-validation, which is now the single most important open item, not just
-"the next one." The build has outpaced validation many times over now:
-v0 before Phase 1, v1+v2's entire scope the same day, a rename and two
-logo iterations, a full Tagalog/English toggle, a whole Catalog
-Management rework, a cross-page correctness audit (decision 0030), and
-now deployment itself (decision 0031) — see
-[completed.md](completed.md) for the full list. Phases 6–8 were
-previously just implied as "open questions" inside Phases 3/4/5, now
-given an actual home so they stop getting silently re-discovered every
-time someone asks "what's left." Phase 9 (mobile app packaging) is a
-genuinely new idea, added 2026-08-22, not a renamed old one.
+[next-steps.md](../next-steps.md) is the pinned "do this now" excerpt.
+This file is the whole plan behind it.
 
-## Phase process, at a glance
+> **Every number in this file is a target or an assumption, not a fact.**
+> Nothing here has been validated with a real customer yet. Each stage
+> has a gate, and you only move on when the gate is met.
 
-| Phase | What it is | Status |
+---
+
+## 1. The situation in one paragraph
+
+Philippine food businesses already have choices:
+- POS apps that also cost recipes: KwentaPOS from ₱59/mo (recipe costing
+  needs Pro, ₱299/mo); Loyverse, StoreHub and UTAK at various prices.
+- A recipe-costing app: iCost, ₱299–599/mo.
+- ₱200–₱1,000 spreadsheet templates.
+
+Amore Cost is one founder, ₱0 budget, zero users, and a free web app
+that does **pricing** better than any of them. It doesn't do selling,
+stock, or staff, and it shouldn't try to.
+
+## 2. The way to win (the strategy)
+
+**Don't fight the POS war. Own the question every food seller asks
+before they need a POS: "Magkano dapat ang presyo ko?"**
+
+Five moves, in order of importance:
+
+### Move 1: Be the "pricing brain," not another POS
+
+- POS apps record what you sold.
+- Amore Cost tells you **what to charge and whether you're actually
+  earning**. That means:
+  - the suggested price;
+  - VAT, Senior/PWD discount and service charge done correctly;
+  - OPEX per dish and break-even;
+  - yield (waste);
+  - menu rounding.
+- None of the POS apps sell this depth. Keep Amore Cost narrow, deep
+  and excellent at this one job.
+- **The rule:** if a feature helps an owner *price better*, it's a
+  candidate. If it helps them *operate the store* (checkout, stock,
+  utang, shifts, branches), the answer is no. Point them to a POS.
+
+### Move 2: Catch owners earlier than the POS apps do
+
+KwentaPOS's customer already has a store running. Our customer is:
+- the home baker deciding what to charge for a cake;
+- the food-cart starter pricing their first menu;
+- the carinderia owner who suspects the adobo is losing money.
+
+That's the **start of the business journey**. Free, no sign-up, Tagalog,
+and a one-click sample menu make Amore Cost the first tool they touch.
+Whoever helps them price first earns their trust when they later need
+more.
+
+### Move 3: Partner with POS apps instead of fighting them
+
+- **Message:** "Price it in Amore Cost, sell it in your POS."
+- **Build:** export the price list as CSV in the import formats of
+  Loyverse, KwentaPOS and UTAK (backlog item 14, extended).
+- **Effect:** every POS becomes a distribution channel instead of a
+  competitor. Later, pitch a referral deal to POS vendors. They lack
+  pricing depth, and we send them users who are ready for a POS.
+
+### Move 4: Build the one moat a POS won't build: live ingredient prices
+
+- Every owner retypes the price of chicken, pork, rice and eggs.
+- The Department of Agriculture publishes market price monitoring for
+  Metro Manila (verify the current format and usage terms before
+  building).
+- Once accounts exist (Stage 3), combine that public data with
+  anonymized prices owners enter. The result is a **live Philippine
+  ingredient price index** that can say: *"Pork is up 8% this week. 3
+  of your recipes dropped below target margin. Suggested new price:
+  ₱189."*
+- POS apps compete on checkout speed and won't build this. It gets
+  better with every user, which is a real network effect.
+
+### Move 5: Win on content and community, not on ads
+
+- The audience learns from short videos and Facebook groups.
+- "Magkano dapat ang presyo ng ___?" is endlessly repeatable content,
+  and every video ends at a free tool that answers it.
+- This ties directly into your existing YouTube/content skills.
+
+### What you must NOT do
+
+| Don't | Why |
+|---|---|
+| Rebuild POS, inventory, utang, shifts, multi-branch | Decision 0040 cut these on purpose. It's a crowded market with ₱59/mo competitors, and you're solo |
+| Chase BIR accreditation | Only needed for an actual POS issuing receipts. Amore Cost simulates; it doesn't sell |
+| Start a price war under ₱59 | You can't out-cheap a funded POS. Compete on value, keep the core free |
+| Build another feature before Stage 1's gate | This project has built ahead of validation many times. The next win is customers, not code |
+| Spend on paid ads before retention is proven | Ads amplify retention; they don't create it |
+
+---
+
+## 3. The stages
+
+| Stage | When (target) | Goal | Gate to move on |
+|---|---|---|---|
+| **0: Launch-ready** | Week 1 | The live site matches the code, you can see who uses it, users can reach you | Deployed + analytics + feedback link live |
+| **1: Validate** | Weeks 2–6 | 20 real food owners try it on their own recipes | See gate below |
+| **2: Content engine** | Months 2–4 | Steady free users from content and groups | 300+ monthly users, 20%+ come back within 30 days |
+| **3: Accounts + paid tier** | Months 4–6 | Cloud sync, first paying customers | 20+ paying customers |
+| **4: Scale the moat** | Months 6–12 | Price index, POS exports, partnerships, app stores | ₱20k+ MRR (target, unvalidated) |
+| **5: Expand** | Year 2 | Multi-outlet, consultants, institutions | Decided by Stage 4 data |
+
+### Stage 0: Launch-ready (week 1, mostly free)
+
+1. **Deploy** the current build (`vercel --prod`). The live site is
+   behind the code (no yield, rounding or sample recipes yet).
+2. **Turn on privacy-friendly analytics.** Vercel Web Analytics is free
+   at this scale. Track visits, "Try with sample recipes" clicks, and
+   "+ New recipe" clicks.
+3. **Add a feedback link** in the app, e.g. a Google Form: "What did
+   you price? Did the suggested price feel right? Would you pay for
+   sync?"
+4. **Finish the name check:** domain, Facebook/TikTok/Instagram handles,
+   IPOPHL trademark search for "Amore Cost". This item has been open
+   since the start.
+5. **Create the Facebook page** and one TikTok/Reels account under the
+   brand.
+
+### Stage 1: Validate (weeks 2–6)
+
+**Set the gate before you start, so the bar can't move to fit the
+results:**
+
+- Talk to **20 food owners**: home bakers, carinderias, food carts,
+  online sellers. Start in person nearby (Parañaque and neighboring
+  areas), then go online.
+- **Script:**
+  1. Open the app on their phone.
+  2. Tap "Try with sample recipes."
+  3. Ask them to add **one of their own dishes**.
+  4. Ask: *"Is the suggested price close to what you charge? Did
+     anything surprise you?"*
+  5. Ask: *"Would you pay ₱99/month to keep this on all your devices
+     and get price alerts?"*
+- **Gate (all three must be true):**
+  - ≥ 10 of 20 enter at least one real recipe without your help;
+  - ≥ 5 come back on their own within 7 days (ask them, or check
+    analytics);
+  - ≥ 3 say yes to a specific price, or ask you "when can I pay?"
+- **If the gate fails:** don't build. Read the notes, find what
+  confused or bored them, and fix *that* (usually onboarding or wording,
+  not features). Rerun with 10 new people. If it fails twice, write a
+  decision record on whether to pivot. One option: a pricing *service*
+  you do for owners using the tool, instead of a SaaS.
+- **Log every conversation** as a short note in `docs/business/` (new
+  file `validation-log.md`). It's the most valuable data this project
+  will ever have.
+
+### Stage 2: Content engine (months 2–4, about ₱0–2k/month)
+
+- **3 short videos per week.** Format: "Magkano dapat ang presyo ng
+  [dish]?", where you cost it live in Amore Cost and reveal the suggested
+  price. Variations:
+  - "Lugi ka ba sa ___?"
+  - "Bakit 30% lang dapat ang food cost mo"
+  - "Senior/PWD discount: tama ba ang kwenta mo?"
+- **"Presyo Check" posts:** invite owners to send a recipe; you price it
+  publicly with permission. This gets you content, leads and
+  testimonials at once.
+- **Facebook groups:** help first, link second. Answer pricing questions
+  in home-baker, carinderia and food-business groups, and share the
+  sample-recipe link when it fits.
+- **Free lead magnets** that point back to the app:
+  - "Food cost cheat sheet (PH 2026)"
+  - "Senior/PWD discount explained"
+- **Small builds allowed in this stage** (each one makes content or
+  sharing easier):
+  - CSV/price-list export (backlog 14);
+  - printable recipe card (backlog 13);
+  - delivery-app commission in the simulator (backlog 11).
+- **Gate:** 300+ monthly users, with 20%+ returning within 30 days.
+
+### Stage 3: Accounts + paid tier (months 4–6)
+
+- **Backend:** Supabase (you already know it from the Sales Agent
+  project). Write a decision record first, as root `CLAUDE.md`
+  requires.
+  - Accounts are **optional**. The no-sign-up free tool stays.
+  - Import existing localStorage data on first sign-in.
+- **What stays free forever:** everything the app does today on one
+  device. This is the hook and the content engine's destination.
+- **Amore Cost Plus**, test **₱99/mo or ₱899/yr** (below iCost and
+  KwentaPOS Pro, above "free"):
+  - cloud sync across phone and laptop, so data is never lost to a
+    cleared browser (the #1 real weakness today);
+  - ingredient price alerts ("your margin slipped");
+  - unlimited saved price history;
+  - branded PDF menu or price list;
+  - delivery-app pricing (GrabFood/foodpanda commission built in).
+- **Also test a one-time "Lifetime Starter"** (e.g. ₱1,499) with the
+  first 50 users. The concept doc's open question is whether this
+  market prefers one-time payments, so measure it instead of guessing.
+- **Payments:** a PH-friendly gateway that takes GCash/Maya (e.g.
+  PayMongo or Xendit). Compare fees at decision time.
+- **Gate:** 20+ paying customers.
+
+### Stage 4: Scale the moat (months 6–12)
+
+1. **Ingredient price index (Move 4):**
+   - Start with Metro Manila staples from public DA data plus
+     user-entered prices.
+   - Weekly "presyo ng bilihin" content writes itself from the index.
+2. **POS exports + partnerships (Move 3):**
+   - CSV formats for Loyverse, KwentaPOS and UTAK.
+   - Approach one POS vendor for a referral swap.
+3. **Distribution partners:**
+   - DTI Negosyo Centers and LGU livelihood programs: a free tool they
+     can teach in seminars;
+   - culinary and baking schools: a pricing module for students;
+   - ingredient suppliers and baking-supply stores: co-branded "price
+     your recipes" QR at the counter.
+4. **Mobile app stores:** wrap the web app for Google Play (TWA, $25
+   one-time). iOS later, since Apple review risks rejecting a "website
+   in a shell."
+5. **Referral loop:** "Give a friend 1 month of Plus, get 1 month."
+   This market spreads through barkadas and groups.
+- **Target:** ₱20k+ MRR, about 200 Plus users at ₱99. This is a target,
+  not a forecast. Revisit with real conversion data from Stage 3.
+
+### Stage 5: Expand (year 2, only if Stage 4 works)
+
+- **Multi-outlet / small franchise costing:** one menu across several
+  branches, with prices adjusted per location. This is *costing*
+  across branches, not a POS.
+- **Consultant tier** (~₱499/mo): food-business coaches and franchise
+  consultants who price menus for many clients.
+- **Institutional licenses:** schools, DTI programs, cooperatives.
+- **Regional price indexes** (Cebu, Davao) once there are users there.
+
+---
+
+## 4. Battlecards: what to say against each alternative
+
+| When they say… | You say… |
+|---|---|
+| "I already use KwentaPOS / Loyverse." | "Keep it. Use Amore Cost to set the right price first, including VAT, Senior/PWD and your rent per dish, then put that price in your POS." |
+| "iCost already does recipe costing." | "Amore Cost is free with no sign-up, works in Tagalog, and shows OPEX per dish, break-even, and a profit-and-loss simulator." |
+| "I have a spreadsheet." | "Your sheet goes stale the day chicken goes up. Here, change one price and every recipe updates." |
+| "I just copy my competitor's price." | "Their costs aren't your costs. Let's check your adobo: 2 minutes, free." |
+
+## 5. Risks and what to do if they happen
+
+| Risk | Early sign | Response |
 |---|---|---|
-| **0 — Decide** | Lock the fork, name, vertical, and visual identity before writing product code | 🟡 Mostly done — fork/name/vertical/logo all resolved (0001, 0009, 0004, 0010); only the name due-diligence checklist (domain/handles/trademark) is still open |
-| **1 — Validate** | Show the pitch (now the live app) to real PH business owners, ask "would this replace your spreadsheet" | 🔴 **Not run** — the single most overdue item on this whole roadmap, no longer blocked by anything technical |
-| **2 — Build v0** | The free, no-signup calculator (Costing & Pricing, Break-Even) | 🟢 Built 2026-08-17, ahead of Phase 1; **deployed** 2026-08-21 (decision 0031) |
-| **3 — Build v1** | Catalog, Inventory, Cost History, Documents — "the reason to create an account" | 🟢 Built 2026-08-17, same day as v0, still simulated on `localStorage` (no real accounts) |
-| **4 — Monetize (features)** | Multi-User, Multi-Channel Pricing, Margin Alerts, Reporting | 🟢 Built 2026-08-17 — the features exist; the paid *tier* itself moved to Phase 7, since it needs Phase 6 first |
-| **5 — Grow (marketing)** | Content marketing, referrals, the Fork 3 partnership option, the Atlas Freelance tie-in | 🔴 Not started — correctly gated behind real validation signal |
-| **6 — Real accounts & backend** *(new)* | Auth, database, and the `localStorage` → account migration — unlocks real Multi-User security and multi-register POS sync | 🔴 Not started — [backlog.md](backlog.md) item 1; needs Phase 1 signal first |
-| **7 — Launch a paid tier** *(new)* | Actually gate something behind payment and take money | 🔴 Not started — depends on Phase 6 existing and Phase 1 confirming willingness to pay; draft ₱199–499/month range is unvalidated |
-| **8 — Ecosystem & integrations** *(new)* | Shopee/Lazada order import, receipt OCR, real push/email notifications, shareable client-facing links, camera barcode scanning, the Atlas Freelance tie-in | 🔴 Not started — [backlog.md](backlog.md) items 4–9; all but barcode scanning need Phase 6's backend first |
-| **9 — Mobile app packaging** *(new)* | Wrap the existing web app for Google Play (TWA) and the Apple App Store (Capacitor) | 🔴 Not started — no rewrite needed, but gated on Phase 1 signal first, same as everything else; most valuable once Phase 6 exists |
+| KwentaPOS or iCost adds VAT/Senior-PWD pricing depth | Their site or changelog mentions it | Lean harder on the free tier, content, and the price index. Speed and focus are the defense. Re-check competitors every quarter |
+| Owners like it but won't pay | Stage 3 conversion under 2% | Test one-time pricing. Test B2B (schools, DTI, consultants) as the payer instead of the owner |
+| Validation keeps failing | Stage 1 gate missed twice | Decision record: pivot to a done-for-you pricing service, or pause |
+| Founder time spread across too many ventures | Stage 2 videos stop | Cut scope to 1 video/week + 3 group answers/week. Consistency beats volume |
+| Data loss (localStorage) hurts trust before Stage 3 | Users report lost recipes | Make "Download backup" more visible. Pull sync forward |
 
-Everything green happened **before** the one red item that was supposed to gate it (Phase 1). That inversion is a known, named risk in this file, not an oversight — see each phase section below for the full reasoning and what it does/doesn't change about what happens next.
+## 6. The scoreboard (review every Sunday)
 
-## Phase 0 — Decide (now, before anything else)
+| Metric | Where to get it | Stage 1 | Stage 2 | Stage 3 | Stage 4 |
+|---|---|---|---|---|---|
+| Owners interviewed | validation-log.md | 20 | — | — | — |
+| Monthly users | Analytics | — | 300 | 1,000 | 5,000 |
+| Users who add their own recipe | Analytics | 50% | 40% | 40% | 40% |
+| 30-day return rate | Analytics | — | 20% | 25% | 30% |
+| Paying customers | Payment dashboard | — | — | 20 | 200 |
+| Videos published | Content log | — | 3/week | 3/week | 3/week |
 
-1. ~~Re-decide the lead vertical~~ — **resolved, twice:** unified food +
-   service + retail first
-   ([decision 0004](../business/decisions/0004-lead-vertical-unified.md)),
-   then narrowed to food-only
-   ([decision 0038](../business/decisions/0038-food-only-vertical-removed.md),
-   2026-09-03) as a deliberate staged rollout, not a reversal made
-   lightly. This is also why [product/modules.md](../product/modules.md) now
-   includes a dedicated Inventory module — going after the food
-   vertical directly means matching iCost's real-time inventory
-   feature, not just its costing math.
-2. **Clear the name due-diligence checklist** — `.ph`/`.com` domain,
-   social handles (Facebook/Instagram/TikTok, where this ICP actually
-   lives), and an IPOPHL trademark search for "Amore Cost." A quick check
-   already found only an obscure, unrelated Node.js library sharing the
-   *previous* name, Calcost (see
-   [business/decisions/0003-brand-name-calcost.md](../business/decisions/0003-brand-name-calcost.md))
-   — that check needs re-running against "Amore Cost" (see
-   [decision 0009](../business/decisions/0009-brand-name-amore-cost.md)),
-   not yet formally cleared either way.
-3. ~~Pick a visual direction~~ — **resolved:** a custom two-tone ring +
-   α% mark, built as real code
-   (`src/components/BrandMark.tsx`) rather than a static image dropped
-   in `branding/logo/` as originally planned here. Went through two
-   iterations the same day — see
-   [decision 0009](../business/decisions/0009-brand-name-amore-cost.md)
-   (v1, superseded) and
-   [decision 0010](../business/decisions/0010-logo-mark-v2-ring-and-chevrons.md)
-   (v2, current).
+All targets are starting guesses. Replace them with real baselines
+after Stage 1.
 
-## Phase 1 — Validate (before writing any product code)
+---
 
-- Use [branding/pitch-one-pager.html](../branding/pitch-one-pager.html)
-  (or a screenshot of it) as the validation artifact — it's built to be
-  shareable as-is.
-- Post it into the channels already identified in
-  [business/market-research.md](../business/market-research.md)'s
-  "Distribution channels worth testing first": PH Business
-  Network-adjacent communities, Filipino small-business Facebook
-  groups, r/phcareers, OnlineJobs.ph-adjacent spaces. Position it as
-  "the upgrade path from the sheet you already bought," not a frontal
-  attack on the community where the competing template is sold.
-- The ask is **"would this replace your spreadsheet,"** not "would you
-  pay" — the same soft-validation move Atlas Freelance's own Phase 1
-  used before any monetization signal was expected.
-- Specifically resolve the open question in
-  [business/concept.md](../business/concept.md): is monthly
-  willingness-to-pay real here, or does this market only accept
-  one-time pricing? This decides whether Phase 4's pricing model
-  survives contact with reality.
-- Decide go/no-go criteria for moving to Phase 2 *before* posting, not
-  after — so the bar doesn't quietly move to match whatever response
-  comes in.
+## How this file stays useful
 
-## Phase 2 — Build v0 (the free, no-signup calculator)
-
-**Built 2026-08-17, ahead of Phase 1 validation** — Oliver asked for a
-working local build before the pitch was shared anywhere, so the
-sequence ran 2 before 1 in practice. That's a real reordering, not a
-correction to this file: Phase 1's validation still needs to happen
-before Phase 3, ideally now pointing at the actual running app
-(`npm run dev`, see root `CLAUDE.md`) instead of only the static pitch
-page.
-
-Scope, as drafted in [product/scope-v1.md](../product/scope-v1.md)'s "v0"
-section, is built in `src/`: one calculator engine — originally
-tab-switchable across food/service/resale, narrowed to food-only as of
-[decision 0038](../business/decisions/0038-food-only-vertical-removed.md)
-(see [product/modules.md](../product/modules.md)'s "Food-only" note) —
-all three pricing strategies (markup / margin / fixed profit), the
-VAT / non-VAT tax toggle, and a break-even calculator — all
-`localStorage`-only, no login. Stack: Next.js + TypeScript + Tailwind,
-matching Atlas Freelance's stack per that file's own suggestion.
-
-- **Deployed 2026-08-21** (decision 0031): **https://amore-cost.vercel.app**,
-  via CLI deploy (no git repo yet, so redeploys are manual —
-  `vercel --prod` from the project folder). Was tracked in
-  [backlog.md](backlog.md) item 1, explicitly deferred 2026-08-18 in
-  favor of the ingredient library and a test suite, both of which
-  landed first (see [completed.md](completed.md)).
-
-## Phase 3 — Build v1 (the reason to create an account)
-
-**Built 2026-08-17, same day as Phase 2, ahead of Phase 1 validation**
-(decision 0006) — Catalog, Inventory, Cost History, and Documents
-(CSV + printable quotations) are all real, but simulated with
-`localStorage` rather than real accounts. See
-[product/scope-v1.md](../product/scope-v1.md) and
-[product/modules.md](../product/modules.md) for exactly what shipped and
-which parts are simplified (Inventory tracks per-item stock, not a
-shared ingredient pool).
-
-Real accounts (auth, backend, database, the localStorage → account
-migration path) are **still not built** — this phase's original
-premise ("the reason to create an account") was satisfied without
-actually needing one yet. That work now has its own home, Phase 6, not
-an assumed next step — see `product/scope-v1.md`'s "open question this
-leaves."
-
-## Phase 4 — Monetize the features (v2)
-
-**Built 2026-08-17** (decision 0006) — Multi-User (a local profile
-switcher, explicitly *not* real access control), Multi-Channel
-Pricing, Margin Alerts, and Sales & Profit Reporting are all real.
-These are the features Phase 7 will eventually gate behind payment —
-this phase is just "build the thing," not "charge for it." See Phase 7
-for the actual paid-tier decision, which needs Phase 6's backend to
-even be possible.
-
-## Phase 5 — Grow (marketing)
-
-- Content marketing aimed at the ICP — how-to-price and how-to-cost
-  content is exactly what this audience already searches for, mirroring
-  Atlas Freelance's own Phase 3 playbook. See
-  [../marketing/content-ideas.md](../marketing/content-ideas.md) for
-  the actual backlog of pieces.
-- A referral program — this market clusters in communities, so word of
-  mouth compounds fast (same logic as Atlas Freelance's Phase 3).
-- Revisit **Fork 3** opportunistically — a PH Business Network
-  partnership conversation (see
-  [business/strategic-forks.md](../business/strategic-forks.md)) is a much
-  easier pitch once there's a real, validated product to show instead
-  of just an idea.
-
-This phase can start as soon as Phase 1 validates — it doesn't need
-Phases 6–8 first, since it's marketing the free tool that already
-exists and is deployed.
-
-## Phase 6 — Real accounts & backend
-
-**Not started** — [backlog.md](backlog.md) item 1. Auth, a real
-database, and the `localStorage` → account migration path. This is
-what actually unlocks:
-- Fixing Multi-User's documented lack of real security (it says so on
-  the page itself — decision 0022's scope note).
-- True multi-register/multi-terminal sync for Point of Sale (decision
-  0015 already scoped a single register as v1's deliberate limit).
-- A pooled raw-ingredient stock across products, instead of Inventory's
-  current per-finished-item tracking.
-- Everything in Phase 8 except barcode scanning.
-
-This was previously buried as an "open question" inside the original
-Phase 3/4 text rather than given its own phase — pulled out here so it
-has a real home instead of getting silently re-discovered. Gated on
-Phase 1 signal: building this before knowing anyone wants to pay for
-sync/multi-device would be building ahead of validation for a fifth
-time.
-
-## Phase 7 — Launch a paid tier
-
-**Not started** — depends on Phase 6 existing and Phase 1 confirming
-real willingness to pay (the open question in
-[business/concept.md](../business/concept.md): is monthly billing
-viable in this market, or does it only accept one-time pricing?).
-Deciding *what* to gate is itself an open decision, not assumed:
-either (a) keep the whole local-only product free forever and monetize
-a future accounts-based sync tier instead, or (b) retroactively gate
-some of what Phase 4 already built behind a paid unlock. Either way,
-not the draft ₱199–499/month range on its own — that figure is still
-unvalidated (see `product/scope-v1.md` and the pitch page).
-
-## Phase 8 — Ecosystem & integrations
-
-**Not started** — [backlog.md](backlog.md) items 4–9, logged
-2026-08-18 from a feature-research pass but deliberately not built
-since none of them (except barcode scanning) are achievable on the
-current local-only architecture:
-- Shopee/Lazada order import (needs OAuth + API integration per
-  platform).
-- Receipt/invoice photo scan (OCR) to auto-fill an ingredient's cost.
-- Real push or email notifications for low stock or a margin dropping
-  below target (a backend + notification service, not just an in-tab
-  toast).
-- A shareable public price-list link and a client-facing quote-approval
-  link — both need a backend to host data outside one browser's
-  `localStorage`.
-- Camera-based barcode scanning for Point of Sale — the one item here
-  that's client-side-feasible today (a barcode-decoding library +
-  `getUserMedia`), not blocked on Phase 6, just not built yet.
-- The **Atlas Freelance ecosystem tie-in** — weaker since decision
-  0038 (Amore Cost no longer serves service providers, the original
-  overlap this was reasoned from), but still real for a food business
-  costing a catering job or bulk order and turning it straight into an
-  Atlas Freelance proposal/invoice (see market-research.md's edge #4)
-  — once both products are far enough along to support the handoff.
-
-## Phase 9 — Mobile app packaging (Play Store / App Store)
-
-**Not started, not urgent** — a distribution decision, not a rebuild.
-Added 2026-08-22 after Oliver asked whether this was possible; the
-existing web app doesn't need to be rewritten to get onto app stores:
-
-- **Android (Google Play):** wrap the deployed site as a Trusted Web
-  Activity (TWA) — a thin native shell around
-  [amore-cost.vercel.app](https://amore-cost.vercel.app). Google Play's
-  developer account is a one-time $25 fee; review is comparatively fast
-  (days, not weeks).
-- **iOS (Apple App Store):** wrap via Capacitor (or similar) instead —
-  iOS has no TWA equivalent. Apple charges $99/year for a developer
-  account, and review is stricter: App Store Review Guideline 4.2 can
-  reject an app that reads as "just a website in a shell" without
-  enough native-feeling functionality (offline behavior, push
-  notifications, native UI touches). This is a real rejection risk to
-  plan for, not assume away.
-- Either path still runs on today's `localStorage`-only data model —
-  each install's data lives on that one device only, same limit as the
-  browser version today. A native app matters more once **Phase 6**
-  (real accounts) exists, since that's what makes "I have this on my
-  phone *and* my laptop" actually useful instead of two disconnected
-  copies of the same tool.
-- **Gated on Phase 1 the same way everything else has been** —
-  packaging this before validation would be building ahead of the
-  evidence yet again. Once Phase 1 validates, this is a real, cheap
-  (~$25–$124 total, no rewrite) move — most valuable once Phase 6 is
-  also in place, but technically doable any time after Phase 1.
-
-## How to use this file, and the rest of this folder
-
-- `../next-steps.md` stays the short "what's actually next" pointer;
-  update *this* file's phase list and "Current phase" line as work
-  actually moves, and keep the two consistent.
-- [backlog.md](backlog.md) is concrete not-yet-started work, roughly
-  ordered. [completed.md](completed.md) is the flat shipped changelog.
-  Ship something from the backlog → delete its line there, add a line
-  to `completed.md`, same session — same discipline as Atlas
-  Freelance's split.
-- Log real decisions in
-  [business/decisions/](../business/decisions/CONTEXT.md), not here — this
-  file is the sequence, not the record of why each choice was made.
+- When a stage's gate is met, mark it done here and in
+  [next-steps.md](../next-steps.md), and add a line to
+  [completed.md](completed.md).
+- Concrete build tasks live in [backlog.md](backlog.md). This file says
+  *which stage* a task belongs to, not how to build it.
+- Real choices (price point, backend, a pivot) get a numbered record in
+  [../business/decisions/](../business/decisions/CONTEXT.md).
+- Competitor facts live in
+  [../business/competitive-landscape.md](../business/competitive-landscape.md)
+  and [../business/kwentapos-comparison.md](../business/kwentapos-comparison.md).
+  Link to them; don't copy them.
