@@ -150,3 +150,30 @@ input[type="number"]::-webkit-inner-spin-button {
     transition-duration: 0.01ms !important;
   }
 }
+
+/*
+ * Thermal-receipt paper for the Receipt Simulator. Deliberately one look
+ * in every theme — it's paper, not UI chrome — so the semantic tokens are
+ * re-pinned to their light values inside it; otherwise dark mode's brighter
+ * orange/green would sit on a light page with poor contrast.
+ */
+.receipt-paper {
+  --receipt-paper: #fbfaf7;
+  background-color: var(--receipt-paper);
+  color: #1b1f18;
+  --accent: #1e8a5c;
+  --accent-strong: #166b47;
+  --accent-soft: #e3f2e9;
+  --warn: #c8720e;
+  --info: #2f6fb0;
+  --bad: #d64545;
+}
+
+.font-receipt {
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+/* Scalloped tear-off edge under the receipt: paper-colored strip with semicircle bites along its bottom. */
+.receipt-edge {
+  background: radial-gradient(circle at 8px 100%, transparent 5px, #fbfaf7 5.5px) 0 0 / 16px 100% repeat-x;
+}

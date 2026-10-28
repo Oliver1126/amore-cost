@@ -70,7 +70,7 @@ export default function OpexPage() {
         </div>
       </div>
 
-      <div className="mt-6 grid lg:grid-cols-[2fr_1fr] gap-6 items-start">
+      <div className="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-6 items-start">
         <div className="card p-5 min-w-0">
           <p className="text-sm font-medium">{t("opex.recurringTitle")}</p>
           <div className="mt-4 space-y-2">
@@ -151,7 +151,7 @@ export default function OpexPage() {
           </div>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-6 min-w-0">
           <div className="card p-5">
             <div className="flex items-center gap-1.5">
               <p className="text-sm font-medium">{t("opex.allocationTitle")}</p>

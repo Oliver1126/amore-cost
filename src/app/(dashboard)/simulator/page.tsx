@@ -74,8 +74,8 @@ export default function MarginSimulatorPage() {
           {t("receipt.emptySuffix")}
         </div>
       ) : (
-        <div className="mt-6 grid lg:grid-cols-[22rem_1fr] gap-6 items-start">
-          <div className="card p-5 space-y-4">
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-[22rem_minmax(0,1fr)] gap-6 items-start">
+          <div className="card p-5 space-y-4 min-w-0">
             <label className="block">
               <span className="text-sm text-text-muted">{t("sim.recipe")}</span>
               <select
@@ -84,7 +84,7 @@ export default function MarginSimulatorPage() {
                   setSelectedId(e.target.value);
                   setPriceOverride(null);
                 }}
-                className={`${inputClass} mt-1 w-full`}
+                className={`${inputClass} mt-1 w-full min-w-0`}
               >
                 {catalog.map((c) => (
                   <option key={c.id} value={c.id}>

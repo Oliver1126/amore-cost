@@ -4,6 +4,20 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-10-28** — Receipt Simulator redesigned as a thermal receipt,
+  following the reference's POS receipt layout: monospace slip, the
+  owner's own business name/address/TIN (optional, saved, in backups — no
+  invented placeholder TIN), QTY/DESCRIPTION/AMOUNT, double/dashed rules,
+  scalloped edge, in-receipt Dish margin analysis (hidden on print),
+  "not a valid receipt" footer. Fixed a real money bug: lines didn't foot
+  by a centavo (₱193.45 + ₱23.21 ≠ ₱216.67) — now computed from rounded
+  menu prices like a POS, matching the reference to the centavo. Fixed a
+  mobile bug on four pages: implicit grid columns grew to the widest
+  dropdown option and pushed content off the left edge of phones
+  (invisible to a document-scroll check because the app's scroll
+  container swallowed it); verified with a per-element offscreen check
+  proven against the broken version first. 165 tests.
+
 - **2026-10-28** — Cut from 11 modules to 5 pages (decision 0040),
   modeled on https://food-cost-tau.vercel.app/: **Dashboard**, **Input**
   (recipes + "Edit breakdown," opened automatically on new recipes),

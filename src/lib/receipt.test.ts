@@ -56,3 +56,23 @@ describe("simulateReceipt", () => {
     expect(r.foodCostPercent).toBe(0);
   });
 });
+
+describe("simulateReceipt — centavo footing", () => {
+  // The Classic Pork Adobo from the reference receipt: ₱65 direct cost at 66.4% margin.
+  const adobo = line(65 / (1 - 0.664), 1, 65);
+
+  it("prints lines that add up to the total exactly, like a real POS", () => {
+    const r = simulateReceipt([adobo], base);
+    expect(r.subtotal).toBe(216.67);
+    expect(r.vatableSales).toBe(193.46);
+    expect(r.vat).toBe(23.21);
+    expect(Math.round((r.vatableSales + r.vat) * 100) / 100).toBe(r.totalDue);
+  });
+
+  it("keeps Senior/PWD lines footing too, with service charge", () => {
+    const r = simulateReceipt([adobo, line(197.14, 3, 69)], { ...base, seniorPwd: true, serviceChargePercent: 10 });
+    const lessVat = Math.round((r.subtotal - r.netSales) * 100) / 100;
+    expect(Math.round((r.subtotal - lessVat - r.discount) * 100) / 100).toBe(r.vatExemptSales);
+    expect(Math.round((r.vatExemptSales + r.serviceCharge) * 100) / 100).toBe(r.totalDue);
+  });
+});

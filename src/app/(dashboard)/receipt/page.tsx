@@ -5,7 +5,16 @@ import Link from "next/link";
 import { useLocalStorage } from "@/lib/useLocalStorage";
 import { computePriceBreakdown, directCost } from "@/lib/calculator";
 import { CATALOG_STORAGE_KEY, newId, type CatalogItem } from "@/lib/catalog";
-import { simulateReceipt, type PricingModel, type ReceiptLine } from "@/lib/receipt";
+import {
+  simulateReceipt,
+  menuUnitPrice,
+  RECEIPT_PROFILE_STORAGE_KEY,
+  defaultReceiptProfile,
+  type PricingModel,
+  type ReceiptLine,
+  type ReceiptProfile,
+} from "@/lib/receipt";
+import { UtensilsCrossed } from "lucide-react";
 import { peso } from "@/lib/format";
 import { useLanguage, getModuleText } from "@/lib/i18n";
 import { PageSkeleton } from "@/components/PageSkeleton";
@@ -23,7 +32,11 @@ function segmentClass(active: boolean) {
 
 export default function ReceiptSimulatorPage() {
   const { lang, t } = useLanguage();
-  const [catalog, , hydrated] = useLocalStorage<CatalogItem[]>(CATALOG_STORAGE_KEY, () => []);
+  const [catalog, , catalogHydrated] = useLocalStorage<CatalogItem[]>(CATALOG_STORAGE_KEY, () => []);
+  const [profile, setProfile, profileHydrated] = useLocalStorage<ReceiptProfile>(
+    RECEIPT_PROFILE_STORAGE_KEY,
+    defaultReceiptProfile
+  );
   const [selectedId, setSelectedId] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [lines, setLines] = useState<ReceiptLine[]>([]);
@@ -32,13 +45,12 @@ export default function ReceiptSimulatorPage() {
   const [serviceCharge, setServiceCharge] = useState(0);
   const [seniorPwd, setSeniorPwd] = useState(false);
 
-  if (!hydrated) return <PageSkeleton />;
+  if (!catalogHydrated || !profileHydrated) return <PageSkeleton />;
 
   const title = getModuleText(lang, MODULES.find((m) => m.slug === "receipt")!).name;
   const inputName = getModuleText(lang, MODULES.find((m) => m.slug === "input")!).name;
   const r = simulateReceipt(lines, { pricingModel, vatRate, serviceChargePercent: serviceCharge, seniorPwd });
-  const rate = vatRate / 100;
-  const shownPrice = (net: number) => (pricingModel === "inclusive" ? net * (1 + rate) : net);
+  const shownPrice = (net: number) => menuUnitPrice(net, { pricingModel, vatRate });
   const itemCount = lines.reduce((s, l) => s + l.quantity, 0);
 
   function addLine() {
@@ -62,10 +74,16 @@ export default function ReceiptSimulatorPage() {
     setQuantity(1);
   }
 
-  const row = (label: string, value: number, opts: { negative?: boolean; strong?: boolean } = {}) => (
-    <div className={`flex justify-between ${opts.strong ? "font-semibold text-base" : ""}`}>
-      <span>{label}</span>
-      <span className="font-num">
+  const now = new Date();
+  const date = now.toLocaleDateString("en-CA");
+  const time = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  const marginPct = r.netRevenue > 0 ? (r.netProfit / r.netRevenue) * 100 : 0;
+
+  // One receipt line: label left, amount right, never wrapping the amount.
+  const row = (label: string, value: number, opts: { negative?: boolean } = {}) => (
+    <div className="flex justify-between gap-3">
+      <span className="min-w-0">{label}</span>
+      <span className="flex-none tabular-nums">
         {opts.negative ? "−" : ""}₱{peso(value)}
       </span>
     </div>
@@ -87,16 +105,16 @@ export default function ReceiptSimulatorPage() {
           {t("receipt.emptySuffix")}
         </div>
       ) : (
-        <div className="mt-6 grid lg:grid-cols-[1fr_24rem] gap-6 items-start">
-          <div className="space-y-6 print:hidden">
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_24rem] gap-6 items-start">
+          <div className="space-y-6 min-w-0 print:hidden">
             <div className="card p-5">
               <p className="text-sm font-medium">{t("receipt.addTitle")}</p>
-              <div className="mt-4 grid sm:grid-cols-[1fr_6rem_auto] gap-2">
+              <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] sm:grid-cols-[minmax(0,1fr)_6rem_auto] gap-2">
                 <select
                   value={selectedId}
                   onChange={(e) => setSelectedId(e.target.value)}
                   aria-label={t("receipt.selectRecipe")}
-                  className={inputClass}
+                  className={`${inputClass} col-span-2 sm:col-span-1 w-full min-w-0`}
                 >
                   <option value="">{t("receipt.chooseRecipe")}</option>
                   {catalog.map((c) => (
@@ -119,7 +137,7 @@ export default function ReceiptSimulatorPage() {
                   type="button"
                   onClick={addLine}
                   disabled={!selectedId || quantity <= 0}
-                  className="rounded-xl bg-accent text-accent-ink px-4 py-2 text-sm font-medium hover:bg-accent-strong transition-colors disabled:opacity-50"
+                  className="rounded-xl bg-accent text-accent-ink px-4 py-2 text-sm font-medium whitespace-nowrap hover:bg-accent-strong transition-colors disabled:opacity-50"
                 >
                   {t("receipt.addToOrder")}
                 </button>
@@ -231,69 +249,142 @@ export default function ReceiptSimulatorPage() {
                 </div>
                 {seniorPwd && <p className="mt-2 text-xs text-text-muted">{t("receipt.seniorPwdNote")}</p>}
               </div>
+
+              <div className="pt-4 border-t border-border">
+                <p className="text-sm text-text-muted">{t("receipt.businessDetails")}</p>
+                <p className="text-xs text-text-muted mt-0.5">{t("receipt.businessDetailsHint")}</p>
+                <div className="mt-2 grid sm:grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    value={profile.businessName}
+                    onChange={(e) => setProfile({ ...profile, businessName: e.target.value })}
+                    placeholder={t("receipt.businessNamePlaceholder")}
+                    aria-label={t("receipt.businessName")}
+                    className={`${inputClass} sm:col-span-2`}
+                  />
+                  <input
+                    type="text"
+                    value={profile.address}
+                    onChange={(e) => setProfile({ ...profile, address: e.target.value })}
+                    placeholder={t("receipt.addressPlaceholder")}
+                    aria-label={t("receipt.address")}
+                    className={inputClass}
+                  />
+                  <input
+                    type="text"
+                    value={profile.tin}
+                    onChange={(e) => setProfile({ ...profile, tin: e.target.value })}
+                    placeholder={t("receipt.tinPlaceholder")}
+                    aria-label={t("receipt.tin")}
+                    className={`${inputClass} font-num`}
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <div className="card p-6 font-num text-sm print:border-0 print:shadow-none">
-              <div className="text-center">
-                <p className="font-display text-base">{t("receipt.receiptHeader")}</p>
-                <p className="text-xs text-text-muted mt-0.5">{t("receipt.simulationLabel")}</p>
-                <p className="text-xs text-text-muted">{new Date().toLocaleString("en-PH")}</p>
-              </div>
-              <div className="my-4 border-t border-dashed border-border" />
-              {lines.length === 0 ? (
-                <p className="text-center text-text-muted">{t("receipt.noItems")}</p>
-              ) : (
-                <ul className="space-y-1">
-                  {lines.map((l) => (
-                    <li key={l.id} className="flex justify-between gap-2">
-                      <span className="truncate">
-                        {l.quantity} × {l.name}
-                      </span>
-                      <span>₱{peso(shownPrice(l.unitNetPrice) * l.quantity)}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <div className="my-4 border-t border-dashed border-border" />
-              <div className="space-y-1">
-                {row(t("receipt.subtotal"), r.subtotal)}
-                {seniorPwd && pricingModel === "inclusive" && row(t("receipt.lessVat"), r.subtotal - r.netSales, { negative: true })}
-                {seniorPwd && row(t("receipt.seniorPwdDiscount"), r.discount, { negative: true })}
-                {row(t("receipt.vatableSales"), r.vatableSales)}
-                {seniorPwd && row(t("receipt.vatExemptSales"), r.vatExemptSales)}
-                {row(`${t("receipt.vat")} (${vatRate}%)`, r.vat)}
-                {serviceCharge > 0 && row(`${t("receipt.serviceChargeLine")} (${serviceCharge}%)`, r.serviceCharge)}
-              </div>
-              <div className="my-3 border-t border-border" />
-              {row(t("receipt.totalDue"), r.totalDue, { strong: true })}
-            </div>
+          <div className="w-full max-w-sm mx-auto lg:max-w-none lg:mx-0 lg:sticky lg:top-6">
+            {/* Receipt paper stays light in every theme — it's paper. Tokens
+                are re-pinned to their light values so orange/blue/green
+                accents keep their contrast on it in dark mode too. */}
+            <div className="receipt-paper rounded-t-xl shadow-sm print:shadow-none">
+              <div className="px-5 pt-7 pb-5 sm:px-7 font-receipt text-[13px] sm:text-sm leading-relaxed">
+                <div className="text-center">
+                  <UtensilsCrossed className="w-7 h-7 mx-auto" strokeWidth={2.25} aria-hidden="true" />
+                  <p className="mt-2 text-lg sm:text-xl font-bold uppercase tracking-wide leading-snug break-words">
+                    {profile.businessName.trim() || t("receipt.businessNameFallback")}
+                  </p>
+                  {profile.address.trim() && <p className="mt-1 break-words">{profile.address}</p>}
+                  {profile.tin.trim() && (
+                    <p className="break-words">
+                      {t("receipt.vatRegTin")} {profile.tin}
+                    </p>
+                  )}
+                </div>
 
-            <div className="card p-5 print:hidden">
-              <p className="text-sm font-medium">{t("receipt.marginTitle")}</p>
-              <div className="mt-3 space-y-1.5 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-text-muted">{t("receipt.directCost")}</span>
-                  <span className="font-num text-warn">₱{peso(r.directCost)}</span>
+                <div className="my-4 border-t-[3px] border-double border-current opacity-40" />
+                <div className="text-center uppercase">
+                  <p>{t("receipt.officialReceiptSimulation")}</p>
+                  <p>
+                    {t("receipt.dateLabel")} {date} {t("receipt.timeLabel")} {time}
+                  </p>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-text-muted">{t("input.foodCost")}</span>
-                  <span className="font-num">{r.foodCostPercent.toFixed(1)}%</span>
+                <div className="my-4 border-t border-dashed border-current opacity-40" />
+
+                <div className="grid grid-cols-[2.25rem_1fr_auto] gap-x-2 font-bold uppercase">
+                  <span>{t("receipt.qty")}</span>
+                  <span>{t("receipt.descriptionCol")}</span>
+                  <span className="text-right">{t("receipt.amountCol")}</span>
                 </div>
-                <div className="flex justify-between font-medium">
-                  <span>{t("receipt.netProfit")}</span>
-                  <span className={`font-num ${r.netProfit < 0 ? "text-bad" : "text-info"}`}>₱{peso(r.netProfit)}</span>
+                <div className="my-2 border-t border-dashed border-current opacity-40" />
+                {lines.length === 0 ? (
+                  <p className="py-2 text-center opacity-60">{t("receipt.noItems")}</p>
+                ) : (
+                  <ul className="space-y-1">
+                    {lines.map((l) => (
+                      <li key={l.id} className="grid grid-cols-[2.25rem_1fr_auto] gap-x-2">
+                        <span className="tabular-nums">{l.quantity}</span>
+                        <span className="min-w-0 break-words">{l.name}</span>
+                        <span className="text-right tabular-nums">₱{peso(shownPrice(l.unitNetPrice) * l.quantity)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <div className="my-3 border-t border-dashed border-current opacity-40" />
+
+                <div className="space-y-0.5 uppercase">
+                  {row(t("receipt.subtotal"), r.subtotal)}
+                  {seniorPwd && pricingModel === "inclusive" && row(t("receipt.lessVat"), r.subtotal - r.netSales, { negative: true })}
+                  {seniorPwd && row(t("receipt.seniorPwdDiscount"), r.discount, { negative: true })}
+                  {seniorPwd ? row(t("receipt.vatExemptSales"), r.vatExemptSales) : row(t("receipt.netVatableSales"), r.vatableSales)}
+                  {row(`${t("receipt.vat")} (${vatRate}%)`, r.vat)}
+                  {row(`${t("receipt.svcCharge")}${serviceCharge > 0 ? ` (${serviceCharge}%)` : ""}`, r.serviceCharge)}
+                </div>
+
+                <div className="mt-3 border-t-[3px] border-double border-current opacity-40" />
+                <div className="my-2 flex justify-between gap-3 text-lg sm:text-xl font-bold uppercase">
+                  <span>{t("receipt.totalDue")}</span>
+                  <span className="tabular-nums">₱{peso(r.totalDue)}</span>
+                </div>
+                <div className="border-t-[3px] border-double border-current opacity-40" />
+
+                <div className="mt-5 rounded-lg border border-dashed border-accent/60 bg-accent-soft/60 p-4 print:hidden">
+                  <p className="text-center font-bold uppercase text-accent-strong">{t("receipt.dishMarginTitle")}</p>
+                  <div className="mt-3 space-y-1.5">
+                    <div className="flex justify-between gap-3">
+                      <span>{t("receipt.directIngredientCost")}</span>
+                      <span className="flex-none tabular-nums text-warn">₱{peso(r.directCost)}</span>
+                    </div>
+                    <div className="flex justify-between gap-3">
+                      <span>{t("receipt.trueFoodCost")}</span>
+                      <span className="flex-none tabular-nums font-bold">{r.foodCostPercent.toFixed(1)}%</span>
+                    </div>
+                    <div className="flex justify-between gap-3 items-start">
+                      <span>{t("receipt.netDishProfit")}</span>
+                      <span className={`text-right tabular-nums font-bold ${r.netProfit < 0 ? "text-bad" : "text-accent-strong"}`}>
+                        ₱{peso(r.netProfit)}
+                        <span className="block font-normal">
+                          ({marginPct.toFixed(1)}% {t("receipt.marginWord")})
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                  <p className="mt-3 text-[11px] leading-snug opacity-70">{t("receipt.marginNote")}</p>
+                </div>
+
+                <div className="mt-5 text-center uppercase opacity-70 text-xs">
+                  <p>{t("receipt.thankYou")}</p>
+                  <p className="mt-0.5">{t("receipt.simulationFooter")}</p>
                 </div>
               </div>
-              <p className="mt-3 text-xs text-text-muted">{t("receipt.marginNote")}</p>
             </div>
+            <div className="receipt-edge h-2.5" aria-hidden="true" />
 
             <button
               type="button"
               onClick={() => window.print()}
               disabled={lines.length === 0}
-              className="w-full rounded-xl border border-border px-4 py-2.5 text-sm font-medium hover:border-accent transition-colors disabled:opacity-50 print:hidden"
+              className="mt-4 w-full rounded-xl border border-border px-4 py-2.5 text-sm font-medium hover:border-accent transition-colors disabled:opacity-50 print:hidden"
             >
               {t("receipt.print")}
             </button>

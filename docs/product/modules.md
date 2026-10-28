@@ -49,10 +49,21 @@ Dashboard and is the Margin & POS Simulator's default volume.
 
 A sandbox order — nothing is saved or recorded as a sale. Pick recipes
 and quantities, choose VAT inclusive/exclusive pricing, VAT rate, service
-charge %, and Standard vs. Senior/PWD. Renders a mock official receipt
-(subtotal, less VAT, SC/PWD discount, VATable / VAT-exempt sales, VAT,
-service charge, total due) plus **what you actually keep**: direct cost,
-food cost %, net profit. Math in `src/lib/receipt.ts`: Senior/PWD is 20%
+charge %, and Standard vs. Senior/PWD. Renders a **thermal-receipt-style
+slip** (monospace, double/dashed rules, scalloped tear-off edge — layout
+from the reference's POS receipt): the owner's own business name /
+address / TIN (optional, saved, included in backups — never invented
+placeholders; TIN line only appears if entered), QTY / DESCRIPTION /
+AMOUNT lines, subtotal, less VAT, SC/PWD discount, net VATable or
+VAT-exempt sales, VAT, service charge, total due, and an in-receipt
+**Dish margin analysis** box (direct ingredient cost, true food cost %,
+net dish profit + margin %) that is **hidden when printing** so a
+customer copy never shows margins. Always marked "Simulated with Amore
+Cost — not a valid receipt." The paper stays light in every theme, with
+color tokens re-pinned inside `.receipt-paper` so accents keep contrast.
+Every amount is whole centavos, computed the way a POS does — from the
+rounded menu price, VATable sales rounded, VAT as the remainder — so the
+printed lines always foot to the total exactly. Math in `src/lib/receipt.ts`: Senior/PWD is 20%
 off the VAT-exclusive price and VAT-exempt (RA 9994/10754, same rule as
 `seniorPwdPrice()`); service charge is on the post-discount net and
 excluded from profit (RA 11360 sends it to staff).
@@ -77,7 +88,7 @@ cost ÷ the pre-VAT menu price, everywhere.
 
 ## Test coverage
 
-`src/lib/*.test.ts` (Vitest, `npm test`, 163 tests) covers the pure logic:
+`src/lib/*.test.ts` (Vitest, `npm test`, 165 tests) covers the pure logic:
 pricing/tax/break-even math, catalog CRUD and history snapshots, the
 ingredient cascade and unit conversion, OPEX totals and categories,
 backup parsing, insights, and the receipt and margin simulators. Pages

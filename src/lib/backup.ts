@@ -4,6 +4,7 @@ import { INGREDIENTS_STORAGE_KEY } from "./ingredients";
 import { TEAM_STORAGE_KEY, ACTIVE_PROFILE_STORAGE_KEY } from "./team";
 import { TEMPLATES_STORAGE_KEY } from "./templates";
 import { OPEX_STORAGE_KEY } from "./opex";
+import { RECEIPT_PROFILE_STORAGE_KEY } from "./receipt";
 
 /** Every localStorage key that holds real Amore Cost data — deliberately excludes the theme preference, which is a device setting, not data. */
 export const BACKUP_KEYS = [
@@ -15,6 +16,7 @@ export const BACKUP_KEYS = [
   TEMPLATES_STORAGE_KEY,
   POS_CART_STORAGE_KEY,
   OPEX_STORAGE_KEY,
+  RECEIPT_PROFILE_STORAGE_KEY,
 ] as const;
 
 export interface BackupFile {

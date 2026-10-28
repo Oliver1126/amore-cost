@@ -72,9 +72,15 @@ and confirm the data survived.
       inclusive vs. exclusive changes how prices display and the total;
       Senior/PWD removes VAT and takes 20% off the VAT-exclusive amount
       (check: total = net × 0.8 + service charge); service charge is
-      computed on the post-discount net; "What you actually keep" excludes
-      VAT and service charge; nothing here changes saved recipes or data;
-      Print shows only the receipt.
+      computed on the post-discount net; the Dish margin analysis box
+      excludes VAT and service charge; nothing here changes saved recipes
+      or data. **Footing:** VATable (or VAT-exempt) sales + VAT + service
+      charge must equal TOTAL DUE to the centavo. **Receipt header:**
+      business name / address / TIN fields persist across reloads, and a
+      blank TIN shows no TIN line. **Print:** only the receipt prints, and
+      the margin box is not on it. **Phone:** at 360px nothing is cut off
+      on either side, long dish names wrap, and the paper stays light in
+      dark mode.
 - [ ] **Margin & POS Simulator** (`/simulator`) — defaults to the
       recipe's suggested price and OPEX's monthly-dishes number; the price
       field and slider stay in sync; "Reset to suggested" appears only

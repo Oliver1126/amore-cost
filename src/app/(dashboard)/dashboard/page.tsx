@@ -102,7 +102,7 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <div className="mt-6 grid lg:grid-cols-[1fr_20rem] gap-6 items-start">
+      <div className="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_20rem] gap-6 items-start">
         <div className="card p-5 min-w-0">
           <div className="flex items-center justify-between gap-3">
             <p className="text-sm font-medium">{t("dash.featuredTitle")}</p>
