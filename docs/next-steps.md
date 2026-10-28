@@ -9,7 +9,18 @@ sequence, and [roadmap/backlog.md](roadmap/backlog.md) /
 [roadmap/completed.md](roadmap/completed.md) for concrete not-started
 work vs. the shipped changelog.
 
-## Where this stands (as of 2026-09-03)
+## Where this stands (as of 2026-10-28)
+
+**Latest (decision 0040):** the app is now **five pages** — Dashboard,
+Input, OPEX & Overhead, Receipt Simulator, Margin & POS Simulator —
+modeled on the food-cost-tau reference, after "too many pages that don't
+matter as of now." Inventory, POS checkout, Cost History, Documents,
+Multi-User, Multi-Channel, Margin Alerts, and Reporting are gone (the
+full version is the `v1-full-11-modules` git tag). The code is also on
+GitHub at https://github.com/Oliver1126/amore-cost. Everything in the
+history below that describes a removed module is accurate history, not
+current spec — see `product/modules.md` for what exists now.
+
 
 Fork, name, and lead vertical are decided (see
 [business/decisions/](business/decisions/CONTEXT.md) 0001, 0009, 0004).

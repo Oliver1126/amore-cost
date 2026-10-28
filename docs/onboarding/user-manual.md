@@ -4,11 +4,10 @@ A simple guide to get you started — no technical background needed.
 
 ## What Amore Cost does
 
-Amore Cost helps you figure out your **true cost** for anything you
-make or sell — ingredients, materials, labor, packaging — and turns
-that into a **price you can actually stand behind**, instead of a
-guess. It works for food businesses, service providers, and resellers,
-all in the same account.
+Amore Cost helps Philippine food businesses figure out the **true cost**
+of every dish — ingredients, packaging, labor — and turn it into a
+**menu price you can actually stand behind**, instead of a guess. Then
+it shows you whether that price really covers your rent and bills.
 
 ## Before you start: three things to know
 
@@ -18,114 +17,92 @@ all in the same account.
    That means it's private to you, but it also means:
    - If you clear your browser's data, or switch to a new phone or
      computer, your information won't automatically come with you.
-   - **Back up regularly.** Go to **Documents → Download full backup**
-     — this saves everything (your Catalog Management data, staff
-     profiles, templates) as one file. Keep it somewhere safe (email it
-     to yourself, save it to cloud storage). If anything ever goes
-     wrong, **Documents → Restore from backup** brings it all back.
-3. **Everything is free right now.** There's no subscription, no trial
-   period, no feature locked behind a paywall.
+   - **Back up regularly.** On the **Dashboard**, click **Download full
+     backup** — this saves everything as one file. Keep it somewhere safe
+     (email it to yourself, save it to cloud storage). If anything ever
+     goes wrong, **Restore from backup** on the same card brings it all
+     back.
+3. **Everything is free right now.** No subscription, no trial, nothing
+   locked behind a paywall.
+
+## The five pages
+
+The menu on the left has just five pages:
+
+| Page | What it's for |
+|---|---|
+| **Dashboard** | Your numbers at a glance: how many recipes, monthly expenses, average food cost %, and anything that needs your attention. |
+| **Input** | Your recipes. Add one, list its ingredients, and see the suggested price. |
+| **OPEX & Overhead** | Your monthly bills — rent, kuryente, sahod — and how much each dish has to earn back. |
+| **Receipt Simulator** | Practice ringing up an order to see exactly what the receipt would show — VAT, Senior/PWD discount, service charge. |
+| **Margin & POS Simulator** | Try a menu price and how many you'd sell a month, and see if it actually pays the bills. |
 
 ## Getting started (5 minutes)
 
-1. Open the app and go to **Costing & Pricing**.
-2. Pick your business type at the top: **Food & beverage**, **Service**,
-   or **Resale / retail**.
-3. Name what you're pricing (e.g. "Leche Flan, 12-pc box").
-4. Add your costs — ingredients or materials, one line at a time. If
-   you buy something in bulk (like a sack of flour), use **Calculate
-   from package price** under that line to work out the per-unit cost
-   automatically.
-5. Fill in labor, packaging, and overhead if they apply.
-6. Choose how you want to price it — **Margin %**, **Markup %**, or a
-   **Fixed profit** amount — and your tax setting.
-7. Your price appears instantly at the top. When you're happy with it,
-   click **Save to Catalog** to keep it.
-
-That's it — you now have your first costed, priced item.
+1. Go to **Input** and click **+ New recipe**. Give it a name — say,
+   "Tapsilog" — and click **Add recipe**.
+2. The breakdown editor opens right away. Add each **ingredient** with
+   how much one serving uses and what it costs. Fill in **packaging**
+   too (the container, the bag, the utensils).
+3. Look at the top: **Recipe cost** (what one serving costs you),
+   **Suggested price**, and **Profit per serving** update as you type.
+   Open **Advanced Pricing Settings** to change how the price is
+   worked out (margin %, markup %, or a fixed peso profit) or to add VAT.
+4. Close the editor — it saves automatically. Your recipe is now a card
+   on the Input page.
+5. Go to **OPEX & Overhead** and add your monthly bills. Enter roughly
+   how many dishes you sell a month to see how much overhead each one
+   must cover.
+6. Open the **Margin & POS Simulator**, pick your recipe, and see whether
+   your price and sales volume actually break even.
 
 ## Everyday tasks
 
-**I want to price something new.**
-Go to **Costing & Pricing**, same steps as above.
+**An ingredient got more expensive.** If you added it through the
+**Ingredient Library** (button at the top of Input), change its price
+once there and every recipe that uses it updates automatically. If you
+typed it straight into a recipe, open that recipe's **Edit breakdown**
+and change it there.
 
-**I keep buying the same ingredient for different products.**
-Add it once in the **Ingredient Library** — scroll down on **Catalog
-Management**, it's the second section on that page. Link it into any
-Costing & Pricing line, and if that ingredient's price ever changes (a
-new supplier quote, a price hike), every item using it updates
-automatically.
+**Which of my dishes are underpriced?** On **Input**, click **Below
+target**. The **Dashboard** also lists them under "Needs your attention,"
+with how much to raise the price.
 
-**I want to know how many I need to sell to break even each month.**
-Go to **Break-Even**. List your monthly expenses (rent, salaries,
-utilities, etc.) one at a time, add a contingency % if you want a
-safety buffer, and it tells you how many units you need to sell.
+**What's a good food cost %?** Most restaurants aim for **28–32%** —
+meaning ingredients are about a third of the menu price. The Dashboard
+and every recipe card show yours, in red when it's above 32%.
 
-**I want a running list of everything I sell, not just one calculation.**
-Everything you **Save to Catalog** shows up on **Catalog Management** —
-with its status (quoted, accepted, in progress, invoiced), current
-stock, and a QR code you can print on a price tag. This is the same
-page as the Ingredient Library above, so the connection between them is
-right there: open any product and it tells you how many ingredients
-from your library it uses (or that it isn't linked to any yet); open
-any ingredient and it lists every product using it, with a link
-straight to each one.
+**What will a Senior Citizen or PWD actually pay?** In the **Receipt
+Simulator**, add the dishes, then choose **Senior / PWD**. It removes VAT
+and takes 20% off, the way the law requires, and shows what you keep.
 
-**I want to track how much stock I have on hand.**
-Go to **Inventory**. Add stock as you receive it, and it'll count down
-automatically as items sell (through Inventory itself, or through
-Point of Sale). It'll flag items running low.
-
-**I run a counter or stall and need to ring up sales on the spot.**
-Go to **Point of Sale**. First, give each item you sell a short code
-under **Catalog Management** (the small "+ SKU/barcode" field) so you
-can scan or quickly search for it. Then in Point of Sale: scan or click
-items into a cart, adjust quantities, pick how the customer paid (Cash,
-GCash, Card, Other), and **Complete sale**. You can print a receipt
-right after — and if a sale needs to be undone later, open that same
-receipt and click **Refund this sale**; it puts the stock back and
-prints a separate refund receipt, without changing the original.
-
-**I need to send a client a formal quotation.**
-On **Documents**, find the item under **Quotations** and click **Print
-/ Save as PDF**. It only shows the client-facing price — not your
-internal cost or margin.
-
-**I want to switch languages or themes.**
-Top-right corner of any page: **EN / TL** for English or Tagalog, and
-**Light / Dark / Auto** for the look.
-
-**I have staff who need to use this too.**
-**Multi-User** lets you add named profiles so you can see who made
-which change. Important: this is *not* a password-protected login —
-anyone using the same device can switch profiles freely. It's for
-keeping track of who did what, not for restricting access.
+**Should I raise my price or sell more?** In the **Margin & POS
+Simulator**, drag the price slider and change the monthly portions —
+the profit chart and break-even number update instantly.
 
 ## Frequently asked questions
 
 **Do I need an account?** No — nothing to sign up for.
 
 **Is my data safe?** It stays only in your own browser. Back it up
-regularly (see above) so a cleared browser or a new device doesn't
-mean starting over.
+regularly from the Dashboard so a cleared browser or a new device
+doesn't mean starting over.
 
 **Does it handle VAT and other Philippine taxes?** You can choose VAT
 (12%), Percentage Tax (3%), a fully custom rate, or no tax. It's meant
 to help you decide on a price — for anything filing-related, confirm
 with an accountant.
 
-**Is this only for food businesses?** Yes, by design — Amore Cost is
-built specifically for Philippine food businesses (recipe-level
-ingredient costing, food-specific margin ranges). If you run a
-different kind of business, this isn't the right tool for you yet.
+**Is this only for food businesses?** Yes, by design — recipe-level
+ingredient costing and food cost % are built for Philippine food
+businesses.
 
 **Does it work on my phone?** Yes — the menu collapses into a
-tap-to-open drawer on small screens, so it's usable for on-the-go
-pricing or ringing up a sale at a stall.
+tap-to-open drawer on small screens.
 
-**Is the printed receipt an official BIR receipt?** No — it's a
-courtesy printout for your own or your customer's records, not a
-BIR-registered official receipt.
+**Does the Receipt Simulator record my sales?** No. It's practice only —
+nothing is saved, and the receipt is marked "Simulation only." It is
+not a BIR official receipt.
 
 ## Need help?
 

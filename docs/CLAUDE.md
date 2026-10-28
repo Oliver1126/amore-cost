@@ -24,7 +24,7 @@ is reference; this is the one page that says what's actually next.
 | "What are the different ways to run this business?" | [business/strategic-forks.md](business/strategic-forks.md) |
 | "How do we actually reach and sell to small businesses?" | [business/go-to-market.md](business/go-to-market.md) |
 | "What could we call this?" | [branding/options.md](branding/options.md) |
-| "What would v1 actually include?" | [product/scope-v1.md](product/scope-v1.md) — phasing; [product/modules.md](product/modules.md) — what each module is |
+| "What would v1 actually include?" | [product/scope-v1.md](product/scope-v1.md) — phasing; [product/modules.md](product/modules.md) — the five pages and what each does |
 | "Why did we decide X this way?" | [business/decisions/](business/decisions/CONTEXT.md) — browse by filename, newest number = latest |
 | "How do I test this app / I'm QA, where do I start?" | [qa/](qa/CONTEXT.md) — setup, a full walkthrough, and the test checklist |
 | "I'm a client/user, how do I use this app?" | [onboarding/user-manual.md](onboarding/user-manual.md) — plain-language guide, no internal jargon |

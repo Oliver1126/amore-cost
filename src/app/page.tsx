@@ -3,8 +3,8 @@ import { BrandMark } from "@/components/BrandMark";
 import { LandingCalculator } from "@/components/LandingCalculator";
 import { MODULES } from "@/lib/modules";
 
-const FEATURED_SLUGS = ["calculator", "catalog", "break-even", "pos", "inventory", "multi-channel"];
-const featured = FEATURED_SLUGS.map((slug) => MODULES.find((m) => m.slug === slug)!);
+// Every page except the Dashboard itself — five pages total (decision 0040), so the grid shows the four that do the work.
+const featured = MODULES.filter((m) => m.slug !== "overview");
 
 export default function LandingPage() {
   return (
@@ -78,11 +78,11 @@ export default function LandingPage() {
       <section id="features" className="max-w-6xl mx-auto px-6 py-20 border-t border-border">
         <h2 className="font-display text-3xl text-center">Everything you need to price your menu with confidence</h2>
         <p className="text-text-muted text-center mt-3 max-w-xl mx-auto">
-          Eleven modules, one account, built for how Filipino food businesses
-          actually work — recipe costing, live inventory, and point of sale in
-          one place.
+          Five focused pages, built for how Filipino food businesses actually
+          work — cost the recipe, cover your overhead, and see the real
+          receipt and profit before you ever change a menu price.
         </p>
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {featured.map((m) => {
             const Icon = m.icon;
             return (
@@ -120,8 +120,9 @@ export default function LandingPage() {
             <span className="font-display text-3xl text-accent">3</span>
             <p className="font-medium mt-2">Track it</p>
             <p className="text-sm text-text-muted mt-1.5">
-              Catalog, Inventory, Cost History, and Sales &amp; Profit
-              Reporting all build on that one true-cost number, automatically.
+              Add your monthly OPEX, then run the Receipt and Margin &amp; POS
+              Simulators to see VAT, Senior/PWD discounts, and break-even on
+              that same true-cost number.
             </p>
           </div>
         </div>
@@ -140,9 +141,9 @@ export default function LandingPage() {
             <p className="font-display text-3xl mt-2">₱0</p>
             <p className="text-sm text-text-muted mt-1">Available right now</p>
             <ul className="mt-5 space-y-2.5 text-sm text-text-muted">
-              <li>✓ All 11 modules, no limits</li>
+              <li>✓ All 5 pages, no limits</li>
               <li>✓ Ingredient Library with cost cascade</li>
-              <li>✓ CSV import/export, full backup</li>
+              <li>✓ Receipt &amp; Margin simulators, full backup</li>
               <li>✓ No account, data stays in your browser</li>
             </ul>
             <Link
@@ -158,7 +159,7 @@ export default function LandingPage() {
             <p className="text-sm text-text-muted mt-1">per month, if this ever ships</p>
             <ul className="mt-5 space-y-2.5 text-sm text-text-muted">
               <li>· Real accounts, cross-device sync</li>
-              <li>· Secure multi-user access (today's is a local-only preview)</li>
+              <li>· Staff accounts with real access control</li>
               <li>· A pooled ingredient stock across every recipe</li>
               <li>· Marketplace order sync (Shopee/Lazada)</li>
             </ul>
@@ -188,8 +189,8 @@ export default function LandingPage() {
             <p className="text-sm text-text-muted mt-1.5">
               Entirely in your own browser (nothing is sent to a server).
               The tradeoff: clearing your browser data or switching devices
-              loses it unless you back up first — Documents has a one-click
-              full backup/restore for exactly this reason.
+              loses it unless you back up first — the Dashboard has a
+              one-click full backup/restore for exactly this reason.
             </p>
           </div>
           <div className="pt-6 border-t border-border">
@@ -206,18 +207,17 @@ export default function LandingPage() {
             <p className="text-sm text-text-muted mt-1.5">
               Yes, by design — Amore Cost is built specifically for
               Philippine food businesses: recipe-level ingredient costing,
-              food-specific margin ranges, and inventory built around how
-              food actually gets sold. If you run a different kind of
+              food-cost % against the 28–32% industry target, and a receipt
+              simulator that handles VAT and Senior/PWD rules. If you run a different kind of
               business, this isn't the right tool for you yet.
             </p>
           </div>
           <div className="pt-6 border-t border-border">
             <p className="font-medium">Can my staff use it too?</p>
             <p className="text-sm text-text-muted mt-1.5">
-              Multi-User lets you add named profiles for staff or a
-              bookkeeper, but it's honestly a local preview, not real
-              access control — anyone on that browser can switch profiles
-              freely. Real per-person security needs accounts, which don't
+              Not yet — everything runs in one browser with no accounts, so
+              anyone using that browser sees the same data. Separate staff
+              logins with real access control need accounts, which don't
               exist yet.
             </p>
           </div>

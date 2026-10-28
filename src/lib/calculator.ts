@@ -130,6 +130,20 @@ export function trueCost(state: CalculatorState): number {
   );
 }
 
+/** Variable cost per portion — `trueCost` minus the per-unit overhead line. The simulators subtract monthly OPEX as a fixed cost separately, so counting a recipe's overhead allocation too would charge the same rent twice. */
+export function directCost(state: CalculatorState): number {
+  return trueCost(state) - state.overhead;
+}
+
+/** Industry target band for food cost % — the reference's "Industry Target: 28.0% – 32.0%." */
+export const FOOD_COST_TARGET = { min: 28, max: 32 };
+
+/** Direct cost as a share of the pre-VAT menu price — the restaurant-standard way to read a dish's margin (100 − food cost % ≈ gross margin). */
+export function foodCostPercent(state: CalculatorState): number {
+  const pre = priceBeforeTax(trueCost(state), state.strategy);
+  return pre > 0 ? (directCost(state) / pre) * 100 : 0;
+}
+
 /** Pre-tax selling price implied by the chosen pricing strategy. */
 export function priceBeforeTax(cost: number, strategy: PricingStrategy): number {
   switch (strategy.type) {

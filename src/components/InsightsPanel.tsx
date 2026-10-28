@@ -42,7 +42,7 @@ export function InsightsPanel({ insights }: { insights: Insight[] }) {
             return (
               <li key={insight.id}>
                 {insight.itemId ? (
-                  <Link href={`/costing?id=${insight.itemId}`} className="block hover:opacity-90 transition-opacity">
+                  <Link href={`/input?edit=${insight.itemId}`} className="block hover:opacity-90 transition-opacity">
                     {content}
                   </Link>
                 ) : (

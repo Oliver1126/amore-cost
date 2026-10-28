@@ -24,7 +24,7 @@ export function CostForm({
   const { lang, t } = useLanguage();
   const labels = getVerticalLabels(lang, state.vertical, VERTICAL_LABELS[state.vertical]);
   const ingredientsName = t("costForm.ingredientLibraryName");
-  const breakEvenName = getModuleText(lang, MODULES.find((m) => m.slug === "break-even")!).name;
+  const opexPageName = getModuleText(lang, MODULES.find((m) => m.slug === "opex")!).name;
   const totalCost = trueCost(state);
   const [showOverheadCalc, setShowOverheadCalc] = useState(false);
   const [expectedVolume, setExpectedVolume] = useState("");
@@ -464,8 +464,8 @@ export function CostForm({
               {opexTotal <= 0 ? (
                 <p className="text-xs text-text-muted">
                   {t("costForm.noOpexPrefix")}{" "}
-                  <a href="/break-even" className="text-accent hover:text-accent-strong font-medium">
-                    {breakEvenName}
+                  <a href="/opex" className="text-accent hover:text-accent-strong font-medium">
+                    {opexPageName}
                   </a>{" "}
                   {t("costForm.noOpexSuffix")}
                 </p>

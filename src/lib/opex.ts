@@ -7,10 +7,28 @@
  * Ingredient Library (`src/lib/ingredients.ts`): a single list, not
  * duplicated per item.
  */
+export const OPEX_CATEGORIES = ["rent", "utilities", "labor", "marketing", "software", "other"] as const;
+export type OpexCategory = (typeof OPEX_CATEGORIES)[number];
+
 export interface OpexItem {
   id: string;
   label: string;
   amountPerMonth: number;
+  /** Optional — items saved before categories existed read as "other". */
+  category?: OpexCategory;
+}
+
+export function totalsByCategory(items: OpexItem[]): Record<OpexCategory, number> {
+  const totals = Object.fromEntries(OPEX_CATEGORIES.map((c) => [c, 0])) as Record<OpexCategory, number>;
+  for (const item of items) {
+    totals[item.category ?? "other"] += Number.isFinite(item.amountPerMonth) ? item.amountPerMonth : 0;
+  }
+  return totals;
+}
+
+/** Monthly overhead each dish has to carry — the reference's "OpEx / Dish." Zero until a sales volume is entered, rather than dividing by a made-up default. */
+export function overheadPerDish(monthlyOpex: number, monthlyDishSales: number): number {
+  return monthlyDishSales > 0 ? monthlyOpex / monthlyDishSales : 0;
 }
 
 export function newOpexItem(label = ""): OpexItem {
@@ -37,6 +55,8 @@ export function opexWithContingency(items: OpexItem[], contingencyPercent: numbe
 export interface OpexSettings {
   items: OpexItem[];
   contingencyPercent: number;
+  /** Estimated dishes sold per month, shared by OPEX allocation, Dashboard, and the Margin & POS Simulator's default. */
+  monthlyDishSales?: number;
 }
 
 export const OPEX_STORAGE_KEY = "calcost:v0:opex";

@@ -20,58 +20,28 @@ npm test        # Vitest — pure-logic tests, no component/page coverage yet
 ```
 
 `/` is a **public marketing landing page** (`src/app/page.tsx`, decision
-0012) — no Sidebar, not part of the dashboard. The actual app lives
-under a `(dashboard)` route group (`src/app/(dashboard)/`, layout wraps
-everything in `AppShell`/`Sidebar`) starting at `/dashboard`. `src/`'s
-dashboard is a real app — a left sidebar (`src/components/Sidebar.tsx`)
-lists all 11 modules from [docs/product/modules.md](docs/product/modules.md)
-(kept in sync with `src/lib/modules.ts`). **All of them are real and
-interactive** (decisions 0006, 0007, 0015, 0022) — Overview
-(`/dashboard`), Costing & Pricing (`/costing`), Break-Even
-(`/break-even`), **Catalog Management** (`/catalog`, includes the
-Ingredient Library as a section — `/ingredients` redirects there),
-Inventory (`/inventory`), **Point of Sale** (`/pos`, incl.
-`/pos/receipt/[transactionId]`), Cost History (`/history`), Documents
-(`/documents`, incl. `/documents/print/[id]`), Multi-User
-(`/multi-user`), Multi-Channel Pricing (`/multi-channel`), and Margin
-Alerts / Sales & Profit Reporting (`/alerts`, `/reporting`) — **note
-only Overview moved routes and `/ingredients` now redirects to
-`/catalog#ingredient-library`; every other module kept its existing
-top-level path**, it's just inside the route group now (route groups
-don't affect the URL). Everything runs on `localStorage` — no accounts,
-no backend. The central data shapes are `CatalogItem`
-(`src/lib/catalog.ts`) and `Ingredient` (`src/lib/ingredients.ts`);
-most modules read or write a slice of one or both.
+0012) — no Sidebar. The app itself lives under a `(dashboard)` route
+group (`src/app/(dashboard)/`, wrapped in `AppShell`/`Sidebar`) and is
+**five pages** (decision 0040, modeled on
+https://food-cost-tau.vercel.app/): **Dashboard** (`/dashboard`),
+**Input** (`/input` — recipes + "Edit breakdown" modal + Ingredient
+Library), **OPEX & Overhead** (`/opex`), **Receipt Simulator**
+(`/receipt`), and **Margin & POS Simulator** (`/simulator`). See
+[docs/product/modules.md](docs/product/modules.md) (kept in sync with
+`src/lib/modules.ts`) for what each does. Every retired route
+(`/costing`, `/catalog`, `/pos`, `/inventory`, …) redirects via
+`next.config.ts`. The old 11-module app is the **`v1-full-11-modules`**
+git tag — check it out rather than rebuilding anything from memory.
 
-**Read
-[decisions/0006](docs/business/decisions/0006-all-modules-built-local-only.md),
-[decisions/0007](docs/business/decisions/0007-ingredient-library-and-test-suite.md),
-[decisions/0015](docs/business/decisions/0015-pos-checkout-module.md),
-[decisions/0022](docs/business/decisions/0022-ingredient-library-and-catalog-merged.md),
-and
-[decisions/0023](docs/business/decisions/0023-catalog-management-in-page-editor.md)
-before assuming any module works exactly like its original spec.** The
-Ingredient Library (0007) closed the *cost*-sharing gap — link a
-`CostItem` to an `Ingredient` via `ingredientId` and
-`propagateIngredientChange` cascades a cost edit to every linked
-catalog item and the draft, firing a real Cost History snapshot only
-when something actually changed. It did **not** close the
-*stock-quantity*-sharing gap: Inventory still tracks stock per finished
-catalog item, not a pooled raw-ingredient stock. It's presented as a
-section of Catalog Management rather than its own module since 0022,
-with the two now cross-linked in both directions, and Catalog
-Management's "Edit & Breakdown" (0023) opens the *entire* cost editor
-— the same `ItemEditor` component `/costing` uses — in a modal, so
-editing never requires leaving the page; `/costing`/`/costing?id=`
-still work unchanged everywhere else that links to them. Multi-User
-(a named
-profile switcher with **zero real security** — it says so on the page
-itself) remains a documented simplification, not a bug to silently
-"fix" by over-promising what it does. Point of Sale (0015) is a real,
-working single-register checkout — it explicitly does **not** do
-cash-drawer/thermal-printer hardware integration, camera-based barcode
-scanning, or multi-register sync (same accounts+backend gap as
-Multi-User).
+Everything runs on `localStorage` — no accounts, no backend. Data
+shapes: `CatalogItem` (a recipe, `src/lib/catalog.ts`), `Ingredient`
+(`src/lib/ingredients.ts`), `OpexSettings` (`src/lib/opex.ts`). Linking
+a cost line to an `Ingredient` makes a price change cascade to every
+recipe using it (decision 0007). **Read decision 0040 before adding a
+page** — the cut to five was deliberate. Both simulators use
+`directCost()` (recipe cost minus its overhead line) because they
+subtract monthly OPEX separately; using `trueCost()` there would count
+rent twice.
 
 A light/dark/auto theme toggle lives in the top bar
 (`src/components/ThemeToggle.tsx`), persisted to `localStorage` and
@@ -116,7 +86,7 @@ first when:
 - Starting a new session on this idea — skim [docs/business/strategy.md](docs/business/strategy.md)
 - Asked "what's decided so far" — [docs/business/decisions/](docs/business/decisions/CONTEXT.md)
 - About to touch `src/` — check [docs/product/modules.md](docs/product/modules.md)
-  for which module you're in and what's simplified about it
+  for which page you're in and what's simplified about it
 - Handed a raw idea, name riff, or something to research that isn't a
   decision yet — log it in [docs/ideas/inbox.md](docs/ideas/inbox.md),
   don't force it into `decisions/` before it's real
@@ -141,12 +111,10 @@ first when:
   using `??` instead of `||` that let a literal "0" sit in the field
   and get typed over instead of replaced.)
 - **QA is a standing responsibility, not a one-time pass.**
-  [docs/qa/qa-manual.md](docs/qa/qa-manual.md)'s per-module checklist
+  [docs/qa/qa-manual.md](docs/qa/qa-manual.md)'s per-page checklist
   and "known simplifications" list need to stay accurate as modules
-  change — when a module's real behavior changes, update its QA entry
-  (and [docs/qa/instructions.md](docs/qa/instructions.md)'s walkthrough
-  if it added/moved a module) the same session, same discipline as
-  `docs/roadmap/completed.md`.
+  change — when a page's real behavior changes, update its QA entry the
+  same session, same discipline as `docs/roadmap/completed.md`.
 
 ## Keeping it alive
 

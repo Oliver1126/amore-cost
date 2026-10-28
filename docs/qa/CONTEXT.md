@@ -5,22 +5,18 @@ role: guide
 
 # qa/
 
-**Start here:** [instructions.md](instructions.md) — setup and a
-walkthrough of every module, for anyone testing the app who hasn't used
-it before.
-
-**Then:** [qa-manual.md](qa-manual.md) — the actual test checklist,
+**Start here:** [qa-manual.md](qa-manual.md) — setup, the per-page test checklist,
 what's a known simplification vs. a real bug, and how to report what
 you find.
 
 **Reads:** [../product/modules.md](../product/modules.md) before filing
 anything as a bug — several things that look broken are documented,
-deliberate simplifications (Multi-User's lack of real security,
-Inventory's per-item stock, Margin Alerts' lack of push notifications).
+deliberate simplifications (the simulators never save anything; they use
+direct cost, not full recipe cost).
 Re-describing a known limitation as a new bug wastes a review cycle.
 
-**Contains:** onboarding instructions for a QA tester and the module-by-
-module test checklist. Nothing here is product spec or roadmap — that's
+**Contains:** the per-page test checklist (the old 11-module walkthrough
+is archived in `../archive/eleven-modules-2026-10/`). Nothing here is product spec or roadmap — that's
 [../product/](../product/CONTEXT.md) and [../roadmap/](../roadmap/roadmap.md).
 
 **Human check:** this app has never been tested by anyone outside the

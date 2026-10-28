@@ -4,6 +4,22 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-10-28** — Cut from 11 modules to 5 pages (decision 0040),
+  modeled on https://food-cost-tau.vercel.app/: **Dashboard**, **Input**
+  (recipes + "Edit breakdown," opened automatically on new recipes),
+  **OPEX & Overhead** (now with expense categories + per-dish overhead
+  allocation), **Receipt Simulator** (new — PH official-receipt math with
+  VAT inclusive/exclusive, Senior/PWD, service charge), **Margin & POS
+  Simulator** (new — P&L waterfall, break-even, OPEX-share control).
+  Removed Inventory, POS checkout, Cost History, Documents, Multi-User,
+  Multi-Channel, Margin Alerts, Reporting, and standalone Costing; every
+  old route redirects. Backup/Restore moved to the Dashboard. Full old
+  version tagged `v1-full-11-modules`. Fixed two latent crashes
+  (`MODULES.find(...)!` on retired slugs in the landing page and
+  `CostForm`). 163 tests, `tsc`/build clean, verified live on all pages
+  in EN/TL, light/dark, desktop + phone, receipt/break-even figures
+  hand-checked.
+
 - **2026-09-03** — Color-coded cost/price/profit cards, food vocabulary
   app-wide (decision 0039): two new permanent design tokens,
   `--warn` (orange, cost emphasis) and `--info` (blue, profit emphasis)

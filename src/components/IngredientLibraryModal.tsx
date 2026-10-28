@@ -407,7 +407,7 @@ export function IngredientLibraryModal({
                                       {usedIn.map((p) => (
                                         <li key={p.id} className="text-sm">
                                           <Link
-                                            href={`/costing?id=${p.id}`}
+                                            href={`/input?edit=${p.id}`}
                                             className="text-accent hover:text-accent-strong font-medium"
                                           >
                                             {p.name}
