@@ -54,13 +54,24 @@ and confirm the data survived.
       breakdown on Input; Dish overhead allocation edits the same
       monthly-sales number OPEX uses; Download backup produces a JSON
       file and Restore asks for confirmation before replacing data.
+      **Sample recipes:** with no recipes, "Try with sample recipes"
+      loads 3 dishes + 13 ingredients (and sample OPEX *only if OPEX is
+      still blank* — never overwrites real expenses); a blue "You're
+      looking at sample recipes" banner appears; "Remove sample recipes"
+      (with confirm) removes only `demo-` records, and your own recipes
+      stay. Clicking Try twice must not duplicate anything.
 - [ ] **Input** (`/input`) — "+ New recipe" creates a recipe *and opens
       its breakdown editor immediately*; every breakdown edit live-saves;
       search and the All / On target / Below target filter narrow the
       cards; Duplicate and Delete (with confirm) work; the Ingredient
       Library button opens the shared library and a cost change there
       cascades into every linked recipe; `/input?edit=<id>` opens that
-      recipe directly.
+      recipe directly. **Yield %:** a line at 70% costs amount ÷ 0.7
+      (unit cost, % of total, recipe cost and price all follow); blank =
+      100%; a manual line shows "₱X after yield" in orange. **Rounding:**
+      the select on the green Suggested price card (Exact / ₱1 / ₱5 /
+      ₱10 / Ends in 9) always rounds *up*, shows "rounded up from ₱X",
+      and the profit card drops/rises to match the rounded price.
 - [ ] **OPEX & Overhead** (`/opex`) — add/remove/edit expenses with a
       category; category breakdown bars and percentages sum correctly;
       contingency % raises the buffered total; Overhead per dish =

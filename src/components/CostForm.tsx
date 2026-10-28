@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { CalculatorState, CostItem } from "@/lib/calculator";
-import { VERTICAL_LABELS, COMMON_UNITS, newCostItem, trueCost, packageLineAmount } from "@/lib/calculator";
+import { VERTICAL_LABELS, COMMON_UNITS, newCostItem, trueCost, packageLineAmount, lineCost, effectiveYield } from "@/lib/calculator";
 import { linkedCostAmount, type Ingredient } from "@/lib/ingredients";
 import { convertQuantity } from "@/lib/units";
 import { peso } from "@/lib/format";
@@ -47,6 +47,7 @@ export function CostForm({
         | "qtyPerPack"
         | "shippingFee"
         | "packUnit"
+        | "yieldPercent"
       >
     >
   ) {
@@ -169,6 +170,12 @@ export function CostForm({
                 <th className="font-medium py-2 pr-3 whitespace-nowrap">{t("costForm.portionQty")}</th>
                 <th className="font-medium py-2 pr-3 whitespace-nowrap">{t("costForm.portionUnit")}</th>
                 <th className="font-medium py-2 pr-3 whitespace-nowrap">
+                  <span className="inline-flex items-center gap-1">
+                    {t("costForm.yield")}
+                    <InfoButton label={t("costForm.yieldWhat")}>{t("costForm.yieldHelp")}</InfoButton>
+                  </span>
+                </th>
+                <th className="font-medium py-2 pr-3 whitespace-nowrap">
                   {t("costForm.unitCostLabel")}{" "}
                   <span className="text-[9px] font-semibold bg-accent-soft text-accent-strong rounded-full px-1.5 py-0.5 align-middle">
                     {t("common.auto")}
@@ -193,7 +200,9 @@ export function CostForm({
                   linkedIngredient && item.unit && item.unit !== linkedIngredient.unit
                     ? convertQuantity(1, item.unit, linkedIngredient.unit) !== null
                     : false;
-                const unitCost = item.amount / (item.quantity || 1);
+                const cost = lineCost(item);
+                const yieldPct = effectiveYield(item);
+                const unitCost = cost / (item.quantity || 1);
                 return (
                   <tr key={item.id} className="border-b border-border last:border-0 align-top">
                     <td className="py-2 pr-3 min-w-[9rem]">
@@ -319,12 +328,31 @@ export function CostForm({
                         className="w-16 rounded-lg border border-border bg-surface-muted px-2 py-1.5 text-sm placeholder:text-text-muted/70 focus:outline-none focus:border-accent"
                       />
                     </td>
+                    <td className="py-2 pr-3">
+                      <div className="relative w-16">
+                        <input
+                          type="number"
+                          inputMode="decimal"
+                          min={1}
+                          max={100}
+                          value={item.yieldPercent ?? ""}
+                          onChange={(e) => {
+                            const v = Number(e.target.value);
+                            updateItem(item.id, { yieldPercent: e.target.value === "" || !v ? undefined : Math.min(100, Math.max(1, v)) });
+                          }}
+                          placeholder="100"
+                          aria-label={`${t("costForm.yield")} — ${item.label || labels.itemNoun.toLowerCase()}`}
+                          className="font-num w-full rounded-lg border border-border bg-surface-muted pl-2 pr-5 py-1.5 text-sm text-right placeholder:text-text-muted/60 focus:outline-none focus:border-accent"
+                        />
+                        <span className="absolute right-1.5 top-1/2 -translate-y-1/2 text-text-muted text-xs">%</span>
+                      </div>
+                    </td>
                     <td className="py-2 pr-3 font-num text-text-muted whitespace-nowrap">
                       ₱{peso(unitCost)}/{item.unit || "unit"}
                     </td>
                     <td className="py-2 pr-3 text-right">
                       {linked || item.qtyPerPack ? (
-                        <span className="font-num font-medium">₱{peso(item.amount)}</span>
+                        <span className="font-num font-medium">₱{peso(cost)}</span>
                       ) : (
                         <div className="relative">
                           <span className="font-num absolute left-2.5 top-1/2 -translate-y-1/2 text-text-muted text-sm">
@@ -341,9 +369,14 @@ export function CostForm({
                           />
                         </div>
                       )}
-                      {totalCost > 0 && item.amount > 0 && (
+                      {yieldPct < 100 && !linked && !item.qtyPerPack && item.amount > 0 && (
+                        <p className="font-num text-[10px] text-warn mt-0.5">
+                          ₱{peso(cost)} {t("costForm.afterYield")}
+                        </p>
+                      )}
+                      {totalCost > 0 && cost > 0 && (
                         <p className="font-num text-[10px] text-text-muted mt-0.5">
-                          {((item.amount / totalCost) * 100).toFixed(1)}% {t("costForm.percentOfCost")}
+                          {((cost / totalCost) * 100).toFixed(1)}% {t("costForm.percentOfCost")}
                         </p>
                       )}
                     </td>

@@ -19,13 +19,6 @@ and leave it sitting here, same discipline Atlas Freelance uses.
 2. **Name due-diligence checklist** — `.ph`/`.com` domain, social
    handles, IPOPHL trademark search for "Amore Cost" (see the bottom of
    [../branding/options.md](../branding/options.md)).
-3. **Memoize POS's `cartDetails`/`visibleItems`** — they currently
-   recompute on every keystroke on the app's single most
-   business-critical screen (checkout). Flagged by the 2026-08-21
-   cross-page audit (decision 0030) as a performance finding, not a
-   correctness one — deferred rather than folded into that batch so it
-   gets its own careful pass on `useMemo` dependency correctness.
-
 ## Features that need real backend/API infrastructure first
 
 Logged 2026-08-18 from the same feature-research pass that produced the
@@ -54,11 +47,29 @@ work:
    client accepting a quote online needs a URL that works outside the
    business owner's own browser, which needs a backend.
 
-## Client-side-feasible, just not built yet
+## Feature gaps — audit of the five-page app (2026-10-28)
 
-9. **Camera-based barcode scanning for Point of Sale** (decision
-   0015) — the v1 scan/search input only supports keyboard-emulating
-   scanner hardware (or manual typing). Scanning with a phone's own
-   camera needs a barcode-decoding library and `getUserMedia` camera
-   permission — a real, buildable addition, just deliberately left out
-   of v1 since real POS hardware scanners don't need it.
+Found by reviewing the five-page app (decision 0040) against the
+food-cost-tau reference and how PH food sellers actually price. The
+three highest-value items from the same audit — demo kitchen, yield %,
+and menu price rounding — shipped the same day (see `completed.md`).
+Point of Sale's old memoization and camera-scanning items were dropped
+from this list: POS no longer exists.
+
+9. **Labor double-count guard** — a recipe's prep labor and an OPEX
+   "Labor" wage both feed the simulators, so an owner who fills in both
+   pays the helper twice. Same trap `directCost()` already closes for
+   overhead. Small.
+10. **Sub-recipes** — use one recipe (garlic rice, a sauce) as an
+    ingredient of others, so a cost change flows through. Medium.
+11. **Delivery-app commission** in the Margin & POS Simulator
+    (GrabFood/foodpanda take ~20–30%). Existed as Multi-Channel Pricing
+    in the `v1-full-11-modules` tag. Small.
+12. **Whole-menu break-even** — plates per day across every dish, not
+    one dish with an "OPEX share" workaround. Medium.
+13. **Printable recipe card (PDF)** — kitchen sheet with ingredients,
+    portions, cost; the reference has one. Small.
+14. **CSV / spreadsheet export** for accountants. Existed in Documents
+    (`v1-full-11-modules` tag). Small.
+15. **Cost-change note on recipe cards** ("cost up 18% since June") —
+    Cost History snapshots are still recorded, just not shown. Small.

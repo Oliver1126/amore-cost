@@ -18,6 +18,8 @@ import { buildBackup, downloadBackup, parseBackup, restoreBackup } from "@/lib/b
 import { peso } from "@/lib/format";
 import { InsightsPanel } from "@/components/InsightsPanel";
 import { PageSkeleton } from "@/components/PageSkeleton";
+import { DemoBanner, TryDemoButton } from "@/components/DemoDataButton";
+import { hasDemoData } from "@/lib/demo";
 import { useLanguage, getModuleText } from "@/lib/i18n";
 import { MODULES } from "@/lib/modules";
 
@@ -75,6 +77,12 @@ export default function DashboardPage() {
       <h1 className="font-display text-2xl">{title}</h1>
       <p className="mt-1 text-text-muted">{t("dash.subtitle")}</p>
 
+      {hasDemoData(catalog) && (
+        <div className="mt-4">
+          <DemoBanner />
+        </div>
+      )}
+
       <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
         {kpis.map((k) => {
           const body = (
@@ -113,12 +121,16 @@ export default function DashboardPage() {
           {featured.length === 0 ? (
             <div className="mt-4">
               <p className="text-sm text-text-muted">{t("input.emptyBody")}</p>
-              <Link
-                href="/input"
-                className="mt-4 inline-block rounded-xl bg-accent text-accent-ink px-4 py-2 text-sm font-medium hover:bg-accent-strong transition-colors"
-              >
-                {t("catalog.newItem")}
-              </Link>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Link
+                  href="/input"
+                  className="inline-block rounded-xl bg-accent text-accent-ink px-4 py-2 text-sm font-medium hover:bg-accent-strong transition-colors"
+                >
+                  {t("catalog.newItem")}
+                </Link>
+                <TryDemoButton />
+              </div>
+              <p className="mt-3 text-xs text-text-muted">{t("demo.tryHint")}</p>
             </div>
           ) : (
             <div className="mt-4 overflow-x-auto">

@@ -11,6 +11,14 @@ work vs. the shipped changelog.
 
 ## Where this stands (as of 2026-10-28)
 
+**Latest (decision 0041):** Input now has a **Yield %** column and a
+**menu price rounding** select, and an empty app offers **"Try with
+sample recipes"** (Adobo, Tapsilog, Halo-Halo) — which is also the
+fastest way to demo Amore Cost to a first business owner for Phase 1
+validation. Remaining audit gaps are backlog items 9–15. A comparison
+against KwentaPOS (a PH POS with recipe costing) is at
+[business/kwentapos-comparison.md](business/kwentapos-comparison.md).
+
 **Latest (decision 0040):** the app is now **five pages** — Dashboard,
 Input, OPEX & Overhead, Receipt Simulator, Margin & POS Simulator —
 modeled on the food-cost-tau reference, after "too many pages that don't

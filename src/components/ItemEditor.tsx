@@ -26,7 +26,7 @@ export function ItemEditor({
 
   return (
     <div>
-      <StatCards state={state} />
+      <StatCards state={state} onChange={onChange} />
       <div className="mt-6 grid sm:grid-cols-2 gap-4 items-start">
         <CostComposition state={state} />
         <BatchCard state={state} onChange={onChange} />

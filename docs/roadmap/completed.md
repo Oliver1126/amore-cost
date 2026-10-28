@@ -4,6 +4,19 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-10-28** — Three pricing aids from the five-page feature audit
+  (decision 0041): **Yield %** per ingredient line (bone-in chicken at
+  70% costs ÷ 0.7, flowing into unit cost, recipe cost, price and food
+  cost %); **menu price rounding** on the Suggested price card (Exact /
+  ₱1 / ₱5 / ₱10 / ends in 9, always up — ₱298.97 → ₱299, with "rounded up
+  from" shown and profit recomputed from the rounded price); and
+  **sample recipes** — one click loads Adobo, Tapsilog and Halo-Halo
+  with linked ingredients and sample OPEX (only if OPEX is blank), one
+  click removes only the `demo-` records. Also fixed: food cost % now
+  measures against the price actually charged, so rounding moves it
+  too. Verified live EN/TL, light/dark, 360/390/1280px, zero console
+  errors. 184 tests.
+
 - **2026-10-28** — Receipt Simulator redesigned as a thermal receipt,
   following the reference's POS receipt layout: monospace slip, the
   owner's own business name/address/TIN (optional, saved, in backups — no

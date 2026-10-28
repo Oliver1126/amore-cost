@@ -1,9 +1,9 @@
 import type { CalculatorState } from "@/lib/calculator";
-import { computePriceBreakdown } from "@/lib/calculator";
+import { computePriceBreakdown, PRICE_ROUNDINGS, type PriceRounding } from "@/lib/calculator";
 import { peso } from "@/lib/format";
 import { useLanguage, getTaxPresetLabel } from "@/lib/i18n";
 
-export function StatCards({ state }: { state: CalculatorState }) {
+export function StatCards({ state, onChange }: { state: CalculatorState; onChange?: (next: CalculatorState) => void }) {
   const { lang, t } = useLanguage();
   const b = computePriceBreakdown(state);
   const isLoss = b.profitPerUnit < 0;
@@ -17,8 +17,29 @@ export function StatCards({ state }: { state: CalculatorState }) {
       </div>
 
       <div className="rounded-2xl bg-accent text-accent-ink p-5 shadow-sm">
-        <p className="text-sm text-accent-ink/80">{t("stats.suggestedPrice")}</p>
+        <div className="flex items-start justify-between gap-2">
+          <p className="text-sm text-accent-ink/80">{t("stats.suggestedPrice")}</p>
+          {onChange && (
+            <select
+              value={state.priceRounding ?? "none"}
+              onChange={(e) => onChange({ ...state, priceRounding: e.target.value as PriceRounding })}
+              aria-label={t("stats.roundingLabel")}
+              className="flex-none rounded-lg bg-accent-ink/15 text-accent-ink text-xs font-medium px-2 py-1 border-0 focus:outline-none cursor-pointer [&>option]:text-text [&>option]:bg-surface"
+            >
+              {PRICE_ROUNDINGS.map((r) => (
+                <option key={r} value={r}>
+                  {t(`stats.round.${r}` as Parameters<typeof t>[0])}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
         <p className="font-num text-3xl font-bold mt-2">₱{peso(b.priceCustomerPays)}</p>
+        {b.priceCustomerPays !== b.unroundedPriceCustomerPays && (
+          <p className="font-num text-xs text-accent-ink/70 mt-0.5">
+            {t("stats.roundedFrom")} ₱{peso(b.unroundedPriceCustomerPays)}
+          </p>
+        )}
         <p className="text-xs text-accent-ink/70 mt-1">
           {b.taxRate > 0
             ? `${t("stats.includesTax")} ${getTaxPresetLabel(lang, state.tax.preset, b.taxLabel)} (${b.taxRate}%)`

@@ -3,11 +3,14 @@
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useLocalStorage } from "@/lib/useLocalStorage";
+import { hasDemoData } from "@/lib/demo";
+import { DemoBanner, TryDemoButton } from "@/components/DemoDataButton";
 import {
   defaultState,
   STORAGE_KEY,
   computePriceBreakdown,
   foodCostPercent,
+  lineCost,
   FOOD_COST_TARGET,
   type CalculatorState,
 } from "@/lib/calculator";
@@ -152,16 +155,25 @@ function InputPageInner() {
         <div className="mt-8 card p-6 max-w-md">
           <p className="font-medium">{t("input.emptyTitle")}</p>
           <p className="mt-1 text-sm text-text-muted">{t("input.emptyBody")}</p>
-          <button
-            type="button"
-            onClick={() => setCreating(true)}
-            className="mt-4 rounded-xl bg-accent text-accent-ink px-4 py-2 text-sm font-medium hover:bg-accent-strong transition-colors"
-          >
-            {t("catalog.newItem")}
-          </button>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => setCreating(true)}
+              className="rounded-xl bg-accent text-accent-ink px-4 py-2 text-sm font-medium hover:bg-accent-strong transition-colors"
+            >
+              {t("catalog.newItem")}
+            </button>
+            <TryDemoButton />
+          </div>
+          <p className="mt-3 text-xs text-text-muted">{t("demo.tryHint")}</p>
         </div>
       ) : (
         <>
+          {hasDemoData(catalog) && (
+            <div className="mt-6">
+              <DemoBanner />
+            </div>
+          )}
           <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3">
             <input
               type="text"
@@ -250,7 +262,7 @@ function InputPageInner() {
                         item.state.costItems.map((ci) => (
                           <li key={ci.id} className="flex items-center justify-between text-xs gap-2">
                             <span className="truncate">{ci.label || t("common.untitled")}</span>
-                            <span className="font-num font-medium flex-none">₱{peso(ci.amount)}</span>
+                            <span className="font-num font-medium flex-none">₱{peso(lineCost(ci))}</span>
                           </li>
                         ))
                       )}

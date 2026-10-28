@@ -283,3 +283,68 @@ describe("seniorPwdPrice", () => {
     expect(b.seniorPwdPrice).toBeCloseTo(100, 5);
   });
 });
+
+import { lineCost, effectiveYield, roundMenuPrice, foodCostPercent as fcp } from "./calculator";
+
+describe("yield %", () => {
+  it("grosses a line up by its yield — 75% usable means the cost is a third higher", () => {
+    expect(lineCost({ amount: 100, yieldPercent: 75 })).toBeCloseTo(133.33, 2);
+  });
+  it("treats an unset yield as 100%, so recipes saved before yield existed are unchanged", () => {
+    expect(lineCost({ amount: 100 })).toBe(100);
+  });
+  it("clamps nonsense yields instead of dividing by zero or shrinking cost", () => {
+    expect(effectiveYield({ yieldPercent: 0 })).toBe(100);
+    expect(effectiveYield({ yieldPercent: 250 })).toBe(100);
+    expect(effectiveYield({ yieldPercent: -5 })).toBe(100);
+  });
+  it("flows into true cost and the suggested price", () => {
+    const base = { ...defaultState(), costItems: [{ ...newCostItem("Pork belly"), amount: 75 }] };
+    const trimmed = { ...base, costItems: [{ ...base.costItems[0], yieldPercent: 75 }] };
+    expect(computePriceBreakdown(base).cost).toBeCloseTo(75);
+    expect(computePriceBreakdown(trimmed).cost).toBeCloseTo(100);
+  });
+});
+
+describe("roundMenuPrice", () => {
+  it("rounds up to the next peso, ₱5, ₱10, or price ending in 9", () => {
+    expect(roundMenuPrice(348.68, "1")).toBe(349);
+    expect(roundMenuPrice(348.68, "5")).toBe(350);
+    expect(roundMenuPrice(348.68, "10")).toBe(350);
+    expect(roundMenuPrice(348.68, "9")).toBe(349);
+    expect(roundMenuPrice(351, "9")).toBe(359);
+  });
+  it("never rounds down, even by a centavo", () => {
+    expect(roundMenuPrice(340.01, "10")).toBe(350);
+  });
+  it("leaves an exact price alone, including float noise just above it", () => {
+    expect(roundMenuPrice(349, "9")).toBe(349);
+    expect(roundMenuPrice(350.0000000001, "5")).toBe(350);
+    expect(roundMenuPrice(348.68, "none")).toBe(348.68);
+  });
+});
+
+describe("computePriceBreakdown with rounding", () => {
+  const state = { ...defaultState(), costItems: [{ ...newCostItem("x"), amount: 97.63 }], strategy: { type: "margin" as const, percent: 72 } };
+
+  it("rounds the customer price and recomputes profit and margin from it", () => {
+    const exact = computePriceBreakdown(state);
+    const rounded = computePriceBreakdown({ ...state, priceRounding: "1" });
+    expect(exact.priceCustomerPays).toBeCloseTo(348.68, 2);
+    expect(rounded.priceCustomerPays).toBe(349);
+    expect(rounded.unroundedPriceCustomerPays).toBeCloseTo(348.68, 2);
+    expect(rounded.profitPerUnit).toBeCloseTo(349 - 97.63, 2);
+    expect(rounded.marginPercent).toBeGreaterThan(exact.marginPercent);
+  });
+
+  it("rounds the VAT-inclusive price and backs the tax out of it", () => {
+    const r = computePriceBreakdown({ ...state, priceRounding: "5", tax: { preset: "vat", customLabel: "", customRate: 0 } });
+    expect(r.priceCustomerPays % 5).toBe(0);
+    expect(r.priceBeforeTax * 1.12).toBeCloseTo(r.priceCustomerPays, 6);
+    expect(r.taxAmount).toBeCloseTo(r.priceCustomerPays - r.priceBeforeTax, 6);
+  });
+
+  it("reports food cost % against the rounded price", () => {
+    expect(fcp({ ...state, priceRounding: "10" })).toBeCloseTo((97.63 / 350) * 100, 4);
+  });
+});

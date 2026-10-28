@@ -36,6 +36,21 @@ Search, an On/Below-target filter, Duplicate, Delete, and the shared
 to every recipe using it — decision 0007). `/input?edit=<id>` opens a
 recipe directly; old `/costing?id=<id>` links redirect there.
 
+Two pricing aids in the editor (decision 0041): a **Yield %** column per
+ingredient line (usable share after trimming/bones/cooking loss —
+`lineCost()` = amount ÷ yield, the stored `amount` stays the purchase
+cost), and a **menu price rounding** select on the Suggested price card
+(`roundMenuPrice()` — Exact, ₱1, ₱5, ₱10, or "ends in 9"; always rounds
+up, and pre-VAT price, VAT and profit are backed out of the rounded
+price so every number agrees with what the customer actually pays).
+
+**Sample recipes** (`src/lib/demo.ts`): an empty Dashboard or Input
+offers "Try with sample recipes" — Chicken Adobo, Tapsilog, Halo-Halo
+with 13 linked ingredients and, only when OPEX is blank, a sample
+carinderia OPEX. Every id starts with `demo-`; "Remove sample recipes"
+deletes only those (a demo ingredient linked into the owner's own recipe
+is kept).
+
 ## 3. OPEX & Overhead — `/opex`
 
 Monthly recurring expenses, each with a category (Rent, Utilities,
@@ -88,8 +103,9 @@ cost ÷ the pre-VAT menu price, everywhere.
 
 ## Test coverage
 
-`src/lib/*.test.ts` (Vitest, `npm test`, 165 tests) covers the pure logic:
+`src/lib/*.test.ts` (Vitest, `npm test`, 184 tests) covers the pure logic:
 pricing/tax/break-even math, catalog CRUD and history snapshots, the
 ingredient cascade and unit conversion, OPEX totals and categories,
-backup parsing, insights, and the receipt and margin simulators. Pages
+backup parsing, insights, the receipt and margin simulators, yield and
+menu-price rounding, and the sample-recipe load/clear. Pages
 and components have no automated coverage.

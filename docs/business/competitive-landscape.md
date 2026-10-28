@@ -14,6 +14,7 @@ this one is the answer.
 | [iCost](https://icost.ph/) | SaaS | Free (1 recipe) / ₱299–599/mo | Food only | Account/app required | Yes ("Cook & Deduct") | Yes, ₱-priced |
 | [FoodCost](https://food-cost-tau.vercel.app/) | SaaS (indie/soft-launched) | Unpublished | Food only | Account required | Partial | Yes — 12% VAT, Senior/PWD built in |
 | Raket.ph templates (JR Quilantang + ~6 other sellers) | Static spreadsheet | ₱200–₱1,000 one-time | Food *or* service, sold as separate products | N/A (buy once) | No — manual edits | Yes, but static |
+| [KwentaPOS](https://www.kwentapos.com/) | Cloud POS (PWA) | ₱59 / ₱299 / ₱999 per mo | Sari-sari, food, retail | 15-day trial, account | Yes (recipe costing, Pro plan and up) | Partly: GCash/Maya/utang; no VAT or Senior/PWD mentioned. Full gap list: [kwentapos-comparison.md](kwentapos-comparison.md) |
 | [Craftybase](https://craftybase.com/recipe-costing-software) | SaaS | From $49/mo (~₱2,800) | Makers/artisans | Account required | Yes | No — USD, not PH-specific |
 | [MarketMan](https://www.marketman.com/platform/recipe-costing-software) | SaaS | From $199/mo (~₱11,000) | Restaurant chains | Account required | Yes | No — USD, enterprise scale |
 

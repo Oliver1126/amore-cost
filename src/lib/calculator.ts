@@ -20,6 +20,20 @@ export interface CostItem {
   shippingFee?: number;
   /** The unit the package itself is measured in (e.g. "kg" for a 25kg sack) — separate from `unit`, which is the portion's own unit. Only meaningful alongside `qtyPerPack`; when unset or equal to `unit`, no conversion is attempted. */
   packUnit?: string;
+  /** Usable share of what's bought, after trimming/bones/peel/cooking loss — 75 means 1 kg bought gives 750 g usable. `amount` stays the as-purchased cost of `quantity`; `lineCost()` grosses it up. Unset = 100. */
+  yieldPercent?: number;
+}
+
+/** Clamped to 1–100 so a typo can't divide by zero or shrink a cost. */
+export function effectiveYield(item: Pick<CostItem, "yieldPercent">): number {
+  const y = item.yieldPercent;
+  return Number.isFinite(y) && (y as number) > 0 ? Math.min(100, Math.max(1, y as number)) : 100;
+}
+
+/** What a cost line really costs once waste is counted — `amount` ÷ yield. */
+export function lineCost(item: Pick<CostItem, "amount" | "yieldPercent">): number {
+  const amount = Number.isFinite(item.amount) ? item.amount : 0;
+  return amount * (100 / effectiveYield(item));
 }
 
 /** Per-unit cost implied by a package purchase: package price plus shipping, split across how many usable units the package contains. */
@@ -111,6 +125,27 @@ export interface CalculatorState {
   tax: TaxState;
   /** How many units a "batch" produces — every per-unit cost/labor/packaging/overhead entered above is assumed to already be for one unit, so this only scales the totals shown, not the per-unit truth. */
   batchSize: number;
+  /** Round the customer-facing price up to a menu-friendly number. Unset = exact (every recipe saved before this existed). */
+  priceRounding?: PriceRounding;
+}
+
+export type PriceRounding = "none" | "1" | "5" | "10" | "9";
+export const PRICE_ROUNDINGS: PriceRounding[] = ["none", "1", "5", "10", "9"];
+
+/**
+ * Always rounds **up**, never down — rounding exists to make a price
+ * printable on a menu board, and rounding down would quietly sell below
+ * the margin the owner chose. "9" = the next price ending in 9 (₱348.68
+ * → ₱349, ₱351 → ₱359).
+ */
+export function roundMenuPrice(price: number, rule: PriceRounding = "none"): number {
+  if (!Number.isFinite(price) || price <= 0 || rule === "none") return price;
+  const p = price - 1e-9;
+  if (rule === "1") return Math.ceil(p);
+  if (rule === "5") return Math.ceil(p / 5) * 5;
+  if (rule === "10") return Math.ceil(p / 10) * 10;
+  const c = Math.ceil(p);
+  return c + ((9 - (c % 10)) + 10) % 10;
 }
 
 export function laborCost(state: Pick<CalculatorState, "laborHours" | "laborRate">): number {
@@ -118,7 +153,7 @@ export function laborCost(state: Pick<CalculatorState, "laborHours" | "laborRate
 }
 
 export function materialsCost(items: CostItem[]): number {
-  return items.reduce((sum, item) => sum + (Number.isFinite(item.amount) ? item.amount : 0), 0);
+  return items.reduce((sum, item) => sum + lineCost(item), 0);
 }
 
 export function trueCost(state: CalculatorState): number {
@@ -140,7 +175,7 @@ export const FOOD_COST_TARGET = { min: 28, max: 32 };
 
 /** Direct cost as a share of the pre-VAT menu price — the restaurant-standard way to read a dish's margin (100 − food cost % ≈ gross margin). */
 export function foodCostPercent(state: CalculatorState): number {
-  const pre = priceBeforeTax(trueCost(state), state.strategy);
+  const pre = computePriceBreakdown(state).priceBeforeTax;
   return pre > 0 ? (directCost(state) / pre) * 100 : 0;
 }
 
@@ -181,6 +216,8 @@ export interface PriceBreakdown {
   taxRate: number;
   taxAmount: number;
   priceCustomerPays: number;
+  /** The price before menu rounding — equal to `priceCustomerPays` when rounding is off. */
+  unroundedPriceCustomerPays: number;
   profitPerUnit: number;
   marginPercent: number;
   markupPercent: number;
@@ -189,9 +226,14 @@ export interface PriceBreakdown {
 
 export function computePriceBreakdown(state: CalculatorState): PriceBreakdown {
   const cost = trueCost(state);
-  const pre = priceBeforeTax(cost, state.strategy);
+  const exactPre = priceBeforeTax(cost, state.strategy);
   const { label: taxLabel, rate: taxRate } = effectiveTax(state.tax);
-  const taxAmount = pre * (taxRate / 100);
+  const exactCustomer = exactPre * (1 + taxRate / 100);
+  // Rounding acts on the price the customer actually sees; everything
+  // else (pre-tax price, tax, profit, margin) is backed out of that.
+  const customer = roundMenuPrice(exactCustomer, state.priceRounding);
+  const pre = customer === exactCustomer ? exactPre : customer / (1 + taxRate / 100);
+  const taxAmount = customer - pre;
   const profitPerUnit = pre - cost;
 
   return {
@@ -200,7 +242,8 @@ export function computePriceBreakdown(state: CalculatorState): PriceBreakdown {
     taxLabel,
     taxRate,
     taxAmount,
-    priceCustomerPays: pre + taxAmount,
+    priceCustomerPays: customer,
+    unroundedPriceCustomerPays: exactCustomer,
     profitPerUnit,
     marginPercent: pre > 0 ? (profitPerUnit / pre) * 100 : 0,
     markupPercent: cost > 0 ? (profitPerUnit / cost) * 100 : 0,

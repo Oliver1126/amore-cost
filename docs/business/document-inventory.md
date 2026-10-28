@@ -11,6 +11,7 @@ going stale — same purpose as Atlas Freelance's own
 | [strategy.md](strategy.md) | Vision, objectives, SWOT, financial summary, risks — the master plan |
 | [concept.md](concept.md) | The problem, the ICP, why static templates aren't enough, open questions |
 | [competitive-landscape.md](competitive-landscape.md) | The crisp current comparison table and "the wedge" |
+| [kwentapos-comparison.md](kwentapos-comparison.md) | KwentaPOS (PH cloud POS) vs. Amore Cost — 16 systems they have that we don't, our differentiation, what to do about it |
 | [market-research.md](market-research.md) | The fuller research trail behind competitive-landscape.md, including the iCost correction |
 | [strategic-forks.md](strategic-forks.md) | The three shapes this business could take, and why standalone won |
 | [go-to-market.md](go-to-market.md) | The offer, channels, and a solo-founder sales motion |
