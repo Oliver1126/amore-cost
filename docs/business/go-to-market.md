@@ -9,24 +9,31 @@ this file is *how* to actually reach and convert the ICP defined in
 
 ## The offer
 
-Two tiers, matching [product/scope-v1.md](../product/scope-v1.md)'s
-draft pricing:
+Two tiers, per [roadmap/roadmap.md](../roadmap/roadmap.md) Stage 3
+(a hypothesis to test, not a decision yet):
 
-- **Free, forever, no signup.** The full v0 calculator — cost, price,
-  and break-even, for food businesses (decision 0038 — was all three
-  verticals under decision 0004, see the archive linked below). This is
-  the hook, not a crippled trial. It has to be good enough on its own
-  that someone tells a friend about it before ever creating an account
-  — the same zero-friction-trial move that worked for Atlas Freelance.
-- **Paid, ₱199–499/month (draft, unvalidated).** Unlocks the
-  ingredient library, the inventory module, cost history, PDF
-  export, and multi-user — see [product/modules.md](../product/modules.md)
-  for exactly what's gated. Match iCost's proven convention here (a
-  time-boxed free trial of the paid tier, no card required) rather than
-  inventing a new trial mechanic this audience hasn't already been
-  trained on.
+- **Free, forever, no signup.** Everything the app does today on one
+  device — all five pages (Dashboard, Input, OPEX & Overhead, Receipt
+  Simulator, Margin & POS Simulator; see
+  [product/modules.md](../product/modules.md)), including the
+  Ingredient Library, yield %, rounding, and sample recipes. This is the
+  hook and the content engine's destination, not a crippled trial.
+- **Amore Cost Plus — test ₱99/mo or ₱899/yr** (below iCost and
+  KwentaPOS Pro). Cloud sync across devices, ingredient price alerts,
+  unlimited price history, a branded PDF menu/price list, and
+  delivery-app pricing. Also test a one-time "Lifetime Starter" with
+  the first 50 users. Needs accounts and a backend first, so it can't
+  exist before Stage 3. Match iCost's proven convention (a time-boxed
+  free trial of Plus, no card required).
 
-## The pitch, post-decision-0038
+## The pitch
+
+**Current (2026-10-28):** *"Price it in Amore Cost, sell it in your
+POS."* Amore Cost is the pricing brain, not another POS — see the
+roadmap's five moves and
+[kwentapos-comparison.md](kwentapos-comparison.md). The anchors below
+are refreshed in the roadmap's battlecards (§4); one-fact-one-home, so
+that table is the current version.
 
 **Food-only, plainly stated** — see
 [decision 0038](decisions/0038-food-only-vertical-removed.md), which
@@ -40,9 +47,10 @@ conversation (not necessarily in public marketing copy, see
 competitors in shareable collateral):
 - vs. the Raket.ph spreadsheets: "stays current when your costs change,
   instead of going stale the day flour goes up"
-- vs. iCost: "gives you a specific recommendation when a recipe's
-  margin slips, not just a recalculated price" (the Insights engine,
-  decision 0032)
+- vs. iCost: "free with no signup, in Tagalog, and shows OPEX per dish,
+  break-even, and a profit-and-loss simulator"
+- vs. a POS (KwentaPOS, Loyverse): "keep it — set the right price here
+  first, including VAT, Senior/PWD, and your rent per dish"
 
 **What this gives up, stated plainly:** `competitive-landscape.md`
 named "one account across all three verticals" as one of the few real
@@ -58,8 +66,9 @@ if this market ever gets revisited.
 ICP is defined in [concept.md](concept.md) — not restated here.
 Channel list and sequencing already identified in
 [market-research.md](market-research.md)'s "Distribution channels
-worth testing first" and phased in [roadmap.md](../roadmap/roadmap.md)'s Phase
-1 and Phase 5. The one addition worth naming explicitly:
+worth testing first" and staged in [roadmap.md](../roadmap/roadmap.md)
+(Stage 1 validation script, Stage 2 content engine, Stage 4
+distribution partners).
 
 ## The actual sales motion for a solo founder
 
@@ -70,7 +79,7 @@ speak of, so the motion has to be founder-led and organic, not paid:
    primary "sales" mechanism — someone doesn't need to talk to Oliver
    to get value, they just need to find it.
 2. **Do things that don't scale, early.** For the first real cohort
-   coming out of Phase 1 validation (../roadmap/roadmap.md) — realistically the
+   coming out of Stage 1 validation ([roadmap](../roadmap/roadmap.md)) — realistically the
    first 20–50 people who actually try the pitch or the v0 tool —
    Oliver should personally help them use it (a DM, a quick call, a
    walkthrough), not wait for a self-serve funnel to convert them. The
@@ -82,7 +91,7 @@ speak of, so the motion has to be founder-led and organic, not paid:
    community/creator recommendations — PH Business Network, JR
    Quilantang's TikTok content — over advertising. A bootstrapped
    founder shouldn't spend on ads before organic community signal is
-   confirmed in Phase 1; if Phase 1 validates, the same communities are
+   confirmed in Stage 1; if Stage 1 validates, the same communities are
    also the free distribution channel for launch.
 4. **Referral, once there's a base.** This market clusters tightly in
    Facebook groups and local business circles — word of mouth compounds
@@ -93,21 +102,20 @@ speak of, so the motion has to be founder-led and organic, not paid:
    [strategic-forks.md](strategic-forks.md)) — approaching PH Business
    Network once there's a working, validated product to show — is the
    highest-leverage single move available given their existing 160K-
-   member audience, but it's a Phase 5 conversation, not a Phase 1
+   member audience, but it's a Stage 4 conversation, not a Stage 1
    dependency.
 
-## What "success" looks like, by phase
+## What "success" looks like, by stage
 
-Mirrors the discipline Atlas Freelance's own go-to-market doc uses —
-each phase has one real signal, not a vanity metric:
+Each roadmap stage has one real signal, not a vanity metric. The exact
+gates and the weekly scoreboard live in
+[roadmap.md](../roadmap/roadmap.md) (§3 and §6) — not restated here:
 
-- **Phase 1 (validate):** a real number of business owners who actually
-  reacted to the pitch with "I'd use this," not just likes or shares.
-- **Phase 2 (v0 live):** repeat use of the free tool by the same
-  person across more than one session — proof it replaced a habit
-  (the spreadsheet), not just a one-time curiosity click.
-- **Phase 3–4 (v1, paid):** conversion from free use to a paid account
-  — the number that actually proves the business, same as Atlas
-  Freelance's own Phase 2 marker.
-- **Phase 5 (grow):** referral share of new signups — the cheapest,
-  most durable channel in a community-dense market like this one.
+- **Stage 1 (validate):** owners entering *their own* recipe unaided
+  and coming back within a week — not likes or shares.
+- **Stage 2 (content):** repeat use across sessions — proof it replaced
+  a habit (the spreadsheet), not a curiosity click.
+- **Stage 3 (Plus):** free → paid conversion — the number that proves
+  the business.
+- **Stage 4 (scale):** referral share of new users — the cheapest,
+  most durable channel in a community-dense market.

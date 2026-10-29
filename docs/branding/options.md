@@ -8,6 +8,13 @@
 > [0002](../business/decisions/0002-brand-name-repricediq.md).) The
 > shortlist below stays as the historical record of what else was
 > considered, including "Calcost" and "Calcul" themselves.
+>
+> **Note 2026-10-28:** the recommended "Kwenta" is now in use by a PH
+> competitor, [KwentaPOS](https://www.kwentapos.com/) (see
+> [../business/kwentapos-comparison.md](../business/kwentapos-comparison.md)) —
+> one more reason it wasn't the pick. The tagline *"Alamin kung may
+> kwenta ang presyo mo"* is still usable as copy, but avoid leaning on
+> "Kwenta" as a brand-like word to prevent confusion.
 
 Naming direction, not a final decision — pick one to move forward with,
 or use these as raw material for something better. All check for a

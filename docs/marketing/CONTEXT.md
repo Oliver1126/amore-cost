@@ -12,13 +12,13 @@ actual checklist and content backlog for carrying that strategy out.
 One fact, one home: don't restate the strategy here, link to it.
 
 **Contains:**
-- [launch-checklist.md](launch-checklist.md) — turns go-to-market.md's
-  Phase 1 plan into an actual step-by-step list, ordered, with a
-  go/no-go gate before posting anything.
+- [launch-checklist.md](launch-checklist.md) — turns
+  [../roadmap/roadmap.md](../roadmap/roadmap.md)'s Stage 0 (launch-ready)
+  and Stage 1 (validate with 20 owners) into a step-by-step list, with
+  the go/no-go gate set before posting anything.
 - [content-ideas.md](content-ideas.md) — a backlog of how-to-price/
-  how-to-cost content pieces for the Phase 5 growth channel
-  go-to-market.md already identified — a queue, not a commitment;
-  nothing here is written yet.
+  how-to-cost content pieces for the roadmap's Stage 2 content engine
+  — a queue, not a commitment; nothing here is written yet.
 - [free-tier-benefits.md](free-tier-benefits.md) — the actual "why is
   this free" explanation, both the user-facing benefits and the
   business rationale, doubling as ready-to-use messaging if anyone

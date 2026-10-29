@@ -22,7 +22,7 @@ going stale — same purpose as Atlas Freelance's own
 ## Deliberately not written yet
 
 - **Legal readiness / ToS / privacy policy** — no accounts exist yet to
-  need them; premature before Phase 1 validation.
+  need them; premature before roadmap Stage 3 (accounts + Plus).
 - **A real financial model** (actual unit economics, CAC, LTV, runway
   figures) — `financial-strategy.md` covers the scenarios and the
   decision order, but deliberately leaves the real numbers blank
@@ -30,5 +30,8 @@ going stale — same purpose as Atlas Freelance's own
   before pricing/gating is decided, per `strategy.md`.
 - **Brand voice guide** — the one-page pitch
   (`../branding/pitch.md`) and this file's siblings carry the voice
-  implicitly so far; worth a dedicated doc if content marketing
-  (roadmap Phase 5) actually starts.
+  implicitly so far; worth a dedicated doc once the content engine
+  (roadmap Stage 2) actually starts.
+- **validation-log.md** — the roadmap's Stage 1 asks for one short note
+  per owner interview; create it with the first real conversation, not
+  before.

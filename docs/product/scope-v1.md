@@ -1,12 +1,17 @@
 # Product scope
 
-See [modules.md](modules.md) for what each module actually is. This
-file is the build-history and the open pricing-tier question — as of
-[decision 0006](../business/decisions/0006-all-modules-built-local-only.md)
-**everything below has been built**, all local-only (no accounts, no
-backend), which changes what's left open here from "what to build
-next" to "how to eventually monetize something that already works for
-free."
+See [modules.md](modules.md) for what each page actually is. This
+file is the build-history and the open pricing-tier question.
+
+> **Current scope (2026-10-29): five pages** — Dashboard, Input, OPEX &
+> Overhead, Receipt Simulator, Margin & POS Simulator
+> ([decision 0040](../business/decisions/0040-five-pages-modeled-on-reference.md)),
+> plus yield %, menu price rounding and sample recipes
+> ([decision 0041](../business/decisions/0041-yield-rounding-sample-recipes.md)).
+> Inventory, POS, Cost History page, Documents, Multi-User,
+> Multi-Channel, Margin Alerts and Reporting below were **built, then
+> cut** by 0040 — they live on as the `v1-full-11-modules` git tag. The
+> history below is accurate history, not current spec.
 
 ## What shipped, in the order it shipped
 
@@ -66,21 +71,21 @@ covering the pricing/tax/break-even/channel math, catalog CRUD and
 history logic, CSV round-tripping, and the ingredient cascade —
 components and pages still have no automated coverage.
 
+**2026-10-28 — cut to five pages** (decision 0040), then yield %,
+menu price rounding and one-click sample recipes (decision 0041). 184
+tests. See [../roadmap/completed.md](../roadmap/completed.md) for
+everything between 2026-08-18 and here.
+
 ## The open question this leaves: pricing and gating
 
 The original plan assumed a free v0 and a paid tier unlocking
-everything else (draft ₱199–499/month, see the open questions in
-[business/concept.md](../business/concept.md)). That framing doesn't
-map cleanly onto current reality: **every module is free and working
-right now**, with no accounts to gate anything behind. Before
-introducing payment, real decisions are needed on:
-
-- Whether to keep the local-only model entirely free forever and
-  monetize differently (e.g. a paid tier for cross-device sync via real
-  accounts, which is also the fix for Multi-User's security gap and
-  Inventory's remaining per-item-not-per-ingredient stock limitation),
-  or gate some of what's already built behind a paid unlock
-  retroactively.
-- Whether real accounts are worth building before Phase 1 validation
-  (see [roadmap.md](../roadmap/roadmap.md)) actually confirms anyone wants this
-  at all — the build has now outpaced validation twice.
+everything else (draft ₱199–499/month). The current proposal is in
+[../roadmap/roadmap.md](../roadmap/roadmap.md) Stage 3: **everything the
+app does today on one device stays free forever**; a paid "Plus" tier
+(test ₱99/mo or ₱899/yr, plus a one-time "Lifetime Starter" option)
+sells what genuinely needs a backend — cloud sync, price alerts,
+history, branded PDF menus, delivery-app pricing. Still unvalidated:
+whether this market pays monthly at all (see
+[business/concept.md](../business/concept.md)), and real accounts stay
+gated on Stage 1's validation result — the build has outpaced
+validation many times.

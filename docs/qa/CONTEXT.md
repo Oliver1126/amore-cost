@@ -22,7 +22,7 @@ is archived in `../archive/eleven-modules-2026-10/`). Nothing here is product sp
 **Human check:** this app has never been tested by anyone outside the
 person building it — see [../next-steps.md](../next-steps.md)'s
 "build has outpaced validation" note. This QA pass and real user
-validation (Phase 1) are two different things: QA checks the app
-works as built; Phase 1 checks whether the build is even the right
-thing. Don't let a clean QA pass substitute for the still-missing
-Phase 1 validation.
+validation (Stage 1 in `../roadmap/roadmap.md`) are two different
+things: QA checks the app works as built; Stage 1 checks whether the
+build is even the right thing. Don't let a clean QA pass substitute for
+the still-missing validation.

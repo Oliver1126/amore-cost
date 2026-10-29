@@ -1,5 +1,10 @@
 # Amore Cost — Master Plan
 
+> **Superseded (2026-10-29).** This snapshot predates the cut to five
+> pages (decision 0040) and the new competitive roadmap. Read
+> [docs/roadmap/roadmap.md](docs/roadmap/roadmap.md) and
+> [docs/next-steps.md](docs/next-steps.md) instead; kept only as history.
+
 *A consolidated reading copy of the roadmap and go-to-market plan, as
 of 2026-08-22. Live app:* **[amore-cost.vercel.app](https://amore-cost.vercel.app)**
 

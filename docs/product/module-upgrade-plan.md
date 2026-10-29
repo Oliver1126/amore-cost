@@ -1,5 +1,13 @@
 # Module upgrade plan — what to add/edit, not what exists
 
+> **Historical (2026-09-02), written for the 11-module app.** Decision
+> 0040 cut the app to five pages, so most module headings below
+> (Inventory, POS, Documents, Multi-User, Multi-Channel, Alerts,
+> Reporting) no longer exist. Ideas that still apply to the five pages
+> — e.g. the cost-shock simulator and a personalized margin range — are
+> candidates for [../roadmap/backlog.md](../roadmap/backlog.md); the
+> current gap list is that file's "Feature gaps" section.
+
 Companion to [business/product-depth-analysis.md](../business/product-depth-analysis.md)
 (the diagnosis) — this is the punch list: concrete ADD/EDIT items per
 module, each checked against the actual code (not assumed) and against

@@ -1,9 +1,11 @@
-# Content ideas — Phase 5 growth channel
+# Content ideas — Stage 2 content engine
 
 A backlog, not a commitment — per [../ideas/inbox.md](../ideas/inbox.md)'s
-own discipline, nothing here is written yet. This is the "content
-marketing aimed at the ICP" channel [../roadmap/roadmap.md](../roadmap/roadmap.md)'s
-Phase 5 names — how-to-price and how-to-cost content is exactly what
+own discipline, nothing here is written yet. This is the content engine
+in [../roadmap/roadmap.md](../roadmap/roadmap.md) Stage 2 (Move 5: win
+on content and community, not ads; its recurring formats — "Magkano
+dapat ang presyo ng ___?" and "Presyo Check" posts — are defined there)
+— how-to-price and how-to-cost content is exactly what
 this audience already searches for. Each idea should trace to a real
 feature or a real pain point already documented, not be generic
 small-business advice.
@@ -14,21 +16,31 @@ small-business advice.
 ## Grounded in real features already built
 
 - **"Margin % vs. Markup %: they're not the same number"** — directly
-  reuses the explanation now built into Costing & Pricing (decision
-  0019). A genuinely common point of confusion, worth a standalone
+  reuses the explanation built into Input's "Edit breakdown" pricing
+  settings (decision 0019). A genuinely common point of confusion, worth a standalone
   explainer even for people who never open the app.
-- **"How much of your rent is really in that price?"** — the OPEX →
-  Overhead connection (decision 0018): most micro-business owners never
+- **"How much of your rent is really in that price?"** — the OPEX &
+  Overhead page's overhead-per-dish allocation: most micro-business owners never
   allocate fixed costs into a single item's price at all. A clear
   before/after example (pricing without OPEX allocation vs. with it)
   would land hard with this ICP.
 - **"Buying in bulk? Here's your real per-unit cost"** — the package
   cost calculator (decision 0014): the sack-of-flour-plus-delivery
   example already used internally is a ready-made worked example.
-- **"What does it actually cost to sell one more unit?"** — break-even
-  + contingency buffer (decisions 0014/0017): framed around the
-  anxiety this ICP already has ("paano ko malalaman kung tama ang
-  presyo ko") per `business/concept.md`'s ICP framing.
+- **"What does it actually cost to sell one more unit?"** — the Margin &
+  POS Simulator's break-even portions and P&L waterfall, plus OPEX's
+  contingency buffer: framed around the anxiety this ICP already has
+  ("paano ko malalaman kung tama ang presyo ko") per
+  `business/concept.md`'s ICP framing.
+- **"Lugi ka ba sa manok? Yield explained"** — the Yield % column
+  (decision 0041): 1 kg of bone-in chicken is ~700 g of meat, so its
+  real cost is ₱220 ÷ 0.7, not ₱220. The sample Chicken Adobo is a
+  ready-made worked example.
+- **"Senior/PWD discount: tama ba ang kwenta mo?"** — the Receipt
+  Simulator's 20%-off-VAT-exclusive, VAT-exempt math (RA 9994/10754);
+  a very common point of real-world error.
+- **"Why ₱299, not ₱298.97"** — menu price rounding (decision 0041):
+  always round up, never below your margin.
 
 ## Format ideas, matching where this audience actually is
 
@@ -47,8 +59,8 @@ small-business advice.
 ## Explicitly not yet in scope
 
 - Nothing here should reference a paid tier or pricing — no pricing
-  exists yet (`business/strategy.md`'s financial summary; still true
-  through Phase 7 in [`../roadmap/roadmap.md`](../roadmap/roadmap.md)).
+  exists yet; the "Plus" tier is a Stage 3 proposal in
+  [`../roadmap/roadmap.md`](../roadmap/roadmap.md), not a product.
   Content written now should sell the free tool, not a plan that isn't
   real.
 - No competitor-name-calling in anything meant to be shared publicly —
@@ -56,10 +68,12 @@ small-business advice.
 - Content must not describe the app as upcoming, in development, or
   not yet available — it has been **live since 2026-08-21** at
   **https://amore-cost.vercel.app** (decision 0031). Always link to
-  the real app as the call-to-action, not the static pitch page.
-- Content must not describe real accounts, multi-register Point of
-  Sale sync, a pooled ingredient stock, Shopee/Lazada order import,
-  receipt OCR, push/email notifications, or shareable client links as
-  available or coming soon — these are Phases 6–8 in
+  the real app as the call-to-action, not the static pitch page — and
+  check it has been redeployed with the current build first (it lagged
+  behind decisions 0040/0041 as of 2026-10-29).
+- Content must not describe real accounts, cloud sync, price alerts,
+  an ingredient price index, receipt OCR, or shareable price-list links
+  as available or coming soon — these are Stages 3–4 in
   [`../roadmap/roadmap.md`](../roadmap/roadmap.md) and none of them
-  are built. Write about what the free tool actually does today.
+  are built. Nor describe POS checkout, inventory, or sales reports —
+  decision 0040 removed them. Write about what the free tool actually does today.

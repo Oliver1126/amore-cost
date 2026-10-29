@@ -4,6 +4,18 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-10-29** — Full documentation sweep to match the five-page app,
+  decision 0041, the KwentaPOS comparison and the new competitive
+  roadmap: business/branding docs, product/QA/marketing docs,
+  next-steps (condensed to current status + Stage 0/1 actions), backlog
+  (every item tagged with its roadmap stage), root CLAUDE.md, README,
+  DESIGN.md page references, and the decisions index (0021–0041 added).
+  **User manual rewritten** (`onboarding/user-manual.md`) as a full
+  guide with worked examples — every peso figure computed from the
+  sample recipes with the app's own math (Adobo ₱80.08 → ₱299, OPEX
+  ₱35.13/dish, a Standard vs. Senior/PWD receipt, three simulator
+  scenarios).
+
 - **2026-10-28** — Three pricing aids from the five-page feature audit
   (decision 0041): **Yield %** per ingredient line (bone-in chicken at
   70% costs ÷ 0.7, flowing into unit cost, recipe cost, price and food

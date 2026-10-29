@@ -5,6 +5,14 @@ correction where an earlier pass got it wrong. For the crisp,
 current-state comparison and "the wedge" without the narrative, see
 [competitive-landscape.md](competitive-landscape.md) instead.
 
+> **Read with dates in mind.** Sections dated 2026-08-17 reason from
+> the multi-vertical product (food + service + resale), retired at
+> decision 0038, and from an 11-module app, cut to five pages at
+> decision 0040. They stay as the trail. The current answer is in
+> competitive-landscape.md and the
+> [roadmap](../roadmap/roadmap.md); the newest finding (POS apps that
+> cost recipes) is at the bottom of this file.
+
 ## Direct reference products (the ones you shared)
 
 Both by **JR Quilantang**, founder of **PH Business Network** (160K+
@@ -135,9 +143,9 @@ Two honest paths were on the table; **resolved 2026-08-17 in
 + service + retail**, making "does all three, iCost does only food" the
 explicit differentiator against a named incumbent. This is the harder
 pitch to validate — it only works if a real target user actually runs
-more than one of these business types at once — so Phase 1 of
-[roadmap.md](../roadmap/roadmap.md) needs to test that directly rather than
-assume it.
+more than one of these business types at once — so validation
+needed to test that directly rather than assume it. (Moot since
+decision 0038 narrowed the product to food-only.)
 
 ## Distribution channels worth testing first
 
@@ -149,3 +157,23 @@ assume it.
 - TikTok/short-form: JR Quilantang and Recurra already run educational
   business content there — a proof that this ICP is reachable and
   responsive to creator-led financial-literacy content, not just ads
+
+## POS apps now cost recipes too (added 2026-10-28)
+
+A new category of competitor: **PH cloud POS apps with recipe costing
+built in.** [KwentaPOS](https://www.kwentapos.com/) (₱59 / ₱299 /
+₱999 per month, PWA, offline, GCash/Maya/utang) sets up ingredients
+and recipes per dish, deducts stock as you sell, and shows "food cost
+and margin per menu item" — on its Pro plan (₱299) and up. Its pages
+don't mention VAT, Senior/PWD, service charge, expenses, or a
+suggested-price engine, and never mention BIR accreditation. Loyverse,
+StoreHub, and UTAK occupy the same "run the store" space. Full
+line-by-line, with what Amore Cost should and shouldn't copy:
+[kwentapos-comparison.md](kwentapos-comparison.md).
+
+What this changes: the defensible lane is no longer "costing exists
+nowhere" (wrong since iCost) or "multi-vertical" (retired at 0038) —
+it's **pricing depth and PH compliance, positioned as the step before
+any POS**, with a live ingredient price index as the moat to build.
+That's the strategy in [../roadmap/roadmap.md](../roadmap/roadmap.md).
+

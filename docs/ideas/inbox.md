@@ -19,9 +19,11 @@ meant.
 ## How triage works
 
 When an idea is worth acting on:
-- **A feature to consider for the build** → fold it into
-  [../product/scope-v1.md](../product/scope-v1.md) once there's enough
-  shape to it.
+- **A feature to consider for the build** → add it to
+  [../roadmap/backlog.md](../roadmap/backlog.md) with the
+  [roadmap](../roadmap/roadmap.md) stage it belongs to, once there's
+  enough shape to it. (Read decision 0040 first — the app was cut to
+  five pages on purpose.)
 - **A name/tagline candidate** → add it to
   [../branding/options.md](../branding/options.md).
 - **A real choice actually made** (name picked, fork picked, a
@@ -38,11 +40,19 @@ things that haven't been decided yet.
 
 ## Log
 
-*(empty — the 2026-08-19 POS idea was triaged and built the same day as
+- 2026-10-28 — Idea: a default yield % on each Ingredient Library entry
+  (prefilled into new recipe lines), and an app-wide default menu
+  rounding — both left out of decision 0041 on purpose (yield and
+  rounding are per recipe today). Wait for a real user to ask.
+
+*(The 2026-08-19 POS idea was triaged and built the same day as
 a scoped checkout module: see
 [decision 0015](../business/decisions/0015-pos-checkout-module.md) and
 [completed.md](../roadmap/completed.md). The hardware-dependent pieces
 it flagged (cash drawer, thermal-printer-specific commands,
 multi-register sync) and the client-side-feasible follow-ups (camera
 scanning, refunds/voids) are now tracked in
-[roadmap/backlog.md](../roadmap/backlog.md) instead of sitting here.)*
+[roadmap/backlog.md](../roadmap/backlog.md) instead of sitting here.
+POS itself was later removed entirely by
+[decision 0040](../business/decisions/0040-five-pages-modeled-on-reference.md),
+and those follow-ups were dropped with it.)*

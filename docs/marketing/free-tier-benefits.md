@@ -15,10 +15,11 @@ made explicit.
 1. **Zero risk to try.** No signup, no card, no trial countdown — price
    a real product today and decide if it's useful before committing to
    anything at all.
-2. **Not a crippled trial.** The entire free tier is the real v0
-   calculator — cost, price, and break-even, across all three
-   verticals (food/service/resale). Nothing about it is a teaser
-   version designed to frustrate you into paying.
+2. **Not a crippled trial.** The entire free tier is the whole app —
+   recipe costing with yield and an ingredient library, suggested
+   price with VAT and Senior/PWD, OPEX per dish, the receipt and margin
+   simulators, and sample recipes to explore first. Nothing about it is
+   a teaser version designed to frustrate you into paying.
 3. **No lock-in anxiety.** Local-only architecture means the data is
    genuinely yours, sitting in your own browser — not held by a vendor
    you'd have to keep paying to keep access to.
@@ -45,8 +46,8 @@ made explicit.
    starts costing something once real accounts/backend infrastructure
    exists (see `business/financial-strategy.md` §1).
 4. **It's the only way to get the actual validation signal needed.**
-   The Phase 1/Phase 2 success criteria (`go-to-market.md`) are
-   explicitly about *repeat* free-tier usage — proof the tool replaced
+   The validation gate ([../roadmap/roadmap.md](../roadmap/roadmap.md)
+   Stage 1) is explicitly about *repeat* free-tier usage — proof the tool replaced
    a habit, not a one-time click. That signal doesn't exist unless
    trying the tool has zero friction.
 5. **It compounds through word of mouth in a community-dense market.**
@@ -54,10 +55,11 @@ made explicit.
    without a "but you'd have to pay first" caveat spreads faster in the
    Facebook groups and communities this ICP actually lives in.
 6. **It leaves room to monetize a different axis later, without
-   breaking trust.** A future paid tier (real accounts, cross-device
-   sync — see `financial-strategy.md` §2–3) can be *added* later
-   without ever taking away what people already got for free. Avoiding
-   that reversal is deliberate, not incidental.
+   breaking trust.** The proposed paid "Plus" tier (roadmap Stage 3:
+   cloud sync, price alerts, history, branded PDF menus) sells only
+   what genuinely needs a backend, and is *added* without ever taking
+   away what people already got for free. Avoiding that reversal is
+   deliberate, not incidental.
 
 ## The honest caveat
 

@@ -57,43 +57,52 @@ A spreadsheet is a *snapshot*, not a *system*. Concretely:
    over a sheet.
 2. **No history.** You can't see that your margin on your bestseller
    quietly eroded over three months as ingredient costs crept up — the
-   sheet only ever shows "now."
+   sheet only ever shows "now." (Amore Cost records a cost snapshot on
+   every settled edit, but no page shows them since decision 0040 —
+   backlog item 15 and the Plus tier's "price history" are the plan.)
 3. **No shared ingredient cost across recipes.** A spreadsheet recipe
    is its own island — raise the price of flour, and there's no way
    to see every other recipe using flour without opening each sheet by
    hand. A real app can cost an ingredient once and reuse it
    everywhere.
-4. **No mobile-friendly, no collaboration.** A sheet doesn't work well
-   thumb-typed at a market stall, and sharing edit access with a
-   partner/bookkeeper is clunky and risks someone breaking a formula.
+4. **Not mobile-friendly.** A sheet doesn't work well thumb-typed at a
+   market stall. (Shared editing with a partner/bookkeeper is also
+   clunky in a sheet — but Amore Cost doesn't solve that yet either:
+   it's single-browser until roadmap Stage 3 adds accounts and sync.)
 5. **One-time purchase = no incentive to keep improving it.** The
    creator's business model is selling more templates to more people,
    not compounding value for existing users — which is exactly the gap
    a subscription SaaS is built to fill (and exactly the reason it can
    sustain ongoing development, unlike a ₱500 one-time sheet).
 
-## The differentiator (draft positioning — revised 2026-09-03)
+## The differentiator (draft positioning — revised 2026-10-28)
 
 **"The costing calculator that updates itself"** is no longer a unique
 claim for food costing — iCost already does this, at ₱299–599/month,
-with 500+ users and a 4.9/5 rating (see market-research.md). It's still
-an accurate differentiator *against the static Google Sheets templates*.
-Peso-first, BIR-aware (VAT / Non-VAT / 8% flat toggle — same logic
-Atlas Freelance already built for its tax estimate) still holds. As of
-[decision 0032](decisions/0032-insights-engine-calculator-to-advisor.md),
-the sharper remaining edge is the Insights engine — specific
-recommendations (why a recipe's margin slipped, which dish carries most
-profit, when stock is about to run out), not just a recalculated
-number — something no competitor found in `competitive-landscape.md`
-does yet.
+with 500+ users and a 4.9/5 rating, and POS apps like KwentaPOS now
+show food cost per menu item too (see
+[competitive-landscape.md](competitive-landscape.md)). It's still an
+accurate differentiator *against the static Google Sheets templates*.
+
+The current positioning is **pricing depth, not breadth**: Amore Cost
+is the "pricing brain" an owner uses before putting prices into any
+POS — suggested price from a chosen margin, VAT inclusive/exclusive,
+Senior/PWD (20% off the VAT-exclusive price, VAT-exempt), service
+charge excluded from profit, OPEX allocated per dish, break-even and a
+P&L simulator, yield % and menu price rounding (decisions 0040, 0041) —
+free, no signup, English and Tagalog. The Insights engine
+([decision 0032](decisions/0032-insights-engine-calculator-to-advisor.md))
+survives on the Dashboard, though only its below-target-margin check
+fires now that the sales and stock data it also read were removed.
 
 ## Open questions to validate before building
 
 - Is the willingness to pay *monthly* actually there, or does this
   market only accept one-time pricing? (Worth testing directly — maybe
-  a low one-time "starter" price unlocks a free tier, with the paid
-  monthly tier selling *automation* — price-update propagation, history,
-  multi-user — as the upgrade reason.)
+  a low one-time "starter" price alongside a monthly tier. The roadmap's
+  Stage 3 tests both: Plus at ₱99/mo for sync, price alerts, history,
+  PDF menu, and delivery pricing, and a one-time "Lifetime Starter"
+  with the first 50 users — see [roadmap/roadmap.md](../roadmap/roadmap.md).)
 - ~~Which vertical to lead with~~ — **resolved twice:** unified food +
   service + resale first
   ([decision 0004](decisions/0004-lead-vertical-unified.md)), then

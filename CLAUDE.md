@@ -1,6 +1,7 @@
 # Amore Cost
 
-A costing & pricing calculator for Philippine small/medium businesses —
+A recipe-costing & menu-pricing app for Philippine food businesses
+(food-only since decision 0038) —
 a real recurring-revenue web app instead of the static Google Sheets
 templates that currently dominate this category. Standalone product
 (Fork 1), not a module of another business and not structured around a
@@ -9,7 +10,10 @@ for that and the other founding decisions. Separate from every other
 business in this workspace — see `../START-HERE-FOLDER-GUIDE.md` for
 the full map. Closest sibling in spirit is `../Atlas Freelance/` — same
 PH-SME-first, peso-first philosophy, same Next.js + TypeScript +
-Tailwind stack.
+Tailwind stack. Code: https://github.com/Oliver1126/amore-cost (`main`).
+Live: https://amore-cost.vercel.app — CLI deploy, no auto-deploy, so it
+only updates when someone runs `vercel --prod` from this folder (needs
+the user's go-ahead).
 
 ## Running it
 
@@ -41,7 +45,9 @@ recipe using it (decision 0007). **Read decision 0040 before adding a
 page** — the cut to five was deliberate. Both simulators use
 `directCost()` (recipe cost minus its overhead line) because they
 subtract monthly OPEX separately; using `trueCost()` there would count
-rent twice.
+rent twice. Yield % (`lineCost()`), menu price rounding
+(`roundMenuPrice()`) and the `demo-` sample recipes (`src/lib/demo.ts`)
+are decision 0041.
 
 A light/dark/auto theme toggle lives in the top bar
 (`src/components/ThemeToggle.tsx`), persisted to `localStorage` and
@@ -69,12 +75,11 @@ Next.js release that may differ from older training data.
 
 The pinned, current "what's open / what to do next" list — read it
 before adding new material so effort doesn't drift from what's actually
-next. As of 2026-08-18 the single most important open item is still
-**validation** — every module is built (including the ingredient
-cascade and a real test suite), and none of it has been shown to a real
-business owner yet. Deployment is tracked as
-[docs/roadmap/backlog.md](docs/roadmap/backlog.md) item 1, explicitly
-deferred rather than dropped.
+next. As of 2026-10-29 the single most important open item is still
+**validation** — none of the app has been shown to a real business
+owner yet. The plan for that (Stage 0 launch-ready, then Stage 1's
+20-owner validation) and for scaling against competitors is
+[docs/roadmap/roadmap.md](docs/roadmap/roadmap.md).
 
 ## Before doing anything else, check docs/
 

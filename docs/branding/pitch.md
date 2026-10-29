@@ -33,6 +33,17 @@ receipt.
 
 ## Status
 
-Not yet reviewed against real users. Logo has not been generated yet —
-see [logo-prompts.md](logo-prompts.md) for the three starting prompts;
-once art is picked, it belongs in the (currently empty) `logo/` folder.
+Not yet reviewed against real users. **Content is stale as of
+2026-10-29** — it still pitches three verticals and the old
+₱199–499/mo draft price. Current truth: food-only (decision 0038), five
+pages (0040), and a Plus tier tested at ₱99/mo with everything on one
+device free ([roadmap](../roadmap/roadmap.md) Stage 3). For Stage 1
+validation, use the live app with **"Try with sample recipes"**
+(decision 0041) instead of this page; refresh the copy before sharing
+it anywhere. The in-app public landing page (`/`, decision 0012) is the
+current marketing surface.
+
+The logo shipped as code, not from the prompts in
+[logo-prompts.md](logo-prompts.md) — see decisions 0010/0011
+(`public/brand-mark.png`, `src/components/BrandMark.tsx`). The `logo/`
+folder is still empty.

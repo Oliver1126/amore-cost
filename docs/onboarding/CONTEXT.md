@@ -15,6 +15,13 @@ someone testing whether the app *works as built*. This is for someone
 *using* the finished thing. Don't merge them — different audience,
 different tone, different level of detail.
 
+**Worked examples:** every peso figure in the manual comes from the
+built-in sample recipes (`src/lib/demo.ts`) run through the app's own
+math, so a reader who taps "Try with sample recipes" sees the same
+numbers. If the sample data or pricing math changes, recompute the
+examples (Adobo/Halo-Halo price and rounding table, OPEX per dish,
+the receipt table, the simulator scenarios) — don't hand-edit them.
+
 **Reads:** [../product/modules.md](../product/modules.md) for what's
 actually true about each module before writing or updating a "how do I…"
 section here — this file should never claim a feature works differently

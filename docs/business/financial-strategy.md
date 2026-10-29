@@ -3,7 +3,7 @@
 **This is the strategy layer — the options on the table and what has to
 be decided, in order. It is deliberately not a financial *model*** (real
 projected revenue, CAC, LTV) — [document-inventory.md](document-inventory.md)
-correctly flags that building one before Phase 1 validation would be
+correctly flags that building one before validation would be
 modeling fiction, per [strategy.md](strategy.md)'s own financial
 summary. Every number below is a scenario to stress-test once real data
 exists, not a forecast to act on now.
@@ -12,7 +12,9 @@ exists, not a forecast to act on now.
 
 - **Hosting: effectively ₱0.** Deployed 2026-08-21 (decision 0031) to
   Vercel's free tier — **https://amore-cost.vercel.app** — which covers
-  early traffic with no real cost.
+  early traffic with no real cost. (As of 2026-10-29 the live site
+  predates decisions 0040/0041; redeploy is `vercel --prod`.) Code is
+  on GitHub at https://github.com/Oliver1126/amore-cost.
 - **Team: one person.** No payroll, no contractors.
 - **No external funding sought.** Bootstrapped by the founder — if this
   assumption is wrong, the rest of this file needs revisiting.
@@ -29,34 +31,39 @@ and [strategy.md](strategy.md) — restated here because every revenue
 scenario below depends on which way it goes:
 
 - **(A) Stay free forever**, monetize a *different* layer entirely —
-  real accounts + cross-device sync as the paid unlock, or the PH
-  Business Network partnership (Fork 3) as a B2B/white-label angle
-  instead of consumer subscriptions.
-- **(B) Retroactively gate** some of what's already built (Ingredient
-  Library, Inventory, Cost History, Multi-User, POS — per
-  `go-to-market.md`'s draft gating list) behind a paid tier.
+  real accounts + cross-device sync as the paid unlock, or a B2B angle
+  (PH Business Network, DTI programs, schools, consultants).
+- **(B) Retroactively gate** some of what's already built behind a
+  paid tier.
 
-Neither is chosen. Both are real options. Phase 1 validation is what
-should decide which one, not a guess made now.
+**Leaning (A), not decided.** The 2026-10-28 roadmap proposes keeping
+everything the five-page app does on one device free, and testing a
+**Plus** tier (₱99/mo or ₱899/yr) for sync, price alerts, history, PDF
+menu, and delivery pricing — features that need the backend anyway.
+(B) has also shrunk: Inventory, Cost History, Multi-User, and POS were
+cut at decision 0040, so there's little left to gate. Stage 1
+validation and Stage 3's real conversion data decide it — record the
+outcome as a decision.
 
 ## 3. Revenue model scenarios
 
 None of these are chosen — each is what would follow from a specific
-Phase 1 answer to [concept.md](concept.md)'s open question: *is monthly
+validation answer to [concept.md](concept.md)'s open question: *is monthly
 willingness-to-pay real here, or does this market only accept one-time
 pricing?*
 
-| Scenario | If Phase 1 shows... | What it needs |
+| Scenario | If validation shows... | What it needs |
 |---|---|---|
-| **A — Monthly subscription** (draft ₱199–499/mo, unvalidated) | Recurring willingness-to-pay is real | Real accounts, a backend, a payment gateway (PayMongo/Xendit are the standard PH-friendly options), recurring billing logic |
-| **B — One-time unlock** | This market only accepts one-time pricing (a real, named risk in `strategy.md`'s Threats) | A payment gateway, but no recurring-billing complexity — a materially smaller build than A |
-| **C — Stay free, monetize elsewhere** | Neither A nor B validates for direct consumer payment | The PH Business Network partnership (Fork 3) or a similar B2B angle, pursued as a Phase 5 move, not a Phase 1 dependency |
+| **A — Monthly subscription** (Plus, test ₱99/mo or ₱899/yr — unvalidated; replaces the older ₱199–499 placeholder) | Recurring willingness-to-pay is real | Real accounts, a backend, a payment gateway (PayMongo/Xendit are the standard PH-friendly options), recurring billing logic |
+| **B — One-time unlock** (roadmap tests a ~₱1,499 "Lifetime Starter" with the first 50 users) | This market only accepts one-time pricing (a real, named risk in `strategy.md`'s Threats) | A payment gateway, but no recurring-billing complexity — a materially smaller build than A |
+| **C — Stay free, monetize elsewhere** | Neither A nor B validates for direct consumer payment | The PH Business Network partnership (Fork 3) or a similar B2B angle, pursued as a Stage 4–5 move, not a Stage 1 dependency |
 
 ## 4. What it would cost to run this, once monetized
 
 The same break-even logic this app teaches its own users, applied to
 the business itself — a useful frame *because* it's the exact math
-already built into [Break-Even](../product/modules.md):
+already built into the [Margin & POS Simulator](../product/modules.md)
+(break-even portions = OPEX ÷ profit per dish):
 
 ```
 Subscribers needed to cover monthly costs = Monthly OPEX ÷ Profit per paying user
@@ -74,7 +81,7 @@ calculation to run once it does, not the calculation itself.
 
 | Metric | Status |
 |---|---|
-| CAC (customer acquisition cost) | Assumed ~₱0 today — the whole go-to-market motion (`go-to-market.md`) is organic/community-led, explicitly no ad budget. Stops being ₱0 only if paid channels are ever tested, which isn't planned before Phase 5. |
+| CAC (customer acquisition cost) | Assumed ~₱0 today — the whole go-to-market motion (`go-to-market.md`) is organic/community-led, explicitly no ad budget. Stops being ₱0 only if paid channels are ever tested, which the roadmap rules out until retention is proven (Stage 4+). |
 | LTV (lifetime value) | Unknown — cannot be honestly estimated without real retention data. |
 | Churn | Unknown, same reason. |
 | Free → paid conversion | Unknown. iCost's own model (a time-boxed free trial of the paid tier, no card required — already noted in `go-to-market.md`) is the closest real reference point in this market, worth benchmarking against once there's real data to compare. |
@@ -98,8 +105,8 @@ repeating them — the financially-relevant ones:
 
 ## What to actually decide, in order
 
-1. **Run Phase 1 validation** — still the standing top priority
-   (`next-steps.md`), and the input every scenario above needs.
+1. **Run Stage 1 validation** (roadmap) — still the standing top
+   priority (`next-steps.md`), and the input every scenario above needs.
 2. **Resolve the free-forever-vs-retroactive-gating fork** (§2), using
    real signal, not a guess.
 3. **Commit to one revenue scenario** (§3) and a real price — only

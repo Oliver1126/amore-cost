@@ -17,6 +17,29 @@ broader "don't build ahead of validation" sequencing point — still
 holds. See "Where this fits in the roadmap" at the bottom, and decision
 0032 itself for what actually shipped vs. what's still just analysis.
 
+## Status as of 2026-10-28 — read this before the module sections
+
+The module-by-module section below audits the **11-module app**. Since
+[decision 0040](decisions/0040-five-pages-modeled-on-reference.md) the
+app is five pages, so map it like this:
+
+| Section below | Today |
+|---|---|
+| Costing & Pricing, Catalog Management | Merged into **Input** (recipe cards + "Edit breakdown"). Decision 0041 added yield % and menu price rounding — both Level 1, but they close real accuracy gaps |
+| Break-Even | Replaced by the **Margin & POS Simulator** (break-even portions + P&L waterfall). Its "missing number" (monthly volume) now comes from OPEX's estimated dishes per month |
+| Inventory, Cost History page, Margin Alerts page, Multi-Channel, Sales & Profit Reporting, POS, Documents, Multi-User | **Removed** — history only; code is the `v1-full-11-modules` tag. Cost snapshots are still recorded, just not shown (backlog item 15) |
+| Insights engine (decision 0032) | Still on the **Dashboard**, but only the below-target-margin check fires — the sales, channel, and stock data its other checks read no longer has a page that writes it |
+
+The diagnosis itself (calculator → tracker → advisor) still holds. The
+2026-10-28 [roadmap](../roadmap/roadmap.md) turns the Level 3 idea
+into something concrete: **price alerts driven by a live ingredient
+price index** ("pork is up 8%, these 3 recipes dropped below target,
+suggested new price ₱189") as the Plus tier's reason to exist.
+
+"Phase N" below refers to the old roadmap's phases, archived at
+[../archive/eleven-modules-2026-10/roadmap.md](../archive/eleven-modules-2026-10/roadmap.md);
+Phase 1 = today's Stage 1, Phase 6 = Stage 3 (accounts), Phase 7 = Stage 3 (Plus).
+
 ## The actual diagnosis
 
 The instinct behind the question is correct, and it's not a new
@@ -256,3 +279,6 @@ The honest sequencing:
    gate" question than the current draft list (ingredient library,
    inventory, cost history, PDF export, multi-user) — those are just
    *more features*, not a different *kind* of value.
+   **2026-10-28:** the roadmap adopted a version of this — Plus = sync,
+   price alerts, history, PDF menu, delivery pricing; everything the
+   app does on one device stays free.

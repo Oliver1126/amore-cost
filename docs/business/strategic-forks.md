@@ -2,7 +2,11 @@
 
 > **Decided 2026-08-16 — Fork 1 (standalone SaaS).** See
 > [decisions/0001-standalone-saas-fork-chosen.md](decisions/0001-standalone-saas-fork-chosen.md).
-> The comparison below stays as the historical record of why.
+> The comparison below stays as the historical record of why. Fork 2's
+> service-costing middle path is moot since decision 0038 (food-only);
+> Fork 3 lives on as a Stage 4–5 lever in
+> [../roadmap/roadmap.md](../roadmap/roadmap.md), alongside the newer
+> idea of partnering with POS apps rather than competing with them.
 
 Three genuinely different shapes this business could take. Not
 mutually exclusive forever, but the *first move* should pick one.

@@ -10,7 +10,7 @@ this one is the answer.
 
 | Product | Type | Price | Verticals | Signup to try | Auto-recalc | PH-aware |
 |---|---|---|---|---|---|---|
-| **Amore Cost** | SaaS | Free (local); paid tier undecided | Food only (decision 0038 — was food+service+resale) | None | Yes | Yes — flexible tax (VAT/Percentage/custom) |
+| **Amore Cost** | SaaS — pricing tool, not a POS (5 pages, decision 0040) | Free (local); Plus tier ₱99/mo is a roadmap hypothesis | Food only (decision 0038 — was food+service+resale) | None | Yes (Ingredient Library cascade) | Yes — VAT incl./excl., Percentage/custom tax, Senior/PWD, service charge |
 | [iCost](https://icost.ph/) | SaaS | Free (1 recipe) / ₱299–599/mo | Food only | Account/app required | Yes ("Cook & Deduct") | Yes, ₱-priced |
 | [FoodCost](https://food-cost-tau.vercel.app/) | SaaS (indie/soft-launched) | Unpublished | Food only | Account required | Partial | Yes — 12% VAT, Senior/PWD built in |
 | Raket.ph templates (JR Quilantang + ~6 other sellers) | Static spreadsheet | ₱200–₱1,000 one-time | Food *or* service, sold as separate products | N/A (buy once) | No — manual edits | Yes, but static |
@@ -20,6 +20,37 @@ this one is the answer.
 
 ## The wedge, stated plainly
 
+**Current (2026-10-28 — decisions 0040/0041, the KwentaPOS comparison,
+and the new [roadmap](../roadmap/roadmap.md)):** Amore Cost is the
+**pricing brain, not a POS.** The POS apps (KwentaPOS, Loyverse,
+StoreHub, UTAK) run the store; KwentaPOS even shows food cost per menu
+item on its ₱299 Pro plan. None of them advertise the *pricing depth*
+Amore Cost has: a suggested price from a chosen margin, VAT
+inclusive/exclusive, Senior/PWD and service charge done per PH law,
+OPEX allocated per dish, break-even and a P&L simulator, yield %, and
+menu price rounding — free, no signup, English and Tagalog. The wedge,
+in order of defensibility:
+
+1. **A live PH ingredient price index** (roadmap Move 4, not built yet)
+   — public DA price monitoring plus anonymized owner prices; gets
+   better with every user. The only claim here that could become a
+   real moat.
+2. **Pricing depth + PH compliance** — real today, but copyable by a
+   POS vendor that decides to care (see "Where this could break").
+3. **Earliest touch, free, no signup, Tagalog, sample recipes** — the
+   first tool an owner pricing a first menu reaches for. A UX lead,
+   not a moat.
+4. **Complement, not competitor, to POS apps** — "price it here, sell
+   it in your POS," backed by a planned CSV price-list export.
+
+Full line-by-line against KwentaPOS:
+[kwentapos-comparison.md](kwentapos-comparison.md).
+
+**History — the 2026-09-03 version of this section,** kept below for
+the reasoning trail. Its claim 2 (the Insights engine) is weaker since
+decision 0040 removed the sales and stock data most of its checks read;
+only the below-target-margin check still fires.
+
 **Updated 2026-09-03 (decision 0038):** this section previously listed
 four claims; two of them — "service-costing is uncontested" and "one
 account across all three verticals" — depended entirely on Amore Cost
@@ -27,7 +58,7 @@ being multi-vertical. As of decision 0038 it isn't anymore, so both
 are gone, not just de-emphasized. Stated plainly: **Amore Cost is now
 in the same single-vertical bracket as iCost and FoodCost**, the two
 competitors this table already tracks. See
-[docs/archive/multi-vertical-2026-08/](multi-vertical-2026-08/README.md)
+[docs/archive/multi-vertical-2026-08/](../archive/multi-vertical-2026-08/README.md)
 if that ever needs re-reading.
 
 Two claims from even earlier already didn't survive contact with
@@ -57,7 +88,7 @@ iCost:
 
 **Net effect of decision 0038 on this file:** the remaining wedge is
 real but noticeably thinner than it was. Worth having in view before
-treating Phase 1 outreach as low-risk — the pitch is narrower, and so
+treating Stage 1 outreach as low-risk — the pitch is narrower, and so
 is what's left to differentiate on if food-only alone doesn't land.
 
 ## Where this could break
@@ -78,6 +109,11 @@ is what's left to differentiate on if food-only alone doesn't land.
   500+ users) — worth watching, not just noting once.
 - Zero-signup (claim 1) is a UX choice any competitor could copy in a
   sprint — it's a current gap, not a moat.
+- **Update 2026-10-28:** POS apps already cost recipes (KwentaPOS Pro).
+  If one adds VAT/Senior-PWD pricing math and a suggested-price engine,
+  claim 2 of the current wedge narrows to OPEX and the simulators.
+  Re-check KwentaPOS, Loyverse, and UTAK quarterly — see
+  [kwentapos-comparison.md](kwentapos-comparison.md).
 
 ## Keeping this current
 

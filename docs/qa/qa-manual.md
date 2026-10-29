@@ -1,9 +1,13 @@
 # QA manual — Amore Cost
 
 The actual test checklist and bug-reporting process. Setup: `npm install`
-then `npm run dev`, open http://localhost:3003/dashboard (or test the live
-https://amore-cost.vercel.app). Five pages — see
-[../product/modules.md](../product/modules.md).
+then `npm run dev`, open http://localhost:3003/dashboard. Five pages — see
+[../product/modules.md](../product/modules.md). The live
+https://amore-cost.vercel.app only matches this checklist once it has
+been redeployed after decisions 0040/0041 (manual `vercel --prod`) — if
+it still shows the old 11-module sidebar, test locally instead. Fastest
+way to get realistic data: "Try with sample recipes" on an empty
+Dashboard.
 
 ## Purpose
 
@@ -11,7 +15,7 @@ Confirm the app works as built — every page does what
 [../product/modules.md](../product/modules.md) says it does, in both
 languages, in both themes, and across a reload. This is **not** the
 same as validating whether the app is worth building in the first
-place — that's Phase 1 in [../roadmap/roadmap.md](../roadmap/roadmap.md),
+place — that's Stage 1 in [../roadmap/roadmap.md](../roadmap/roadmap.md),
 still not run, and a clean QA pass doesn't substitute for it.
 
 ## Read this before filing anything as a bug
@@ -33,6 +37,17 @@ says so directly in the app or in `modules.md`:
   "Cost / serving" shown on Input.
 - **No accounts, no backend, no cross-device sync.** Everything is
   `localStorage`, scoped to one browser — back up from the Dashboard.
+- **Yield % is per recipe line, not per ingredient.** The same chicken
+  can be 70% in one recipe and 100% in another — deliberate (decision
+  0041).
+- **Menu rounding only rounds up**, so a rounded price can be a few
+  centavos (or pesos, with ₱10) above the exact suggestion — never
+  below. Profit and food cost % are recomputed from the rounded price.
+- **Loading or removing sample recipes reloads the page.** Expected —
+  it's the same mechanism as Restore backup.
+- **"Needs your attention" mostly shows the below-target-margin check.**
+  Its other checks read sales/channel data no remaining page writes
+  (see `modules.md`).
 - **Full Tagalog coverage** as of this writing — English text with the
   toggle on TL is a real bug.
 
@@ -134,10 +149,9 @@ For each issue found, include:
 - No real accounts, login, or backend of any kind
 - No automated test coverage of components/pages (only pure logic is
   tested — see `../product/modules.md`)
-- No Shopee/Lazada order sync, receipt OCR, real push/email
-  notifications, or shareable client-facing links (all tracked in
-  `../roadmap/backlog.md`, all explicitly deferred pending a real
-  backend)
+- No receipt OCR, price/margin alerts, or shareable price-list links
+  (tracked in `../roadmap/backlog.md`, deferred pending a real backend —
+  roadmap Stages 3–4)
 - No real point-of-sale checkout, inventory tracking, sales history, or
   multi-user profiles — removed in decision 0040 to keep the app to five
   pages; the Receipt and Margin & POS Simulators are sandboxes that never
