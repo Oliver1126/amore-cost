@@ -1,0 +1,57 @@
+Kilalanin ang Amore Cost. Ang pricing tool na ginawa talaga para sa Filipino food business.
+<break time="1.5s" />
+Alamin kung may kwenta ang presyo mo.
+<break time="1.5s" />
+Karamihan sa maliliit na food business, hula lang ang presyo... o kinokopya lang sa katabing stall.
+<break time="1.5s" />
+Tumataas ang presyo ng ingredients, pero ang presyo sa menu... ganun pa rin.
+<break time="1.5s" />
+Yung waste, gaya ng buto ng manok, hindi nabibilang.
+<break time="1.5s" />
+Tapos ang upa, ang bills, at ang Senior at PWD discount... tahimik na kumakain ng kita mo.
+<break time="1.5s" />
+Ang Amore Cost ay para sa mga home baker, carinderia, food cart, at online food seller sa buong Pilipinas.
+<break time="1.5s" />
+Libre ito, walang sign-up, at may English at Tagalog. Sa phone man o sa laptop.
+<break time="1.5s" />
+Isang tap lang para magsimula. Pindutin ang Try with sample recipes, at may totoong carinderia menu ka na agad: Adobo, Tapsilog, at Halo-Halo.
+<break time="1.5s" />
+Sa Dashboard, kita mo agad ang recipes mo, ang monthly bills, at ang average food cost mo... kumpara sa healthy target na twenty-eight to thirty-two percent.
+<break time="1.5s" />
+Sa bawat recipe, ilalagay mo kung gaano karami ang gamit sa isang serving. Pwede sa grams, kahit per kilo ka bumibili. Automatic ang convert.
+<break time="1.5s" />
+Binibilang din ng yield ang natatapon. Ang manok na may buto, sa seventy percent yield... sixty-two pesos and eighty-six centavos pala talaga per plate. Hindi forty-four.
+<break time="1.5s" />
+Kaya ang isang plato ng adobo, eighty pesos and eight centavos ang totoong gastos.
+<break time="1.5s" />
+Mula diyan, magsa-suggest ang Amore Cost ng tamang presyo, base sa margin na gusto mo. Kasama na ang VAT.
+<break time="1.5s" />
+I-round mo sa two hundred ninety-nine pesos, para maganda tingnan sa menu. Laging pataas ang round, kaya hindi nababawasan ang margin mo.
+<break time="1.5s" />
+Pati ang tamang Senior at PWD price, nandiyan na. Two hundred thirteen pesos and fifty-seven centavos.
+<break time="1.5s" />
+Lahat ng ingredients mo, nasa iisang Ingredient Library.
+<break time="1.5s" />
+Pag tumaas ang manok sa palengke, from two hundred twenty to three hundred pesos per kilo... isang beses mo lang palitan, update na lahat ng recipe.
+<break time="1.5s" />
+Next, ilagay ang monthly bills mo. Upa, kuryente, L-P-G, sahod, at ads.
+<break time="1.5s" />
+Fifty-two thousand seven hundred pesos kada buwan, hatiin sa fifteen hundred dishes... ibig sabihin, bawat plato kailangang kumita ng thirty-five pesos and thirteen centavos para sa bills.
+<break time="1.5s" />
+Sa Receipt Simulator, kita mo eksakto kung magkano ang babayaran ng customer.
+<break time="1.5s" />
+Dalawang adobo at isang halo-halo: seven hundred eighty-eight pesos. Pag senior citizen, unang tinatanggal ang VAT, saka ang twenty percent. Kaya five hundred sixty-two pesos and eighty-six centavos ang tamang total.
+<break time="1.5s" />
+At kita mo rin kung magkano talaga ang naiuuwi mo sa bawat order.
+<break time="1.5s" />
+Panghuli, sinasagot ng Margin and POS Simulator ang malaking tanong. Kaya ba ng presyong ito ang bills mo?
+<break time="1.5s" />
+Kahit adobo lang ang magbayad ng lahat ng bills, break-even ka na sa two hundred eighty-two plato kada buwan. Mga sampu lang kada araw!
+<break time="1.5s" />
+Sa Amore Cost, sigurado ka sa presyo mo, at protektado ang margin mo kahit tumaas ang gastos.
+<break time="1.5s" />
+Tama ang VAT at ang Senior discount, at alam mo na ang break-even mo, bago ka pa magbukas.
+<break time="1.5s" />
+May POS ka na? Ituloy mo lang. I-presyo mo sa Amore Cost, saka ibenta sa POS mo.
+<break time="1.5s" />
+Subukan nang libre sa amore cost dot vercel dot app. Amore Cost... alamin kung may kwenta ang presyo mo.

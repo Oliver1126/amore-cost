@@ -18,7 +18,8 @@ and `out/amore-cost-presentation.srt`.
 | [capture.cjs](capture.cjs) | Screenshots of the real app with the sample recipes loaded → `shots/` |
 | [slide.html](slide.html) | The slide template (app font, colors, logo) |
 | [render.cjs](render.cjs) | One 1920×1080 frame per narration line → `out/frames/` |
-| [build.py](build.py) | Voiceover + timing + fades → the MP4 and SRT |
+| [build.py](build.py) | Voiceover + timing + fades → the MP4 and SRT (`--taglish` = ElevenLabs audio + Taglish captions) |
+| [elevenlabs-voiceover-taglish.md](elevenlabs-voiceover-taglish.md) / [.txt](elevenlabs-voiceover-taglish.txt) | The Taglish voiceover script for ElevenLabs — settings, line-by-line table, and a paste-ready file. Generated from `scenes.json` by [elevenlabs_script.py](elevenlabs_script.py) |
 
 ## Rebuild
 
@@ -44,6 +45,10 @@ hand-edit numbers in `scenes.json`.
 https://amore-cost.vercel.app, which only shows these features after a
 `vercel --prod` deploy.
 
-**Upgrading the voice:** `say` is a free robotic-ish voice. For a warmer
-or Taglish narration, record your own (or use a TTS service) per line
-into `out/audio/sSS-lLL.aiff` and adapt `build.py` to skip `say`.
+**Taglish ElevenLabs version (recommended):** generate the voiceover from
+[elevenlabs-voiceover-taglish.md](elevenlabs-voiceover-taglish.md), save it
+as `out/elevenlabs/full.mp3` (or one `sSS-lLL.mp3` per line), then
+`CAPTIONS=tl node docs/marketing/video/render.cjs` and
+`python3 docs/marketing/video/build.py --taglish` →
+`out/amore-cost-presentation-taglish.mp4`. The full-file split was tested
+end to end (29 of 29 lines cut correctly at the 1.5 s breaks).
