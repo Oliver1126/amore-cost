@@ -29,7 +29,10 @@ One fact, one home: don't restate the strategy here, link to it.
 - [social/](social/facebook-cover.html) — the Facebook page cover
   (`facebook-cover.png`, 1640×624, upload that one). Edit the HTML and
   re-render with `render-cover.cjs`; `facebook-cover-guides.png` shows
-  the phone crop (blue) and safe zone (pink) for checking.
+  the phone crop (blue) and safe zone (pink) for checking. Also
+  [facebook-posts.md](social/facebook-posts.md): four paste-ready Taglish
+  posts, each with its image (`post-1.png` … `post-4.png`, from
+  `post-images.html` via `render-posts.cjs`).
 - [drafts/](drafts/) — finished (not yet reviewed-and-moved) content
   pieces, written by the `mwp-matrix/` pipeline one at a time from
   `content-ideas.md`'s backlog, gated behind a human approval step

@@ -4,6 +4,11 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-10-31** — Four Facebook posts with images
+  (`docs/marketing/social/facebook-posts.md`, `post-1..4.png`): launch,
+  chicken price increase (Adobo ₱80.08 → ₱102.94, food cost 30% → 39%),
+  Senior/PWD VAT-first discount, and yield %. All numbers from the demo
+  recipes.
 - **2026-10-31** — Facebook page cover (`docs/marketing/social/`): 1640×624
   PNG rendered from HTML in the app's own palette and font. Taglish headline
   "Alamin kung may kwenta ang presyo mo." plus the demo Adobo price card

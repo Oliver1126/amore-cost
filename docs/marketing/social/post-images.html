@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Amore Cost post images</title>
+<!-- 1080×1350 (4:5) Facebook feed images, one per post in facebook-posts.md.
+     post-images.html?n=1 … ?n=4. Render all: node render-posts.cjs
+     Numbers are the app's sample recipes (src/lib/demo.ts). -->
+<style>
+  @font-face { font-family: "Work Sans"; src: url("../../../src/app/fonts/worksans-var.woff2") format("woff2"); font-weight: 400 700; }
+  :root { --bg:#f2f3f0; --surface:#fff; --border:#e6e8e2; --text:#1b1f18; --muted:#6b7267;
+    --accent:#1e8a5c; --accent-strong:#166b47; --accent-soft:#e3f2e9; --warn:#c8720e; --warn-soft:#fbeedd; --info:#2f6fb0; --bad:#c2410c; --bad-soft:#fde7dc; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { width:1080px; height:1350px; overflow:hidden; }
+  body { font-family:"Work Sans",system-ui,sans-serif; background:var(--bg); color:var(--text); position:relative; }
+  .glow { position:absolute; border-radius:50%; filter:blur(90px); }
+  .g1 { width:700px; height:700px; background:#cfe9da; top:-300px; right:-260px; opacity:.85; }
+  .g2 { width:640px; height:640px; background:#f6e3c8; bottom:-320px; left:-260px; opacity:.6; }
+  .post { position:absolute; inset:72px 80px; display:none; flex-direction:column; }
+  .post.on { display:flex; }
+  .kicker { align-self:flex-start; font-size:26px; font-weight:600; color:var(--accent-strong); background:var(--accent-soft); padding:10px 22px; border-radius:999px; }
+  h1 { font-size:84px; line-height:1.04; letter-spacing:-.02em; margin-top:28px; }
+  h1 em { font-style:normal; color:var(--accent-strong); }
+  h1 .w { color:var(--warn); }
+  .lead { font-size:32px; line-height:1.38; color:var(--muted); margin-top:24px; }
+  .card { background:var(--surface); border-radius:30px; padding:36px 40px; box-shadow:0 0 0 1px var(--border), 0 24px 60px rgba(20,40,30,.12); }
+  .row { display:flex; justify-content:space-between; align-items:baseline; font-size:32px; padding:18px 0; border-bottom:2px solid var(--border); font-variant-numeric:tabular-nums; }
+  .row:last-child { border-bottom:0; }
+  .row .k { color:var(--muted); } .row .v { font-weight:700; }
+  .cost { color:var(--warn); } .good { color:var(--accent-strong); } .info { color:var(--info); } .bad { color:var(--bad); }
+  .foot { margin-top:auto; display:flex; align-items:center; justify-content:space-between; }
+  .brand { display:flex; align-items:center; gap:14px; font-weight:700; font-size:34px; }
+  .brand img { height:60px; }
+  .url { font-size:28px; font-weight:700; color:#fff; background:var(--accent); padding:14px 26px; border-radius:999px; }
+  .spacer { flex:1; min-height:36px; }
+  /* post 1 */
+  .price { background:var(--accent); color:#fff; border-radius:22px; padding:26px 30px; margin:20px 0 8px; }
+  .price small { font-size:24px; font-weight:600; opacity:.85; }
+  .price b { display:block; font-size:96px; line-height:1.02; }
+  .price span { font-size:22px; opacity:.85; }
+  .card h2 { font-size:38px; }
+  .card .top { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .top span { font-size:24px; color:var(--muted); }
+  .ticks { display:flex; gap:12px; flex-wrap:wrap; margin-top:30px; }
+  .tick { font-size:24px; font-weight:600; background:var(--surface); box-shadow:0 0 0 1px var(--border); padding:10px 18px; border-radius:999px; }
+  /* post 2 */
+  .jump { display:flex; align-items:center; gap:24px; margin-top:34px; }
+  .jump .p { font-size:76px; font-weight:700; font-variant-numeric:tabular-nums; }
+  .jump .old { color:var(--muted); text-decoration:line-through; text-decoration-thickness:5px; }
+  .jump .arrow { font-size:60px; color:var(--warn); }
+  .jump .new { color:var(--warn); }
+  .jump .kg { font-size:30px; color:var(--muted); font-weight:500; }
+  .cmp { display:grid; grid-template-columns:1fr auto auto; column-gap:34px; row-gap:0; font-variant-numeric:tabular-nums; }
+  .cmp div { font-size:31px; padding:18px 0; border-bottom:2px solid var(--border); }
+  .cmp .h { font-size:22px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; padding-top:0; }
+  .cmp .n { text-align:right; font-weight:700; }
+  .cmp .last { border-bottom:0; }
+  .alert { margin-top:24px; background:var(--warn-soft); color:#8a4c06; border-radius:20px; padding:22px 26px; font-size:28px; line-height:1.35; }
+  /* post 3 */
+  .vs { display:flex; flex-direction:column; gap:26px; margin-top:8px; }
+  .box { border-radius:28px; padding:30px 36px; }
+  .box.wrong { background:var(--bad-soft); }
+  .box.right { background:var(--surface); box-shadow:0 0 0 3px var(--accent), 0 24px 60px rgba(20,40,30,.12); }
+  .box .lbl { font-size:28px; font-weight:700; }
+  .box.wrong .lbl { color:var(--bad); } .box.right .lbl { color:var(--accent-strong); }
+  .box .math { font-size:36px; margin-top:12px; font-variant-numeric:tabular-nums; line-height:1.45; }
+  .box.wrong .math { color:#7a3a1e; }
+  .box .tot { font-size:72px; font-weight:700; margin-top:6px; font-variant-numeric:tabular-nums; }
+  .box.wrong .tot { color:var(--bad); text-decoration:line-through; text-decoration-thickness:5px; }
+  .box.right .tot { color:var(--accent-strong); }
+  /* post 4 */
+  .bar { display:flex; height:90px; border-radius:20px; overflow:hidden; margin:18px 0 14px; font-size:26px; font-weight:700; }
+  .bar .use { flex:0 0 70%; background:var(--accent); color:#fff; display:flex; align-items:center; padding-left:24px; }
+  .bar .loss { flex:1; background:repeating-linear-gradient(45deg,#f3d5b5 0 14px,#f8e3cc 14px 28px); color:#8a4c06; display:flex; align-items:center; justify-content:center; }
+  .cap { font-size:26px; color:var(--muted); }
+  .big2 { display:flex; gap:24px; margin-top:28px; }
+  .big2 .c { flex:1; border-radius:24px; padding:26px 28px; }
+  .big2 .c.a { background:var(--surface); box-shadow:0 0 0 1px var(--border); }
+  .big2 .c.b { background:var(--warn-soft); }
+  .big2 small { font-size:24px; color:var(--muted); font-weight:600; }
+  .big2 b { display:block; font-size:72px; margin-top:6px; font-variant-numeric:tabular-nums; }
+  .big2 .a b { color:var(--muted); text-decoration:line-through; text-decoration-thickness:4px; }
+  .big2 .b b { color:var(--warn); }
+</style>
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div>
+
+<!-- 1 · Launch -->
+<section class="post" id="p1">
+  <span class="kicker">Libreng pricing tool 💚</span>
+  <h1>May kwenta ba talaga ang <em>presyo mo?</em></h1>
+  <p class="lead">Alamin ang totoong gastos ng bawat plato at ang tamang presyo, sa loob ng ilang minuto.</p>
+  <div class="spacer"></div>
+  <div class="card">
+    <div class="top"><h2>Chicken Adobo</h2><span>1 plato</span></div>
+    <div class="price"><small>Suggested menu price</small><b>₱299</b><span>VAT included · rounded up</span></div>
+    <div class="row"><span class="k">Totoong gastos</span><span class="v cost">₱80.08</span></div>
+    <div class="row"><span class="k">Food cost</span><span class="v good">30% ✓</span></div>
+    <div class="row"><span class="k">Senior / PWD price</span><span class="v info">₱213.57</span></div>
+  </div>
+  <div class="ticks"><span class="tick">✓ Libre</span><span class="tick">✓ Walang sign-up</span><span class="tick">✓ English / Tagalog</span><span class="tick">✓ Phone o laptop</span></div>
+  <div class="spacer"></div>
+  <div class="foot"><div class="brand"><img src="../../../public/brand-mark.png" alt=""><span>Amore Cost</span></div><span class="url">amore-cost.vercel.app</span></div>
+</section>
+
+<!-- 2 · Price increase -->
+<section class="post" id="p2">
+  <span class="kicker">Ingredient Library</span>
+  <h1>Tumaas na naman <span class="w">ang manok?</span></h1>
+  <div class="jump"><span class="p old">₱220</span><span class="arrow">→</span><span class="p new">₱300</span><span class="kg">per kilo</span></div>
+  <div class="spacer"></div>
+  <div class="card">
+    <div class="cmp">
+      <div class="h">Chicken Adobo</div><div class="h n">Dati</div><div class="h n">Ngayon</div>
+      <div>Manok sa 1 plato</div><div class="n">₱62.86</div><div class="n cost">₱85.71</div>
+      <div>Totoong gastos</div><div class="n">₱80.08</div><div class="n cost">₱102.94</div>
+      <div class="last">Food cost sa ₱299</div><div class="n good last">30%</div><div class="n bad last">39%</div>
+    </div>
+    <div class="alert">⚠️ Lampas na sa healthy target na 28–32%. Isang palit lang ng presyo, kita mo agad sa <b>lahat</b> ng recipe.</div>
+  </div>
+  <div class="spacer"></div>
+  <div class="foot"><div class="brand"><img src="../../../public/brand-mark.png" alt=""><span>Amore Cost</span></div><span class="url">amore-cost.vercel.app</span></div>
+</section>
+
+<!-- 3 · Senior / PWD -->
+<section class="post" id="p3">
+  <span class="kicker">Receipt Simulator 🧾</span>
+  <h1>Senior o PWD ang customer. <em>Tama ba ang discount mo?</em></h1>
+  <div class="spacer"></div>
+  <div class="vs">
+    <div class="box wrong"><div class="lbl">❌ Mali: 20% agad sa presyong may VAT</div><div class="math">₱299 − 20%</div><div class="tot">₱239.20</div></div>
+    <div class="box right"><div class="lbl">✅ Tama: tanggalin muna ang VAT, saka 20%</div><div class="math">₱299 ÷ 1.12 = ₱266.96 &nbsp;→&nbsp; −20%</div><div class="tot">₱213.57</div></div>
+  </div>
+  <div class="spacer"></div>
+  <div class="foot"><div class="brand"><img src="../../../public/brand-mark.png" alt=""><span>Amore Cost</span></div><span class="url">amore-cost.vercel.app</span></div>
+</section>
+
+<!-- 4 · Yield -->
+<section class="post" id="p4">
+  <span class="kicker">Yield % 🍗</span>
+  <h1>Bakit <span class="w">₱62.86</span> at hindi ₱44 ang manok mo?</h1>
+  <p class="lead">May buto, may balat, may natatapon. Hindi lahat ng binili mo, napupunta sa plato.</p>
+  <div class="spacer"></div>
+  <div class="card">
+    <div class="cap">200 g na manok, ₱220/kg</div>
+    <div class="bar"><span class="use">70% napupunta sa plato</span><span class="loss">30% buto</span></div>
+    <div class="big2">
+      <div class="c a"><small>Akala mo</small><b>₱44.00</b></div>
+      <div class="c b"><small>Totoong gastos</small><b>₱62.86</b></div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="foot"><div class="brand"><img src="../../../public/brand-mark.png" alt=""><span>Amore Cost</span></div><span class="url">amore-cost.vercel.app</span></div>
+</section>
+
+<script>
+  const n = new URLSearchParams(location.search).get("n") || "1";
+  document.getElementById("p" + n).classList.add("on");
+</script>
+</body>
+</html>
