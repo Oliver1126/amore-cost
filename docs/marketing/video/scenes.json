@@ -1,0 +1,163 @@
+{
+  "title": "Amore Cost — presentation video",
+  "voice": "Samantha",
+  "rate": 172,
+  "notes": "Every peso figure comes from the built-in sample recipes (src/lib/demo.ts) run through the app's own math — same numbers as docs/onboarding/user-manual.md. `say` = what the voice reads (phonetic, pesos spelled out); `caption` = what's on screen.",
+  "scenes": [
+    {
+      "id": "title",
+      "layout": "title",
+      "kicker": "For Filipino food businesses",
+      "headline": "Amore Cost",
+      "sub": "Alamin kung may kwenta ang presyo mo.",
+      "lines": [
+        { "caption": "Meet Amore Cost — the pricing tool built for Filipino food businesses.", "say": "Meet Ah-moh-reh Cost. The pricing tool built for Filipino food businesses." },
+        { "caption": "Know if your price is really earning for you.", "say": "Know whether your price is really earning for you." }
+      ]
+    },
+    {
+      "id": "problem",
+      "layout": "cards",
+      "kicker": "The problem",
+      "headline": "Most small food sellers price by guessing",
+      "cards": [
+        { "icon": "🤔", "title": "Guess or copy", "body": "Prices copied from the stall next door" },
+        { "icon": "📈", "title": "Costs go up", "body": "Ingredient prices rise, menu prices don't" },
+        { "icon": "🦴", "title": "Hidden waste", "body": "Bones, peel and trim are never counted" },
+        { "icon": "🧾", "title": "Silent leaks", "body": "Rent, bills and Senior/PWD discounts eat the profit" }
+      ],
+      "lines": [
+        { "caption": "Most small food sellers set prices by guessing, or by copying the stall next door.", "say": "Most small food sellers set prices by guessing, or by copying the stall next door.", "reveal": 1 },
+        { "caption": "Ingredient prices go up, but menu prices stay the same.", "say": "Ingredient prices go up, but menu prices stay the same.", "reveal": 2 },
+        { "caption": "Waste — like chicken bones — is never counted.", "say": "Waste, like chicken bones, is never counted.", "reveal": 3 },
+        { "caption": "And rent, bills and Senior/PWD discounts quietly eat the profit.", "say": "And rent, bills, and senior citizen and P W D discounts quietly eat the profit.", "reveal": 4 }
+      ]
+    },
+    {
+      "id": "who",
+      "layout": "phone",
+      "shot": "12-phone-tl.png",
+      "kicker": "Who it's for",
+      "headline": "Built for the way Filipino food businesses work",
+      "facts": ["Home bakers", "Carinderias & eateries", "Food carts", "Online food sellers", "Free · no sign-up · English & Tagalog"],
+      "lines": [
+        { "caption": "Amore Cost is made for home bakers, carinderias, food carts and online food sellers.", "say": "Ah-moh-reh Cost is made for home bakers, carinderias, food carts, and online food sellers across the Philippines.", "reveal": 4 },
+        { "caption": "It's free, there's no sign-up, and it works in English and Tagalog — on your phone or laptop.", "say": "It's free, there's no sign-up, and it works in English and Tagalog, on your phone or your laptop.", "reveal": 5 }
+      ]
+    },
+    {
+      "id": "start",
+      "layout": "shot",
+      "shot": "02-dashboard.png",
+      "kicker": "Start in one tap",
+      "headline": "Try it with a real carinderia menu",
+      "facts": ["Chicken Adobo · Tapsilog · Halo-Halo", "13 ingredients, sample monthly bills", "Avg food cost vs. the 28–32% target"],
+      "lines": [
+        { "caption": "Getting started takes one tap: “Try with sample recipes” loads a real carinderia menu.", "say": "Getting started takes one tap. Try with sample recipes loads a real carinderia menu: chicken adobo, tapsilog, and halo-halo.", "reveal": 2 },
+        { "caption": "The Dashboard shows your recipes, monthly bills, and average food cost against the healthy 28–32% target.", "say": "The dashboard shows your recipes, your monthly bills, and your average food cost, against the healthy twenty eight to thirty two percent target.", "reveal": 3 }
+      ]
+    },
+    {
+      "id": "recipe",
+      "layout": "shot",
+      "shot": "04-ingredients.png",
+      "kicker": "Step 1 · Know your true cost",
+      "headline": "Every ingredient, including the waste",
+      "facts": ["Recipe in grams, bought by the kilo", "Chicken at 70% yield: ₱44.00 → ₱62.86", "One plate of adobo really costs ₱80.08"],
+      "lines": [
+        { "caption": "Each recipe lists what one serving uses. Enter grams even if you buy by the kilo — the app converts it.", "say": "Each recipe lists what one serving uses. Enter grams, even if you buy by the kilo. The app converts it for you.", "reveal": 1 },
+        { "caption": "Yield counts what you throw away: bone-in chicken at 70% really costs ₱62.86 per plate, not ₱44.", "say": "Yield counts what you throw away. Chicken with bones, at seventy percent yield, really costs sixty two pesos and eighty six centavos per plate, not forty four.", "reveal": 2 },
+        { "caption": "So one plate of adobo truly costs ₱80.08.", "say": "So one plate of adobo truly costs eighty pesos and eight centavos.", "reveal": 3 }
+      ]
+    },
+    {
+      "id": "price",
+      "layout": "shot",
+      "shot": "03-price-cards.png",
+      "kicker": "Step 2 · Set the right price",
+      "headline": "A suggested price you can stand behind",
+      "facts": ["Based on the margin you want, VAT included", "Rounded up to a menu-friendly ₱299", "Correct Senior/PWD price: ₱213.57"],
+      "lines": [
+        { "caption": "From that cost, Amore Cost suggests a selling price based on the margin you want — VAT included.", "say": "From that cost, Ah-moh-reh Cost suggests a selling price based on the margin you want, with VAT included.", "reveal": 1 },
+        { "caption": "Round it to a menu-friendly ₱299. It always rounds up, so you never lose margin.", "say": "Round it to a menu-friendly two hundred ninety nine pesos. It always rounds up, so you never lose margin.", "reveal": 2 },
+        { "caption": "It even shows the correct Senior/PWD price: ₱213.57.", "say": "It even shows the correct senior and P W D price. Two hundred thirteen pesos and fifty seven centavos.", "reveal": 3 }
+      ]
+    },
+    {
+      "id": "library",
+      "layout": "shot",
+      "shot": "06-library.png",
+      "kicker": "Prices change? No problem",
+      "headline": "Change a price once, every recipe updates",
+      "facts": ["One shared Ingredient Library", "Chicken ₱220 → ₱300/kg at the palengke", "Every linked recipe recalculates"],
+      "lines": [
+        { "caption": "Keep your ingredients in one shared library.", "say": "Keep your ingredients in one shared library.", "reveal": 1 },
+        { "caption": "When chicken jumps from ₱220 to ₱300 a kilo at the palengke, change it once — every recipe updates.", "say": "When chicken jumps from two hundred twenty to three hundred pesos a kilo at the palengke, change it once, and every recipe updates.", "reveal": 3 }
+      ]
+    },
+    {
+      "id": "opex",
+      "layout": "shot",
+      "shot": "07-opex.png",
+      "kicker": "Step 3 · Cover your bills",
+      "headline": "Know what each plate must earn back",
+      "facts": ["Rent, kuryente, LPG, sahod, ads", "₱52,700 a month ÷ 1,500 dishes", "Each plate must cover ₱35.13"],
+      "lines": [
+        { "caption": "Next, add your monthly bills: rent, electricity, LPG, salaries and ads.", "say": "Next, add your monthly bills. Rent, electricity, L P G, salaries, and ads.", "reveal": 1 },
+        { "caption": "₱52,700 a month across 1,500 dishes means every plate must earn back ₱35.13.", "say": "Fifty two thousand seven hundred pesos a month, across fifteen hundred dishes, means every plate must earn back thirty five pesos and thirteen centavos.", "reveal": 3 }
+      ]
+    },
+    {
+      "id": "receipt",
+      "layout": "receipt",
+      "shot": "10-receipt-paper.png",
+      "kicker": "Receipt Simulator",
+      "headline": "See exactly what the customer pays",
+      "facts": ["2 Adobo + 1 Halo-Halo = ₱788.00", "Senior/PWD: VAT off first, then 20%", "Correct total: ₱562.86", "Plus what you really keep"],
+      "lines": [
+        { "caption": "The Receipt Simulator shows exactly what a customer pays.", "say": "The receipt simulator shows exactly what a customer pays.", "reveal": 1 },
+        { "caption": "Two adobo and one halo-halo come to ₱788. For a senior citizen, VAT comes off first, then 20% — the correct total is ₱562.86.", "say": "Two adobo and one halo-halo come to seven hundred eighty eight pesos. For a senior citizen, VAT comes off first, then twenty percent. The correct total is five hundred sixty two pesos and eighty six centavos.", "reveal": 3 },
+        { "caption": "And you see what you really keep from every order.", "say": "And you see what you really keep from every order.", "reveal": 4 }
+      ]
+    },
+    {
+      "id": "simulator",
+      "layout": "shot",
+      "shot": "11-simulator.png",
+      "kicker": "Margin & POS Simulator",
+      "headline": "Does this price pay the bills?",
+      "facts": ["Try any price and monthly volume", "Break-even: 282 plates a month", "About 10 a day — even if adobo pays every bill"],
+      "lines": [
+        { "caption": "Finally, the Margin & POS Simulator answers the big question: does this price pay the bills?", "say": "Finally, the margin and P O S simulator answers the big question. Does this price pay the bills?", "reveal": 1 },
+        { "caption": "Even if adobo alone paid every bill, you'd break even at 282 plates a month — about 10 a day.", "say": "Even if adobo alone paid every bill, you'd break even at two hundred eighty two plates a month. That's about ten a day.", "reveal": 3 }
+      ]
+    },
+    {
+      "id": "benefits",
+      "layout": "cards",
+      "kicker": "How it helps",
+      "headline": "What Amore Cost gives your business",
+      "cards": [
+        { "icon": "✅", "title": "Price with confidence", "body": "A real number, not a guess" },
+        { "icon": "🛡️", "title": "Protect your margin", "body": "Spot it the day costs rise" },
+        { "icon": "⚖️", "title": "Get compliance right", "body": "VAT, Senior/PWD, service charge" },
+        { "icon": "🎯", "title": "Know your break-even", "body": "Before you open, not after" }
+      ],
+      "lines": [
+        { "caption": "With Amore Cost, you price with confidence and protect your margin when costs rise…", "say": "With Ah-moh-reh Cost, you price with confidence, and protect your margin when costs rise.", "reveal": 2 },
+        { "caption": "…handle VAT and Senior/PWD discounts correctly, and know your break-even before you open.", "say": "You handle VAT and senior discounts correctly, and you know your break-even before you open.", "reveal": 4 }
+      ]
+    },
+    {
+      "id": "cta",
+      "layout": "title",
+      "kicker": "Works with the POS you already use",
+      "headline": "Price it in Amore Cost.\nSell it in your POS.",
+      "sub": "Free · No sign-up · amore-cost.vercel.app",
+      "lines": [
+        { "caption": "Already using a POS? Keep it. Price it in Amore Cost, then sell it in your POS.", "say": "Already using a P O S? Keep it. Price it in Ah-moh-reh Cost, then sell it in your P O S." },
+        { "caption": "Try it free at amore-cost.vercel.app — know if your price is really earning.", "say": "Try it free at amore cost dot vercel dot app. Ah-moh-reh Cost. Know if your price is really earning." }
+      ]
+    }
+  ]
+}

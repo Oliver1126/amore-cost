@@ -23,6 +23,9 @@ One fact, one home: don't restate the strategy here, link to it.
   this free" explanation, both the user-facing benefits and the
   business rationale, doubling as ready-to-use messaging if anyone
   ever asks.
+- [video/](video/README.md) — the ~3-minute narrated presentation
+  video (real app screens, burned-in captions), built from a storyboard
+  by scripts; the MP4 itself is regenerated, not committed.
 - [drafts/](drafts/) — finished (not yet reviewed-and-moved) content
   pieces, written by the `mwp-matrix/` pipeline one at a time from
   `content-ideas.md`'s backlog, gated behind a human approval step

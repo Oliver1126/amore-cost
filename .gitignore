@@ -46,3 +46,7 @@ mwp-matrix/03_output/*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# presentation video build outputs (regenerate with docs/marketing/video/build.sh)
+/docs/marketing/video/out/
+/docs/marketing/video/shots/

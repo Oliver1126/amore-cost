@@ -4,6 +4,16 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-10-31** — Presentation video (`docs/marketing/video/`): a
+  3:15 narrated explainer, 1920×1080, built from real app screenshots
+  with the sample recipes, burned-in captions + `.srt`, reproducible
+  from `scenes.json` via capture/render/build scripts. Fixed two stale
+  UI strings found while capturing it: the Ingredient Library's
+  description and empty state still pointed to the removed "Costing &
+  Pricing" page and "Cost History" (EN + TL, plus "products" →
+  "recipes"), and the Tagalog Dashboard showed "Average food cost %"
+  untranslated.
+
 - **2026-10-29** — Full documentation sweep to match the five-page app,
   decision 0041, the KwentaPOS comparison and the new competitive
   roadmap: business/branding docs, product/QA/marketing docs,

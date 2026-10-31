@@ -310,13 +310,13 @@ const STRINGS = {
     "templates.saveCurrent": "Save current",
 
     "ingredients.description":
-      "Cost a raw ingredient or material once, then link it to any item on Costing & Pricing. Change the cost here and every linked item recalculates — including a real Cost History snapshot for anything that actually changed price.",
+      "Save each ingredient's price once, then link it to any recipe from its ingredient rows. Change the price here and every recipe that uses it recalculates automatically.",
     "ingredients.addTitle": "Add an ingredient",
     "ingredients.namePlaceholder": "e.g. Eggs",
     "ingredients.categoryPlaceholder": "Category (optional) — e.g. dairy, flour, packaging",
     "ingredients.addButton": "Add ingredient",
     "ingredients.empty":
-      "Nothing here yet — add your most-used ingredients or materials above, then link them from any item on Costing & Pricing.",
+      "Nothing here yet — add your most-used ingredients above, then link them from any recipe's ingredient rows.",
     "ingredients.name": "Name",
     "ingredients.costPerUnit": "Cost / unit",
     "ingredients.usedIn": "Used in",
@@ -328,8 +328,8 @@ const STRINGS = {
     "ingredients.supplierNamePlaceholder": "Supplier name",
     "ingredients.similarPrefix": "Similar ingredients",
     "ingredients.noCategoryHint": "Give this ingredient a category above to see substitutes.",
-    "ingredients.usedInItemsTitle": "Used in these products:",
-    "ingredients.notUsedYet": "Not used in any product yet.",
+    "ingredients.usedInItemsTitle": "Used in these recipes:",
+    "ingredients.notUsedYet": "Not used in any recipe yet.",
 
     "catalog.description": "Every recipe you've saved, instead of one throwaway calculation at a time.",
     "catalog.newItem": "+ New recipe",
@@ -786,13 +786,13 @@ const STRINGS = {
     "templates.saveCurrent": "I-save ang Kasalukuyan",
 
     "ingredients.description":
-      "Isingil ang hilaw na sangkap o materyales nang isang beses, pagkatapos i-link ito sa kahit anong item sa Pagsingil at Presyo. Palitan ang gastos dito at awtomatikong nagbabago ang lahat ng naka-link na item — kasama ang tunay na Cost History snapshot para sa anumang talagang nagbago ang presyo.",
+      "I-save ang presyo ng bawat sangkap nang isang beses, pagkatapos i-link ito sa kahit anong recipe mula sa mga hanay ng sangkap nito. Palitan ang presyo dito at awtomatikong nagbabago ang bawat recipe na gumagamit nito.",
     "ingredients.addTitle": "Magdagdag ng Sangkap",
     "ingredients.namePlaceholder": "hal. Itlog",
     "ingredients.categoryPlaceholder": "Kategorya (opsyonal) — hal. dairy, harina, packaging",
     "ingredients.addButton": "Idagdag ang Sangkap",
     "ingredients.empty":
-      "Wala pang laman dito — idagdag ang pinaka-gamit mong sangkap o materyales sa itaas, pagkatapos i-link ito mula sa kahit anong item sa Pagsingil at Presyo.",
+      "Wala pang laman dito — idagdag ang pinaka-gamit mong sangkap sa itaas, pagkatapos i-link ito mula sa mga hanay ng sangkap ng kahit anong recipe.",
     "ingredients.name": "Pangalan",
     "ingredients.costPerUnit": "Gastos / Unit",
     "ingredients.usedIn": "Ginagamit Sa",
@@ -804,7 +804,7 @@ const STRINGS = {
     "ingredients.supplierNamePlaceholder": "Pangalan ng Supplier",
     "ingredients.similarPrefix": "Katulad na Sangkap",
     "ingredients.noCategoryHint": "Bigyan ang sangkap na ito ng kategorya sa itaas para makita ang mga substitute.",
-    "ingredients.usedInItemsTitle": "Ginagamit sa mga sumusunod na produkto:",
+    "ingredients.usedInItemsTitle": "Ginagamit sa mga sumusunod na recipe:",
     "ingredients.notUsedYet": "Wala pang gumagamit nito.",
 
     "catalog.description": "Bawat recipe na na-save mo, sa halip na isang beses lang na kalkulasyon.",
@@ -1002,7 +1002,7 @@ const STRINGS = {
     "dash.subtitle": "Kita ng mga recipe, gastos sa sangkap, at buwanang overhead — naka-save lang lahat sa device na ito.",
     "dash.activeRecipes": "Mga aktibong recipe",
     "dash.monthlyOpex": "Buwanang OPEX",
-    "dash.avgFoodCost": "Average food cost %",
+    "dash.avgFoodCost": "Karaniwang food cost %",
     "dash.industryTarget": "Target ng industriya:",
     "dash.ingredients": "Sangkap sa aklatan",
     "dash.featuredTitle": "Mga bagong recipe",
