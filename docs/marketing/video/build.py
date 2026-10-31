@@ -134,7 +134,9 @@ for si, scene in enumerate(cfg["scenes"]):
 listfile = OUT / f"segments{SUFFIX}.txt"
 listfile.write_text("".join(f"file '{s}'\n" for s in segments))
 final = OUT / f"amore-cost-presentation{SUFFIX}.mp4"
-run("ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(listfile), "-c", "copy", "-movflags", "+faststart", str(final))
+# Join, then normalize loudness to -16 LUFS (the usual target for social video) without re-encoding the picture.
+run("ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(listfile), "-c:v", "copy",
+    "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "160k", "-ar", "48000", "-movflags", "+faststart", str(final))
 (OUT / f"amore-cost-presentation{SUFFIX}.srt").write_text(
     "\n".join(f"{i}\n{srt_time(a)} --> {srt_time(b)}\n{text}\n" for i, (a, b, text) in enumerate(srt, 1))
 )

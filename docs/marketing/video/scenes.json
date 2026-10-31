@@ -15,7 +15,7 @@
           "caption": "Meet Amore Cost — the pricing tool built for Filipino food businesses.",
           "say": "Meet Ah-moh-reh Cost. The pricing tool built for Filipino food businesses.",
           "tl": {
-            "caption": "Kilalanin ang Amore Cost — ang pricing tool na ginawa para sa Filipino food business.",
+            "caption": "Kilalanin ang Amore Cost — ang pricing tool na ginawa para sa mga Filipino food business.",
             "say": "Kilalanin ang Amore Cost. Ang pricing tool na ginawa talaga para sa Filipino food business."
           }
         },
@@ -62,7 +62,7 @@
           "say": "Most small food sellers set prices by guessing, or by copying the stall next door.",
           "reveal": 1,
           "tl": {
-            "caption": "Karamihan sa maliliit na food business, hula lang ang presyo — o kinokopya sa katabing stall.",
+            "caption": "Karamihan sa maliliit na food business ngayon, hula lang nang hula ng presyo — o kinokopya lang sa katabing stall.",
             "say": "Karamihan sa maliliit na food business, hula lang ang presyo... o kinokopya lang sa katabing stall."
           }
         },
@@ -114,7 +114,7 @@
           "say": "Ah-moh-reh Cost is made for home bakers, carinderias, food carts, and online food sellers across the Philippines.",
           "reveal": 4,
           "tl": {
-            "caption": "Ang Amore Cost ay para sa home bakers, carinderia, food carts, at online food sellers.",
+            "caption": "Ang Amore Cost ay para sa mga nagsisimulang home baker, carinderia, food cart, at online food seller sa buong Pilipinas.",
             "say": "Ang Amore Cost ay para sa mga home baker, carinderia, food cart, at online food seller sa buong Pilipinas."
           }
         },
@@ -123,7 +123,7 @@
           "say": "It's free, there's no sign-up, and it works in English and Tagalog, on your phone or your laptop.",
           "reveal": 5,
           "tl": {
-            "caption": "Libre ito, walang sign-up, at may English at Tagalog — sa phone man o laptop.",
+            "caption": "Libre lang ito, walang sign-up, at may English at Tagalog — sa phone man o laptop.",
             "say": "Libre ito, walang sign-up, at may English at Tagalog. Sa phone man o sa laptop."
           }
         }
@@ -146,7 +146,7 @@
           "say": "Getting started takes one tap. Try with sample recipes loads a real carinderia menu: chicken adobo, tapsilog, and halo-halo.",
           "reveal": 2,
           "tl": {
-            "caption": "Isang tap lang para magsimula: “Try with sample recipes” — may totoong carinderia menu agad: Adobo, Tapsilog, at Halo-Halo.",
+            "caption": "Isang tap lang para magsimula: pindutin ang “Try with sample recipes” at may totoong carinderia menu ka agad — Adobo, Tapsilog, at Halo-Halo.",
             "say": "Isang tap lang para magsimula. Pindutin ang Try with sample recipes, at may totoong carinderia menu ka na agad: Adobo, Tapsilog, at Halo-Halo."
           }
         },
@@ -219,7 +219,7 @@
           "say": "From that cost, Ah-moh-reh Cost suggests a selling price based on the margin you want, with VAT included.",
           "reveal": 1,
           "tl": {
-            "caption": "Mula diyan, magsa-suggest ang Amore Cost ng tamang presyo base sa margin na gusto mo — kasama na ang VAT.",
+            "caption": "Mula diyan, magsa-suggest ang Amore Cost ng tamang presyo, base doon sa margin na gusto mo — kasama na ang VAT.",
             "say": "Mula diyan, magsa-suggest ang Amore Cost ng tamang presyo, base sa margin na gusto mo. Kasama na ang VAT."
           }
         },

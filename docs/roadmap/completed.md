@@ -4,6 +4,14 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-10-31** — Taglish presentation video with a real ElevenLabs
+  voiceover (`out/amore-cost-presentation-taglish.mp4`, 3:52, captions
+  in Taglish). The take ignored the script's `<break>` tags, so added
+  `align_voice.py`: whisper.cpp word timestamps matched to the script cut
+  it into 29 lines (all 28 cuts verified at sentence boundaries; spot
+  checks confirm voice ↔ slide sync). Captions adjusted where the voice
+  ad-libbed; loudness normalized to −16 LUFS.
+
 - **2026-10-31** — Presentation video (`docs/marketing/video/`): a
   3:15 narrated explainer, 1920×1080, built from real app screenshots
   with the sample recipes, burned-in captions + `.srt`, reproducible

@@ -52,14 +52,14 @@ Or just put the audio in that folder and ask Claude to build it.
 
 | File | Voiceover (paste this) | On-screen caption |
 |---|---|---|
-| `s00-l00` | Kilalanin ang Amore Cost. Ang pricing tool na ginawa talaga para sa Filipino food business. | Kilalanin ang Amore Cost — ang pricing tool na ginawa para sa Filipino food business. |
+| `s00-l00` | Kilalanin ang Amore Cost. Ang pricing tool na ginawa talaga para sa Filipino food business. | Kilalanin ang Amore Cost — ang pricing tool na ginawa para sa mga Filipino food business. |
 | `s00-l01` | Alamin kung may kwenta ang presyo mo. | Alamin kung may kwenta ang presyo mo. |
 
 ### The problem
 
 | File | Voiceover (paste this) | On-screen caption |
 |---|---|---|
-| `s01-l00` | Karamihan sa maliliit na food business, hula lang ang presyo... o kinokopya lang sa katabing stall. | Karamihan sa maliliit na food business, hula lang ang presyo — o kinokopya sa katabing stall. |
+| `s01-l00` | Karamihan sa maliliit na food business, hula lang ang presyo... o kinokopya lang sa katabing stall. | Karamihan sa maliliit na food business ngayon, hula lang nang hula ng presyo — o kinokopya lang sa katabing stall. |
 | `s01-l01` | Tumataas ang presyo ng ingredients, pero ang presyo sa menu... ganun pa rin. | Tumataas ang presyo ng ingredients, pero ang presyo sa menu, ganun pa rin. |
 | `s01-l02` | Yung waste, gaya ng buto ng manok, hindi nabibilang. | Yung waste — gaya ng buto ng manok — hindi nabibilang. |
 | `s01-l03` | Tapos ang upa, ang bills, at ang Senior at PWD discount... tahimik na kumakain ng kita mo. | Tapos ang upa, bills, at Senior/PWD discount — tahimik na kumakain ng kita mo. |
@@ -68,14 +68,14 @@ Or just put the audio in that folder and ask Claude to build it.
 
 | File | Voiceover (paste this) | On-screen caption |
 |---|---|---|
-| `s02-l00` | Ang Amore Cost ay para sa mga home baker, carinderia, food cart, at online food seller sa buong Pilipinas. | Ang Amore Cost ay para sa home bakers, carinderia, food carts, at online food sellers. |
-| `s02-l01` | Libre ito, walang sign-up, at may English at Tagalog. Sa phone man o sa laptop. | Libre ito, walang sign-up, at may English at Tagalog — sa phone man o laptop. |
+| `s02-l00` | Ang Amore Cost ay para sa mga home baker, carinderia, food cart, at online food seller sa buong Pilipinas. | Ang Amore Cost ay para sa mga nagsisimulang home baker, carinderia, food cart, at online food seller sa buong Pilipinas. |
+| `s02-l01` | Libre ito, walang sign-up, at may English at Tagalog. Sa phone man o sa laptop. | Libre lang ito, walang sign-up, at may English at Tagalog — sa phone man o laptop. |
 
 ### Start in one tap
 
 | File | Voiceover (paste this) | On-screen caption |
 |---|---|---|
-| `s03-l00` | Isang tap lang para magsimula. Pindutin ang Try with sample recipes, at may totoong carinderia menu ka na agad: Adobo, Tapsilog, at Halo-Halo. | Isang tap lang para magsimula: “Try with sample recipes” — may totoong carinderia menu agad: Adobo, Tapsilog, at Halo-Halo. |
+| `s03-l00` | Isang tap lang para magsimula. Pindutin ang Try with sample recipes, at may totoong carinderia menu ka na agad: Adobo, Tapsilog, at Halo-Halo. | Isang tap lang para magsimula: pindutin ang “Try with sample recipes” at may totoong carinderia menu ka agad — Adobo, Tapsilog, at Halo-Halo. |
 | `s03-l01` | Sa Dashboard, kita mo agad ang recipes mo, ang monthly bills, at ang average food cost mo... kumpara sa healthy target na twenty-eight to thirty-two percent. | Sa Dashboard, kita mo agad ang recipes mo, monthly bills, at average food cost — kumpara sa healthy target na 28–32%. |
 
 ### Step 1 · Know your true cost
@@ -90,7 +90,7 @@ Or just put the audio in that folder and ask Claude to build it.
 
 | File | Voiceover (paste this) | On-screen caption |
 |---|---|---|
-| `s05-l00` | Mula diyan, magsa-suggest ang Amore Cost ng tamang presyo, base sa margin na gusto mo. Kasama na ang VAT. | Mula diyan, magsa-suggest ang Amore Cost ng tamang presyo base sa margin na gusto mo — kasama na ang VAT. |
+| `s05-l00` | Mula diyan, magsa-suggest ang Amore Cost ng tamang presyo, base sa margin na gusto mo. Kasama na ang VAT. | Mula diyan, magsa-suggest ang Amore Cost ng tamang presyo, base doon sa margin na gusto mo — kasama na ang VAT. |
 | `s05-l01` | I-round mo sa two hundred ninety-nine pesos, para maganda tingnan sa menu. Laging pataas ang round, kaya hindi nababawasan ang margin mo. | I-round sa ₱299 para maganda sa menu. Laging pataas ang round, kaya hindi nababawasan ang margin mo. |
 | `s05-l02` | Pati ang tamang Senior at PWD price, nandiyan na. Two hundred thirteen pesos and fifty-seven centavos. | Pati ang tamang Senior/PWD price, nandiyan na: ₱213.57. |
 
