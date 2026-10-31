@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Amore Cost Facebook cover</title>
+<!-- 1640×624 Facebook page cover. Everything that matters sits inside the
+     centre 1100×560 "safe zone" so phones (which crop the sides) and the
+     profile photo (bottom-left on desktop) never hide it.
+     Render: node docs/marketing/social/render-cover.cjs -->
+<style>
+  @font-face { font-family: "Work Sans"; src: url("../../../src/app/fonts/worksans-var.woff2") format("woff2"); font-weight: 400 700; }
+  :root {
+    --bg: #f2f3f0; --surface: #ffffff; --border: #e6e8e2; --text: #1b1f18; --muted: #6b7267;
+    --accent: #1e8a5c; --accent-strong: #166b47; --accent-soft: #e3f2e9; --warn: #c8720e; --info: #2f6fb0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1640px; height: 624px; overflow: hidden; }
+  body { font-family: "Work Sans", system-ui, sans-serif; background: var(--bg); color: var(--text); position: relative; }
+  .glow { position: absolute; border-radius: 50%; filter: blur(80px); }
+  .g1 { width: 700px; height: 700px; background: #cfe9da; top: -330px; right: -120px; opacity: .8; }
+  .g2 { width: 620px; height: 620px; background: #f6e3c8; bottom: -360px; left: -160px; opacity: .6; }
+  .g3 { width: 380px; height: 380px; background: #d9ebf7; bottom: -220px; right: 330px; opacity: .5; }
+  /* Light peso-sign texture outside the safe zone, so the wide desktop crop isn't empty. */
+  .peso { position: absolute; font-weight: 700; color: var(--accent); opacity: .07; }
+  .safe { position: absolute; left: 270px; top: 32px; width: 1100px; height: 560px; display: flex; align-items: center; gap: 44px; }
+  .left { flex: 1; }
+  .brand { display: flex; align-items: center; gap: 14px; font-weight: 700; font-size: 30px; }
+  .brand img { height: 52px; }
+  h1 { font-size: 52px; white-space: nowrap; line-height: 1.06; letter-spacing: -0.015em; margin-top: 26px; }
+  h1 em { font-style: normal; color: var(--accent-strong); }
+  .sub { font-size: 21px; line-height: 1.4; color: var(--muted); margin-top: 18px; max-width: 600px; }
+  .pills { display: flex; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+  .pill { font-size: 17px; white-space: nowrap; font-weight: 600; padding: 8px 16px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong); }
+  .pill.url { background: var(--accent); color: #fff; }
+  .card { flex: 0 0 380px; background: var(--surface); border-radius: 26px; padding: 28px 30px; box-shadow: 0 0 0 1px var(--border), 0 24px 60px rgba(20,40,30,.14); transform: rotate(1.5deg); }
+  .card .top { display: flex; justify-content: space-between; align-items: baseline; }
+  .card h2 { font-size: 26px; }
+  .card .tag { font-size: 15px; color: var(--muted); }
+  .price { margin-top: 18px; background: var(--accent); color: #fff; border-radius: 18px; padding: 18px 22px; }
+  .price small { font-size: 16px; font-weight: 600; opacity: .85; }
+  .price b { display: block; font-size: 56px; line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .price span { font-size: 15px; opacity: .85; }
+  .row { display: flex; justify-content: space-between; font-size: 19px; padding: 12px 2px; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+  .row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .row .k { color: var(--muted); }
+  .row .v { font-weight: 700; }
+  .rows { margin-top: 10px; }
+  .cost { color: var(--warn); } .good { color: var(--accent-strong); } .info { color: var(--info); }
+  /* Preview-only safe-zone outline: add ?guides to the URL. */
+  .guides .safe { outline: 2px dashed #e0457b; }
+  .guides .mobile { position: absolute; top: 0; bottom: 0; left: 265px; width: 1110px; outline: 2px dashed #3a7bd5; }
+</style>
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+<div class="peso" style="font-size:180px; left:60px; top:20px; transform:rotate(-12deg)">₱</div>
+<div class="peso" style="font-size:120px; left:150px; top:380px; transform:rotate(10deg)">₱</div>
+<div class="peso" style="font-size:150px; right:70px; top:300px; transform:rotate(14deg)">₱</div>
+<div class="peso" style="font-size:96px; right:180px; top:40px; transform:rotate(-8deg)">₱</div>
+
+<div class="safe">
+  <div class="left">
+    <div class="brand"><img src="../../../public/brand-mark.png" alt=""><span>Amore Cost</span></div>
+    <h1>Alamin kung <em>may kwenta</em><br>ang presyo mo.</h1>
+    <p class="sub">Libreng recipe costing at menu pricing para sa carinderia, home baker, food cart at online seller.</p>
+    <div class="pills">
+      <span class="pill">Libre · walang sign-up</span>
+      <span class="pill">VAT + Senior/PWD</span>
+      <span class="pill url">amore-cost.vercel.app</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="top"><h2>Chicken Adobo</h2><span class="tag">1 plato</span></div>
+    <div class="price"><small>Suggested menu price</small><b>₱299</b><span>VAT included · rounded up</span></div>
+    <div class="rows">
+      <div class="row"><span class="k">Totoong gastos</span><span class="v cost">₱80.08</span></div>
+      <div class="row"><span class="k">Food cost</span><span class="v good">30% ✓</span></div>
+      <div class="row"><span class="k">Senior / PWD price</span><span class="v info">₱213.57</span></div>
+    </div>
+  </div>
+</div>
+<div class="mobile"></div>
+<script>if (location.search.includes("guides")) document.body.classList.add("guides");</script>
+</body>
+</html>

@@ -4,6 +4,11 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-10-31** — Facebook page cover (`docs/marketing/social/`): 1640×624
+  PNG rendered from HTML in the app's own palette and font. Taglish headline
+  "Alamin kung may kwenta ang presyo mo." plus the demo Adobo price card
+  (₱299 / ₱80.08 cost / 30% food cost / ₱213.57 Senior-PWD), all within
+  the phone-crop safe zone.
 - **2026-10-31** — Taglish presentation video with a real ElevenLabs
   voiceover (`out/amore-cost-presentation-taglish.mp4`, 3:52, captions
   in Taglish). The take ignored the script's `<break>` tags, so added

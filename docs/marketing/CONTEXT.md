@@ -26,6 +26,10 @@ One fact, one home: don't restate the strategy here, link to it.
 - [video/](video/README.md) — the ~3-minute narrated presentation
   video (real app screens, burned-in captions), built from a storyboard
   by scripts; the MP4 itself is regenerated, not committed.
+- [social/](social/facebook-cover.html) — the Facebook page cover
+  (`facebook-cover.png`, 1640×624, upload that one). Edit the HTML and
+  re-render with `render-cover.cjs`; `facebook-cover-guides.png` shows
+  the phone crop (blue) and safe zone (pink) for checking.
 - [drafts/](drafts/) — finished (not yet reviewed-and-moved) content
   pieces, written by the `mwp-matrix/` pipeline one at a time from
   `content-ideas.md`'s backlog, gated behind a human approval step
