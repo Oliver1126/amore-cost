@@ -4,7 +4,7 @@ Ready to paste, one image each (`post-1.png` … `post-4.png`, 1080×1350,
 the 4:5 size that fills the most screen in the feed). Images are
 rendered from [post-images.html](post-images.html) by `render-posts.cjs`. Taglish, written for small PH food-business owners
 (carinderia, home baker, food cart, online seller). Every number below
-comes from the app's sample recipes (`src/lib/demo.ts`), so anyone who
+comes from the app's sample recipes (Post 5 is the video) (`src/lib/demo.ts`), so anyone who
 taps "Try with sample recipes" sees the same figures.
 
 Before posting, make sure https://amore-cost.vercel.app is deployed
@@ -101,6 +101,71 @@ Sa Amore Cost, may "Yield %" bawat ingredient, kaya kasama na sa computation ang
 👉 Libre: amore-cost.vercel.app
 
 #AmoreCost #FoodCosting #CarinderiaTips #FoodBusinessPH
+```
+
+---
+
+## Post 5 — The presentation video (Taglish)
+
+**Video:** `docs/marketing/video/out/amore-cost-presentation-taglish.mp4`
+(3:52, not committed; rebuild with `python3 docs/marketing/video/build.py --taglish`).
+Upload it natively to Facebook (not as a YouTube link) so it autoplays in the feed.
+Also upload `amore-cost-presentation-taglish.srt` as captions (English (US) is fine;
+Facebook has no Taglish option). The captions are already burned into the video,
+so this only helps search.
+
+**Video title** (the Title field when uploading):
+
+```
+Amore Cost: Paano malalaman kung may kwenta ang presyo mo? (Libreng pricing tool)
+```
+
+**Description:**
+
+```
+Benta nang benta, pero bakit parang walang naiipon? 🤔 Baka ang presyo mo ang may problema.
+
+Panoorin kung paano gumagana ang Amore Cost 💚 ang LIBRENG pricing tool na ginawa para sa Filipino food business: carinderia, home baker, food cart, at online food seller.
+
+Sa video na 'to, gamit ang totoong carinderia menu (Adobo, Tapsilog, Halo-Halo):
+🍗 Bakit ₱80.08 ang totoong gastos ng isang plato ng adobo, kasama na ang buto at natatapon
+💰 Paano makuha ang tamang presyo (₱299) base sa margin na gusto mo, kasama na ang VAT
+👵 Ang tamang Senior/PWD price: ₱213.57, hindi ₱239.20
+📈 Tumaas ang manok? Isang palit lang, update na lahat ng recipe
+🧾 Magkano talaga ang babayaran ng customer, at magkano ang naiuuwi mo
+📊 Ilang plato ang kailangang mabenta para mabayaran ang monthly bills (spoiler: mga sampu lang kada araw!)
+
+⏱️ Mga parte ng video:
+0:00 Ano ang Amore Cost
+0:12 Ang problema: presyong hula lang
+0:37 Para kanino ito
+0:53 Subukan sa isang tap
+1:14 Step 1: Totoong gastos
+1:42 Step 2: Tamang presyo
+2:06 Tumaas ang presyo? Walang problema
+2:20 Step 3: Bayaran ang bills
+2:40 Receipt Simulator
+3:05 Margin & POS Simulator
+3:22 Paano ito makakatulong
+3:36 May POS ka na? Ituloy mo lang
+
+📱 Libre, walang sign-up, English o Tagalog, sa phone man o laptop.
+👉 Subukan na: amore-cost.vercel.app
+Pindutin lang ang "Try with sample recipes" para makita agad.
+
+May tanong ka sa pag-presyo ng menu mo? I-comment mo lang, sasagutin namin! 👇
+I-share sa kakilala mong may food business 🙏
+
+#AmoreCost #FoodBusinessPH #Carinderia #HomeBakerPH #FoodCartBusiness #SmallBusinessPH #NegosyoTips #FoodCosting
+```
+
+**Short version** (for a Reel or a 30–60 s clip cut from the video):
+
+```
+Sigurado ka bang may kita ang adobo mo? 🍗
+₱80.08 ang totoong gastos, ₱299 ang tamang presyo, ₱213.57 para sa Senior/PWD. Kinompute lahat ng Amore Cost 💚
+Libre, walang sign-up 👉 amore-cost.vercel.app
+#AmoreCost #FoodBusinessPH #Carinderia
 ```
 
 ---
