@@ -78,15 +78,25 @@ and confirm the data survived.
 - [ ] **Input** (`/input`) — "+ New recipe" creates a recipe *and opens
       its breakdown editor immediately*; every breakdown edit live-saves;
       search and the All / On target / Below target filter narrow the
-      cards; Duplicate and Delete (with confirm) work; the Ingredient
+      list; each recipe is one compact row, and ▾ shows its ingredient
+      costs plus Duplicate and Delete (with confirm). **Editor layout
+      (decision 0042):** name/servings/target margin in the fixed
+      header; the price panel stays in view (sticky on desktop; on
+      phones it sits after the ingredients and the footer shows the
+      live price + food cost); typing an Ingredient Library name into a
+      line links it (green "Library" chip, unit adopted, kg/L convert),
+      editing the name away unlinks it without the cost jumping;
+      "+ Pack price" opens supplier/pack price/qty per pack/pack
+      unit/shipping for unlinked lines and the button then summarises
+      them; Escape and Done both close; the Ingredient
       Library button opens the shared library and a cost change there
       cascades into every linked recipe; `/input?edit=<id>` opens that
       recipe directly. **Yield %:** a line at 70% costs amount ÷ 0.7
       (unit cost, % of total, recipe cost and price all follow); blank =
       100%; a manual line shows "₱X after yield" in orange. **Rounding:**
-      the select on the green Suggested price card (Exact / ₱1 / ₱5 /
+      the select on the green Suggested price panel (Exact / ₱1 / ₱5 /
       ₱10 / Ends in 9) always rounds *up*, shows "rounded up from ₱X",
-      and the profit card drops/rises to match the rounded price.
+      and profit drops/rises to match the rounded price.
 - [ ] **OPEX & Overhead** (`/opex`) — add/remove/edit expenses with a
       category; category breakdown bars and percentages sum correctly;
       contingency % raises the buffered total; Overhead per dish =

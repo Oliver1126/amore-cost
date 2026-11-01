@@ -26,10 +26,14 @@ cleared browser.
 
 ## 2. Input — `/input`
 
-Every recipe as a card (cost per serving, food cost %, suggested price,
-expandable ingredient list). **"+ New recipe"** creates it and opens
-**"Edit breakdown"** straight away — the full `ItemEditor` (ingredients
-table, servings, pricing strategy, tax) in a modal, every edit
+Every recipe as one compact row (cost per serving, food cost % with a
+meter, suggested price; ▾ shows the ingredient costs, Duplicate and
+Delete). **"+ New recipe"** creates it and opens **"Edit breakdown"**
+straight away — a modal with the recipe name, servings and target
+margin in its header, the ingredient list as the main area
+(`IngredientLines`: 6 columns, library linking by name, pack pricing
+in a per-row drawer), other costs and pricing settings below, and a
+sticky live price panel (`PriceSummary`) beside it (decision 0042). Every edit
 live-saved, one Cost History snapshot per settled edit (decision 0036).
 Search, an On/Below-target filter, Duplicate, Delete, and the shared
 **Ingredient Library** (link an ingredient once; a price change cascades

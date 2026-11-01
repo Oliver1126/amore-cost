@@ -137,28 +137,42 @@ This is where you'll spend most of your time.
 1. Tap **+ New recipe**, type a name (for example, *Pancit Canton*), and
    tap **Add recipe**.
 2. The **Edit & Breakdown** window opens right away. Everything you
-   type **saves automatically**. There's no Save button. Close the
-   window when you're done.
+   type **saves automatically**. There's no Save button. Tap **Done**
+   (or press Esc) when you're finished.
 
-### 6.2 The three cards at the top
+The window has three parts:
+- **Top:** the recipe name (tap it to rename), **Servings** and
+  **Target margin**.
+- **Middle:** your ingredients, then other costs and pricing settings.
+- **Price panel:** on the right on a computer, below the ingredients
+  on a phone. On a phone, the live price and food cost % also stay at
+  the bottom of the screen beside **Done**.
+
+### 6.2 The price panel
 
 As you type ingredients, these update instantly:
 
-| Card | Meaning |
+| Line | Meaning |
 |---|---|
-| **Recipe cost** (orange) | What one serving costs you to make |
-| **Suggested price** (green) | What to charge the customer, VAT included if you turned VAT on |
+| **Suggested price** (green box) | What to charge the customer, VAT included if you turned VAT on |
+| **Senior / PWD** | What a Senior Citizen or PWD pays for this dish by law |
+| **Cost / serving** (orange) | What one serving costs you to make |
+| **Food cost %** | Cost as a share of the price before VAT. The dot turns green inside the healthy **28–32%** band |
 | **Profit per serving** (blue) | What you keep from each serving after the recipe cost, before rent and bills |
-
-The green card also shows the **Senior/PWD price**: what a Senior
-Citizen or PWD pays for this dish by law.
 
 ### 6.3 Add ingredients
 
-Each row is one ingredient. Fill in:
-- **Portion qty** and **Portion unit:** how much **one serving** uses
-  (for example, 200 g).
-- **Unit cost:** what that ingredient costs per unit.
+Tap **+ Add ingredient**. Each row is one ingredient:
+- **Ingredient:** type its name. If it's already in your
+  **Ingredient Library**, pick it from the suggestions. The row then
+  shows a green **Library** tag and gets its price from the library
+  automatically.
+- **Qty** and **Unit:** how much **one serving** uses (for example,
+  200 g).
+- **Line cost:** for an ingredient that isn't in the library and isn't
+  priced by pack, type what that amount costs.
+- The small bar under each line cost shows that ingredient's share of
+  the recipe cost, so the expensive ones stand out.
 
 **Example: Chicken Adobo with rice (one serving)**
 
@@ -173,8 +187,8 @@ Each row is one ingredient. Fill in:
 | **Recipe cost** | | | | **₱80.08** |
 
 You can enter the recipe in **grams** even when you buy in **kilos**.
-The app converts automatically, and a small green note appears under
-the ingredient name, such as "Converted to kg at ₱220/kg."
+The app converts automatically. The **Unit cost** column shows both,
+for example "₱0.31/g" with "₱220.00/kg" in green under it.
 
 ### 6.4 Yield %: count what you throw away
 
@@ -207,10 +221,10 @@ prepping once, and use your real number.
 
 ### 6.5 Buying in packs or sacks
 
-If you buy flour by the sack, use the **package columns** instead of
-working out the unit cost yourself:
+If you buy flour by the sack, tap **+ Pack price** under the ingredient
+name instead of working out the unit cost yourself:
 
-| Column | Example |
+| Field | Example |
 |---|---|
 | **Supplier** | SM Market |
 | **Package price** | ₱1,200 |
@@ -220,7 +234,10 @@ working out the unit cost yourself:
 | **Portion qty / unit** | 250 g |
 
 The app works out: (₱1,200 + ₱50) ÷ 25 kg = ₱50/kg = **₱0.05/g**, so
-250 g costs **₱12.50**.
+250 g costs **₱12.50**. The button then shows a summary, such as
+"Pack price: ₱1,200.00 / 25 kg", so you can see it without opening it.
+(Library ingredients don't need this. Their price comes from the
+library.)
 
 ### 6.6 Packaging, labor and overhead
 
@@ -253,14 +270,14 @@ Here you also choose **tax**: No tax, VAT (12%), Percentage Tax (3%),
 or a custom rate. If you're VAT-registered, choose VAT and the
 suggested price will include it.
 
-**Servings:** if one batch makes many servings (a tray of 24 brownies),
-enter **24**. The app shows total cost, revenue and profit for the
-whole batch.
+**Servings** (at the top of the window): if one batch makes many
+servings (a tray of 24 brownies), enter **24**. The price panel then
+shows total cost, revenue and profit for the whole batch.
 
 ### 6.8 Round the menu price
 
-Nobody puts ₱298.97 on a menu board. Use the dropdown on the green
-**Suggested price** card:
+Nobody puts ₱298.97 on a menu board. Use the dropdown in the green
+**Suggested price** box:
 
 | Option | Adobo (₱298.97) | Halo-Halo (₱180.69) |
 |---|---|---|
@@ -272,7 +289,7 @@ Nobody puts ₱298.97 on a menu board. Use the dropdown on the green
 
 - The app **always rounds up**, never down, so you never quietly earn
   less than the margin you chose.
-- The card shows "rounded up from ₱298.97" so you can see the
+- The box shows "rounded up from ₱298.97" so you can see the
   difference.
 - **Profit per serving** and food cost % update to match the rounded
   price.
@@ -289,12 +306,15 @@ attention" list.
 - **Search** by name.
 - **All recipes / On target / Below target:** filter which dishes you
   see.
-- **Show ingredient breakdown:** a quick look without opening the
-  editor.
-- **Edit breakdown:** opens the full editor.
-- **Duplicate:** copy a recipe to make a variation (for example,
-  *Adobo, large serving*).
-- **Delete:** removes it after you confirm.
+Each recipe is one row: cost per serving, food cost % (with a small
+bar: green is healthy, red is too high) and the suggested price.
+
+- **Edit breakdown** (or tap the name): opens the full editor.
+- **▾:** a quick look at the ingredient costs without opening the
+  editor. It also holds:
+  - **Duplicate:** copy a recipe to make a variation (for example,
+    *Adobo, large serving*).
+  - **Delete:** removes it after you confirm.
 
 ### 6.11 Ingredient Library: change a price once, update every recipe
 

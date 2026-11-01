@@ -4,6 +4,19 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-11-01** — Input redesign (decision 0042). The recipe list is
+  now compact rows (cost, food cost meter, price, ▾ quick breakdown with
+  Duplicate/Delete) instead of tall cards. Edit & Breakdown is a
+  "workbench":
+  - fixed header with the name, servings and target margin;
+  - ingredient list as the main area: 12 columns → 6, one name field
+    that links to the library, pack pricing in a per-row drawer,
+    share-of-cost bars;
+  - sticky `PriceSummary` panel replacing StatCards, CostComposition
+    and BatchCard;
+  - mini live price in the footer on phones; Escape closes.
+  Checks: tsc, 184 tests and build all pass, plus live checks in EN/TL,
+  light/dark, at 1440/1280/390/360 px.
 - **2026-10-31** — Four Facebook posts with images
   (`docs/marketing/social/facebook-posts.md`, `post-1..4.png`): launch,
   chicken price increase (Adobo ₱80.08 → ₱102.94, food cost 30% → 39%),

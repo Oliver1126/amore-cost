@@ -201,98 +201,125 @@ function InputPageInner() {
             </div>
           </div>
 
-          <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {visible.map((item) => {
-              const b = computePriceBreakdown(item.state);
-              const fc = foodCostPercent(item.state);
-              const fcHigh = fc > FOOD_COST_TARGET.max;
-              const belowTarget = marginStatus(b.marginPercent, item.targetMarginPercent) === "belowTarget";
-              const expanded = expandedId === item.id;
-              return (
-                <div key={item.id} className="card p-5 flex flex-col">
-                  <div className="flex items-start justify-between gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setEditingId(item.id)}
-                      className="font-medium hover:text-accent transition-colors text-left"
-                    >
-                      {item.state.itemName || t("common.untitled")}
-                    </button>
-                    <span
-                      className={`flex-none text-[11px] font-medium rounded-full px-2 py-0.5 ${
-                        belowTarget ? "bg-bad-soft text-bad" : "bg-accent-soft text-accent-strong"
-                      }`}
-                    >
-                      {item.targetMarginPercent.toFixed(1)}% {t("catalog.targetMarginLabel")}
-                    </span>
-                  </div>
-                  <p className="mt-0.5 text-xs text-text-muted">
-                    {item.state.batchSize} {t("input.servingsSuffix")}
-                  </p>
+          <div className="mt-4 card overflow-hidden">
+            <div className="hidden md:grid grid-cols-[minmax(0,1fr)_7rem_9rem_8rem_auto] gap-4 px-5 py-2.5 bg-surface-muted text-[11px] uppercase tracking-wider text-text-muted">
+              <span>{t("input.colRecipe")}</span>
+              <span className="text-right">{t("input.costPerServing")}</span>
+              <span>{t("input.foodCost")}</span>
+              <span className="text-right">{t("stats.suggestedPrice")}</span>
+              <span className="w-[8.5rem]" />
+            </div>
+            <ul className="divide-y divide-border">
+              {visible.map((item) => {
+                const b = computePriceBreakdown(item.state);
+                const fc = foodCostPercent(item.state);
+                const fcHigh = fc > FOOD_COST_TARGET.max;
+                const fcOk = fc >= FOOD_COST_TARGET.min && !fcHigh;
+                const belowTarget = marginStatus(b.marginPercent, item.targetMarginPercent) === "belowTarget";
+                const expanded = expandedId === item.id;
+                const name = item.state.itemName || t("common.untitled");
+                return (
+                  <li key={item.id} className="group">
+                    <div className="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_7rem_9rem_8rem_auto] gap-x-4 gap-y-1.5 items-center px-4 md:px-5 py-3 hover:bg-surface-muted/60 transition-colors">
+                      <div className="min-w-0">
+                        <button
+                          type="button"
+                          onClick={() => setEditingId(item.id)}
+                          className="font-medium hover:text-accent transition-colors text-left truncate max-w-full block"
+                        >
+                          {name}
+                        </button>
+                        <p className="text-xs text-text-muted flex flex-wrap items-center gap-x-2">
+                          <span>
+                            {item.state.batchSize} {t("input.servingsSuffix")} · {item.state.costItems.length} {t("editor.ingredients").toLowerCase()}
+                          </span>
+                          <span
+                            className={`text-[10px] font-medium rounded-full px-1.5 py-px ${
+                              belowTarget ? "bg-bad-soft text-bad" : "bg-accent-soft text-accent-strong"
+                            }`}
+                          >
+                            {item.targetMarginPercent.toFixed(0)}% {t("catalog.targetMarginLabel").toLowerCase()}
+                          </span>
+                        </p>
+                      </div>
 
-                  <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                    <div>
-                      <p className="text-[11px] uppercase tracking-wider text-text-muted">{t("input.costPerServing")}</p>
-                      <p className="font-num font-semibold mt-0.5 text-warn">₱{peso(b.cost)}</p>
+                      <p className="md:hidden font-num text-lg font-bold text-accent-strong text-right">₱{peso(b.priceCustomerPays)}</p>
+
+                      <p className="hidden md:block font-num text-sm font-semibold text-warn text-right">₱{peso(b.cost)}</p>
+
+                      <div className="hidden md:block">
+                        <p className={`font-num text-sm font-semibold ${fcHigh ? "text-bad" : fcOk ? "text-accent-strong" : ""}`}>{fc.toFixed(1)}%</p>
+                        <div className="mt-1 h-1 w-24 rounded-full bg-surface-muted overflow-hidden">
+                          <span
+                            className={`block h-full ${fcHigh ? "bg-bad" : fcOk ? "bg-accent" : "bg-text-muted"}`}
+                            style={{ width: `${Math.min(100, (fc / 60) * 100)}%` }}
+                          />
+                        </div>
+                      </div>
+
+                      <p className="hidden md:block font-num text-lg font-bold text-accent-strong text-right">₱{peso(b.priceCustomerPays)}</p>
+
+                      {/* Phone-only second line: cost and food cost */}
+                      <p className="md:hidden font-num text-xs text-text-muted col-span-1">
+                        <span className="text-warn font-semibold">₱{peso(b.cost)}</span> {t("input.costPerServing").toLowerCase()} ·{" "}
+                        <span className={`font-semibold ${fcHigh ? "text-bad" : fcOk ? "text-accent-strong" : "text-text"}`}>{fc.toFixed(1)}%</span> {t("input.foodCostShort")}
+                      </p>
+
+                      <div className="flex items-center justify-end gap-1 md:w-[8.5rem]">
+                        <button
+                          type="button"
+                          onClick={() => setExpandedId(expanded ? null : item.id)}
+                          aria-expanded={expanded}
+                          aria-label={expanded ? t("input.hideBreakdown") : t("input.showBreakdown")}
+                          title={expanded ? t("input.hideBreakdown") : t("input.showBreakdown")}
+                          className="w-8 h-8 rounded-lg text-text-muted hover:text-text hover:bg-surface-muted transition-colors"
+                        >
+                          <span aria-hidden className={`inline-block transition-transform ${expanded ? "rotate-180" : ""}`}>▾</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setEditingId(item.id)}
+                          className="rounded-lg bg-accent text-accent-ink px-3 py-1.5 text-xs font-medium hover:bg-accent-strong transition-colors whitespace-nowrap"
+                        >
+                          {t("input.editBreakdown")}
+                        </button>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-[11px] uppercase tracking-wider text-text-muted">{t("input.foodCost")}</p>
-                      <p className={`font-num font-semibold mt-0.5 ${fcHigh ? "text-bad" : ""}`}>{fc.toFixed(1)}%</p>
-                    </div>
-                  </div>
 
-                  <div className="mt-3 rounded-xl bg-accent text-accent-ink px-4 py-3">
-                    <p className="text-xs text-accent-ink/80">{t("stats.suggestedPrice")}</p>
-                    <p className="font-num text-2xl font-bold mt-0.5">₱{peso(b.priceCustomerPays)}</p>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setExpandedId(expanded ? null : item.id)}
-                    aria-expanded={expanded}
-                    className="mt-3 text-xs text-accent hover:text-accent-strong transition-colors text-left"
-                  >
-                    {expanded ? t("input.hideBreakdown") : `${t("input.showBreakdown")} (${item.state.costItems.length})`}
-                  </button>
-                  {expanded && (
-                    <ul className="mt-2 space-y-1.5">
-                      {item.state.costItems.length === 0 ? (
-                        <li className="text-xs text-text-muted">{t("catalog.noCostLines")}</li>
-                      ) : (
-                        item.state.costItems.map((ci) => (
-                          <li key={ci.id} className="flex items-center justify-between text-xs gap-2">
-                            <span className="truncate">{ci.label || t("common.untitled")}</span>
-                            <span className="font-num font-medium flex-none">₱{peso(lineCost(ci))}</span>
-                          </li>
-                        ))
-                      )}
-                    </ul>
-                  )}
-
-                  <div className="mt-auto pt-4">
-                    <button
-                      type="button"
-                      onClick={() => setEditingId(item.id)}
-                      className="w-full rounded-lg bg-accent text-accent-ink px-3 py-2 text-xs font-medium hover:bg-accent-strong transition-colors"
-                    >
-                      {t("input.editBreakdown")}
-                    </button>
-                    <div className="mt-2 flex items-center justify-between text-xs text-text-muted">
-                      <button
-                        type="button"
-                        onClick={() => setCatalog(upsert(catalog, duplicateCatalogItem(item)))}
-                        className="hover:text-text transition-colors"
-                      >
-                        {t("catalog.duplicate")}
-                      </button>
-                      <button type="button" onClick={() => remove(item)} className="hover:text-bad transition-colors">
-                        {t("common.delete")}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+                    {expanded && (
+                      <div className="px-4 md:px-5 pb-4 -mt-1">
+                        <div className="rounded-xl bg-surface-muted p-3">
+                          {item.state.costItems.length === 0 ? (
+                            <p className="text-xs text-text-muted">{t("catalog.noCostLines")}</p>
+                          ) : (
+                            <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-1">
+                              {item.state.costItems.map((ci) => (
+                                <li key={ci.id} className="flex items-center justify-between text-xs gap-2">
+                                  <span className="truncate">{ci.label || t("common.untitled")}</span>
+                                  <span className="font-num font-medium flex-none">₱{peso(lineCost(ci))}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                          <div className="mt-3 pt-2 border-t border-border flex items-center justify-end gap-4 text-xs text-text-muted">
+                            <button
+                              type="button"
+                              onClick={() => setCatalog(upsert(catalog, duplicateCatalogItem(item)))}
+                              className="hover:text-text transition-colors"
+                            >
+                              {t("catalog.duplicate")}
+                            </button>
+                            <button type="button" onClick={() => remove(item)} className="hover:text-bad transition-colors">
+                              {t("common.delete")}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
           </div>
           {visible.length === 0 && <p className="mt-6 text-sm text-text-muted">{t("input.noMatches")}</p>}
         </>

@@ -14,10 +14,10 @@
   --good: #1e8a5c;
   --bad: #d64545;
   --bad-soft: #fbe9e8;
-  /** Recipe cost emphasis (StatCards, decision 0039) — a warm amber-orange, distinct from the green accent/red-bad pair. */
+  /** Recipe cost emphasis (PriceSummary, decision 0039) — a warm amber-orange, distinct from the green accent/red-bad pair. */
   --warn: #c8720e;
   --warn-soft: #fbeedc;
-  /** Secondary profit metric (StatCards, decision 0039) — a calm blue, paired with --warn as the second new semantic tone. */
+  /** Secondary profit metric (PriceSummary, decision 0039) — a calm blue, paired with --warn as the second new semantic tone. */
   --info: #2f6fb0;
   --info-soft: #e5eef8;
 }

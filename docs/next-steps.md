@@ -9,7 +9,7 @@ scale, win), and [roadmap/backlog.md](roadmap/backlog.md) /
 [roadmap/completed.md](roadmap/completed.md) for concrete not-started
 work vs. the shipped changelog.
 
-## Where this stands (as of 2026-10-29)
+## Where this stands (as of 2026-11-01)
 
 - **The app is five pages** (decision 0040): Dashboard, Input, OPEX &
   Overhead, Receipt Simulator, Margin & POS Simulator — see
@@ -19,9 +19,13 @@ work vs. the shipped changelog.
   price rounding on the Suggested price card, and one-click **"Try with
   sample recipes"** (Adobo, Tapsilog, Halo-Halo) — the fastest way to
   demo the app to a first owner. 184 tests (Vitest).
+- **Input redesign** (decision 0042): compact recipe rows, and an Edit &
+  Breakdown "workbench" — ingredients as the main area (6 columns,
+  library linking by name, pack pricing in a drawer) beside a sticky
+  live price panel.
 - **Code:** https://github.com/Oliver1126/amore-cost (`main`).
   **Live site:** https://amore-cost.vercel.app — **behind the code**:
-  it predates decisions 0040/0041 and needs a manual `vercel --prod`
+  it predates decisions 0040–0042 and needs a manual `vercel --prod`
   from this folder (no auto-deploy).
 - **Competition:** KwentaPOS also does recipe costing inside a POS —
   see [business/kwentapos-comparison.md](business/kwentapos-comparison.md)

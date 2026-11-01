@@ -86,7 +86,7 @@ number = latest):
 | [0025](0025-lightweight-create-item-modal.md) | Lightweight "+ New item" modal | Input now opens the breakdown straight after create (0040) |
 | [0026](0026-lightweight-add-ingredient-modal.md) | Lightweight "Add ingredient" popup | Current |
 | [0027](0027-ingredient-library-as-modal.md) | Ingredient Library as its own modal | Current |
-| [0028](0028-cost-line-table-matches-reference-columns.md) | Cost-line table matches the reference's columns | Current (0041 added a Yield % column) |
+| [0028](0028-cost-line-table-matches-reference-columns.md) | Cost-line table matches the reference's columns | Superseded in part by 0042 (12 columns → 6, package fields in a drawer) |
 | [0029](0029-item-editor-cards-above-vertical-tabs.md) | Editor cards above vertical tabs | Vertical tabs gone at 0038 |
 | [0030](0030-cross-page-audit-batch-fixes.md) | Cross-page audit, 8 bugs fixed | History |
 | [0031](0031-deployed-to-vercel.md) | Deployed to Vercel | Current (live site lags the code until the next `vercel --prod`) |
@@ -100,6 +100,7 @@ number = latest):
 | [0039](0039-color-coded-cost-cards-and-recipe-vocabulary.md) | Color-coded cards, recipe vocabulary | Current |
 | [0040](0040-five-pages-modeled-on-reference.md) | **Five pages** (Dashboard, Input, OPEX, Receipt Sim, Margin & POS Sim) | Current — supersedes 0006 and 0015 |
 | [0041](0041-yield-rounding-sample-recipes.md) | Yield %, menu price rounding, sample recipes | Current |
+| [0042](0042-input-compact-list-and-workbench-editor.md) | Input: compact recipe list + "workbench" Edit & Breakdown (ingredients main, sticky price panel) | Current |
 
 Read 0001–0020 above with 0040 in mind: several describe modules that
 no longer exist (0006's "all modules," 0015 POS, 0018's Costing &
