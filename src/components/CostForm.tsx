@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { CalculatorState, CostItem } from "@/lib/calculator";
 import { COMMON_UNITS, newCostItem, trueCost, packageLineAmount, lineCost, effectiveYield, materialsCost } from "@/lib/calculator";
-import { linkedCostAmount, type Ingredient } from "@/lib/ingredients";
+import { linkedCostAmount, withPack, type Ingredient, type IngredientPack } from "@/lib/ingredients";
 import { convertQuantity } from "@/lib/units";
 import { peso } from "@/lib/format";
 import { useLocalStorage } from "@/lib/useLocalStorage";
@@ -34,8 +34,10 @@ const inputCls =
  * (decision 0042), replacing the old 12-column table. One combined name
  * field links to the Ingredient Library by typing/picking an exact name;
  * the five package fields (supplier, pack price, qty per pack, pack unit,
- * shipping) only apply to unlinked lines, so they fold into a per-row
- * "Pack price" drawer instead of five mostly-empty columns.
+ * shipping) fold into a per-row "Pack price" drawer instead of five
+ * mostly-empty columns. On an unlinked line the drawer edits the line's
+ * own fields; on a linked line it edits the library ingredient itself
+ * (via `onIngredientChange`), so the change cascades to every recipe.
  *
  * The cost math is unchanged: every edit goes through `recompute()`, which
  * must agree with `syncCostItem` (src/lib/ingredients.ts), the cascade that
@@ -45,10 +47,13 @@ export function IngredientLines({
   state,
   onChange,
   ingredients = [],
+  onIngredientChange,
 }: {
   state: CalculatorState;
   onChange: (next: CalculatorState) => void;
   ingredients?: Ingredient[];
+  /** Saves a library ingredient (and cascades it). Without it, linked lines get no Pack price drawer. */
+  onIngredientChange?: (next: Ingredient) => void;
 }) {
   const { lang, t } = useLanguage();
   const labels = getVerticalLabels(lang, state.vertical, VERTICAL_LABELS[state.vertical]);
@@ -162,7 +167,10 @@ export function IngredientLines({
             const unitCost = amount / (item.quantity || 1);
             const yieldLoss = cost - amount;
             const hasPack = !!item.qtyPerPack;
-            const packOpen = !linked && (openPack[item.id] ?? false);
+            // Linked lines show (and edit) the library ingredient's pack; unlinked lines their own.
+            const packSrc: IngredientPack & { unit: string } = linked ?? item;
+            const canPack = !linked || !!onIngredientChange;
+            const packOpen = canPack && (openPack[item.id] ?? false);
             const name = item.label || labels.itemNoun.toLowerCase();
             return (
               <li key={item.id} className="px-3 py-2.5 hover:bg-surface-muted/50 transition-colors">
@@ -188,17 +196,17 @@ export function IngredientLines({
                         </span>
                       )}
                     </div>
-                    {!linked && (
+                    {canPack && (
                       <button
                         type="button"
                         onClick={() => setOpenPack((o) => ({ ...o, [item.id]: !packOpen }))}
                         aria-expanded={packOpen}
-                        className="mt-1 text-[11px] text-accent hover:text-accent-strong"
+                        className="mt-1 text-[11px] text-accent hover:text-accent-strong text-left"
                       >
-                        {hasPack
-                          ? `${t("editor.package")}: ₱${peso(item.packagePrice || 0)} / ${item.qtyPerPack} ${item.packUnit || item.unit}`
-                          : `+ ${t("editor.package")}`}{" "}
-                        <span aria-hidden>{packOpen ? "▴" : "▾"}</span>
+                        {packSrc.qtyPerPack
+                          ? `${t("editor.package")}: ₱${peso(packSrc.packagePrice || 0)} / ${packSrc.qtyPerPack} ${packSrc.packUnit || packSrc.unit}`
+                          : `+ ${t("editor.package")}`}
+                        {packSrc.supplier ? ` · ${packSrc.supplier}` : ""} <span aria-hidden>{packOpen ? "▴" : "▾"}</span>
                       </button>
                     )}
                   </div>
@@ -315,63 +323,16 @@ export function IngredientLines({
 
                 {packOpen && (
                   <div className="mt-2 rounded-lg bg-surface-muted p-3">
-                    <p className="text-[11px] text-text-muted">{t("editor.packageHint")}</p>
-                    <div className="mt-2 grid grid-cols-2 sm:grid-cols-5 gap-2">
-                      <label className="block col-span-2 sm:col-span-1">
-                        <span className="text-[10px] uppercase tracking-wider text-text-muted">{t("costForm.supplier")}</span>
-                        <input
-                          type="text"
-                          value={item.supplier ?? ""}
-                          onChange={(e) => setRecomputed(item, { supplier: e.target.value })}
-                          placeholder={t("costForm.supplierPlaceholder")}
-                          className={`mt-1 ${inputCls} bg-surface`}
-                        />
-                      </label>
-                      <label className="block">
-                        <span className="text-[10px] uppercase tracking-wider text-text-muted">{t("costForm.packagePrice")}</span>
-                        <input
-                          type="number"
-                          inputMode="decimal"
-                          value={item.packagePrice || ""}
-                          onChange={(e) => setRecomputed(item, { packagePrice: Number(e.target.value) || 0 })}
-                          placeholder="0.00"
-                          className={`mt-1 font-num ${inputCls} bg-surface text-right`}
-                        />
-                      </label>
-                      <label className="block">
-                        <span className="text-[10px] uppercase tracking-wider text-text-muted">{t("costForm.qtyPerPack")}</span>
-                        <input
-                          type="number"
-                          inputMode="decimal"
-                          value={item.qtyPerPack || ""}
-                          onChange={(e) => setRecomputed(item, { qtyPerPack: Number(e.target.value) || 0 })}
-                          placeholder="1"
-                          className={`mt-1 font-num ${inputCls} bg-surface text-right`}
-                        />
-                      </label>
-                      <label className="block">
-                        <span className="text-[10px] uppercase tracking-wider text-text-muted">{t("costForm.packUnit")}</span>
-                        <input
-                          type="text"
-                          list={UNITS_LIST_ID}
-                          value={item.packUnit ?? ""}
-                          onChange={(e) => setRecomputed(item, { packUnit: e.target.value })}
-                          placeholder={item.unit || "kg"}
-                          className={`mt-1 ${inputCls} bg-surface`}
-                        />
-                      </label>
-                      <label className="block">
-                        <span className="text-[10px] uppercase tracking-wider text-text-muted">{t("costForm.shippingFee")}</span>
-                        <input
-                          type="number"
-                          inputMode="decimal"
-                          value={item.shippingFee || ""}
-                          onChange={(e) => setRecomputed(item, { shippingFee: Number(e.target.value) || 0 })}
-                          placeholder="0.00"
-                          className={`mt-1 font-num ${inputCls} bg-surface text-right`}
-                        />
-                      </label>
-                    </div>
+                    <p className={`text-[11px] ${linked ? "text-accent-strong" : "text-text-muted"}`}>
+                      {linked ? t("editor.packLibraryNote").replace("{name}", linked.name) : t("editor.packageHint")}
+                    </p>
+                    <PackFields
+                      values={packSrc}
+                      unitPlaceholder={packSrc.unit || "kg"}
+                      onChange={(patch) =>
+                        linked && onIngredientChange ? onIngredientChange(withPack(linked, patch)) : setRecomputed(item, patch)
+                      }
+                    />
                   </div>
                 )}
               </li>
@@ -390,6 +351,90 @@ export function IngredientLines({
 
       {ingredients.length > 0 && <p className="mt-2 text-xs text-text-muted">{t("editor.libraryHint")}</p>}
     </section>
+  );
+}
+
+/**
+ * Supplier, pack price, qty per pack, pack unit and shipping — the "Pack
+ * price" drawer's fields, shared by recipe lines (CostItem) and the
+ * Ingredient Library (Ingredient), which store the same five fields.
+ */
+export function PackFields({
+  values,
+  unitPlaceholder,
+  onChange,
+  surface = "bg-surface",
+  hideSupplier = false,
+}: {
+  values: IngredientPack;
+  unitPlaceholder: string;
+  onChange: (patch: IngredientPack) => void;
+  surface?: string;
+  /** For forms that already show supplier as its own field (IngredientForm). */
+  hideSupplier?: boolean;
+}) {
+  const { t } = useLanguage();
+  const label = "text-[10px] uppercase tracking-wider text-text-muted";
+  const num = (v: string) => Number(v) || 0;
+  return (
+    <div className={`mt-2 grid grid-cols-2 gap-2 ${hideSupplier ? "sm:grid-cols-4" : "sm:grid-cols-5"}`}>
+      {!hideSupplier && (
+        <label className="block col-span-2 sm:col-span-1">
+          <span className={label}>{t("costForm.supplier")}</span>
+          <input
+            type="text"
+            value={values.supplier ?? ""}
+            onChange={(e) => onChange({ supplier: e.target.value })}
+            placeholder={t("costForm.supplierPlaceholder")}
+            className={`mt-1 ${inputCls} ${surface}`}
+          />
+        </label>
+      )}
+      <label className="block">
+        <span className={label}>{t("costForm.packagePrice")}</span>
+        <input
+          type="number"
+          inputMode="decimal"
+          value={values.packagePrice || ""}
+          onChange={(e) => onChange({ packagePrice: num(e.target.value) })}
+          placeholder="0.00"
+          className={`mt-1 font-num ${inputCls} ${surface} text-right`}
+        />
+      </label>
+      <label className="block">
+        <span className={label}>{t("costForm.qtyPerPack")}</span>
+        <input
+          type="number"
+          inputMode="decimal"
+          value={values.qtyPerPack || ""}
+          onChange={(e) => onChange({ qtyPerPack: num(e.target.value) })}
+          placeholder="1"
+          className={`mt-1 font-num ${inputCls} ${surface} text-right`}
+        />
+      </label>
+      <label className="block">
+        <span className={label}>{t("costForm.packUnit")}</span>
+        <input
+          type="text"
+          list={UNITS_LIST_ID}
+          value={values.packUnit ?? ""}
+          onChange={(e) => onChange({ packUnit: e.target.value })}
+          placeholder={unitPlaceholder}
+          className={`mt-1 ${inputCls} ${surface}`}
+        />
+      </label>
+      <label className="block">
+        <span className={label}>{t("costForm.shippingFee")}</span>
+        <input
+          type="number"
+          inputMode="decimal"
+          value={values.shippingFee || ""}
+          onChange={(e) => onChange({ shippingFee: num(e.target.value) })}
+          placeholder="0.00"
+          className={`mt-1 font-num ${inputCls} ${surface} text-right`}
+        />
+      </label>
+    </div>
   );
 }
 

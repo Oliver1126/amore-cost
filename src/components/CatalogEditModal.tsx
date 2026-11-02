@@ -22,11 +22,14 @@ export function CatalogEditModal({
   ingredients,
   onSave,
   onTargetMarginChange,
+  onIngredientChange,
   onClose,
 }: {
   item: CatalogItem;
   ingredients: Ingredient[];
   onSave: (next: CalculatorState) => void;
+  /** Saves + cascades a library ingredient edited from a linked line's Pack price drawer. */
+  onIngredientChange: (next: Ingredient) => void;
   onTargetMarginChange: (value: number) => void;
   onClose: () => void;
 }) {
@@ -111,7 +114,7 @@ export function CatalogEditModal({
         </header>
 
         <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-5">
-          <ItemEditor state={state} onChange={onSave} ingredients={ingredients} />
+          <ItemEditor state={state} onChange={onSave} ingredients={ingredients} onIngredientChange={onIngredientChange} />
         </div>
 
         <footer className="flex-none border-t border-border px-4 sm:px-6 py-3 flex items-center justify-between gap-3">

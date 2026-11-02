@@ -18,10 +18,12 @@ export function ItemEditor({
   state,
   onChange,
   ingredients,
+  onIngredientChange,
 }: {
   state: CalculatorState;
   onChange: (next: CalculatorState) => void;
   ingredients: Ingredient[];
+  onIngredientChange?: (next: Ingredient) => void;
 }) {
   const { t } = useLanguage();
 
@@ -31,7 +33,7 @@ export function ItemEditor({
         <PriceSummary state={state} onChange={onChange} />
       </aside>
       <div className="order-1 min-w-0 space-y-6">
-        <IngredientLines state={state} onChange={onChange} ingredients={ingredients} />
+        <IngredientLines state={state} onChange={onChange} ingredients={ingredients} onIngredientChange={onIngredientChange} />
         <OtherCosts state={state} onChange={onChange} />
         <CollapsiblePanel title={t("itemEditor.advancedPricingSettings")}>
           <div className="grid sm:grid-cols-2 gap-4 items-start">

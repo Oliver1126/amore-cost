@@ -243,8 +243,12 @@ name instead of working out the unit cost yourself:
 The app works out: (₱1,200 + ₱50) ÷ 25 kg = ₱50/kg = **₱0.05/g**, so
 250 g costs **₱12.50**. The button then shows a summary, such as
 "Pack price: ₱1,200.00 / 25 kg", so you can see it without opening it.
-(Library ingredients don't need this. Their price comes from the
-library.)
+
+**Library ingredients have Pack price too.** On a line with the green
+**Library** tag, the same button shows the pack saved in the Ingredient
+Library, for example "Pack price: ₱120.00 / 1 L · Puregold". Changing it
+there **updates the library**, so every recipe that uses that ingredient
+gets the new price. The drawer reminds you of this before you type.
 
 ### 6.6 Packaging, labor and overhead
 
@@ -329,8 +333,11 @@ The **Ingredient Library** button at the top of Input is your shared
 price list.
 
 1. Tap **Ingredient Library** and use **Add an ingredient**. Enter a
-   name, unit, **Cost / unit**, and optionally a category (for example,
-   "meat").
+   name, unit, **Cost / unit**, and optionally the **Supplier** (where
+   you buy it now) and a category (for example, "meat").
+   - Bought by the pack, bottle or sack? Fill in the **Pack price** box
+     instead (for example, ₱1,450 for a 25 kg sack of rice). The cost
+     per unit is worked out for you (₱58.00/kg).
 2. In a recipe, pick that ingredient from the small dropdown above the
    ingredient name. The row is now **linked**.
 3. When the price changes at the market, update it **once** in the
@@ -340,8 +347,13 @@ price list.
 library. The adobo's chicken line goes from ₱62.86 to ₱85.71, and its
 recipe cost and suggested price update by themselves.
 
-You can also log several **suppliers** for each ingredient. The library
-marks the **cheapest**, and **Use this price** applies it. Ingredients
+The library shows each ingredient's **Supplier** and, under its cost,
+the pack it's bought in. Tap **Edit** to change any of these.
+
+To compare shops, open **Compare prices** and log other suppliers'
+prices per unit. The library marks the **cheapest**. **Use this price**
+switches the ingredient to that supplier and price, and every recipe
+updates. Ingredients
 with the same category appear as **Similar ingredients**, which helps
 when you're looking for a cheaper substitute.
 

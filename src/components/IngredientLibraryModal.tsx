@@ -2,7 +2,7 @@
 
 import { Fragment, useState } from "react";
 import Link from "next/link";
-import { COMMON_UNITS, type CalculatorState } from "@/lib/calculator";
+import type { CalculatorState } from "@/lib/calculator";
 import type { CatalogItem } from "@/lib/catalog";
 import {
   newSupplierQuote,
@@ -14,9 +14,11 @@ import {
   usedInItems,
   cheapestSupplier,
   similarIngredients,
+  packCostPerUnit,
   type Ingredient,
 } from "@/lib/ingredients";
 import { AddIngredientModal } from "@/components/AddIngredientModal";
+import { IngredientForm } from "@/components/IngredientForm";
 import { peso } from "@/lib/format";
 import { useLanguage } from "@/lib/i18n";
 
@@ -48,7 +50,7 @@ export function IngredientLibraryModal({
   const { lang, t } = useLanguage();
   const [addingIngredient, setAddingIngredient] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [editDraft, setEditDraft] = useState({ name: "", unit: "", costPerUnit: "", category: "" });
+  const [editDraft, setEditDraft] = useState<Ingredient | null>(null);
   const [expandedIngredientId, setExpandedIngredientId] = useState<string | null>(null);
   const [supplierForm, setSupplierForm] = useState({ name: "", price: "" });
 
@@ -66,24 +68,21 @@ export function IngredientLibraryModal({
 
   function startEdit(ing: Ingredient) {
     setEditingId(ing.id);
-    setEditDraft({
-      name: ing.name,
-      unit: ing.unit,
-      costPerUnit: String(ing.costPerUnit),
-      category: ing.category ?? "",
-    });
+    setEditDraft(ing);
   }
 
   function saveEdit(ing: Ingredient) {
+    if (!editDraft) return;
     applyIngredientUpdate({
-      ...ing,
+      ...editDraft,
       name: editDraft.name.trim() || ing.name,
       unit: editDraft.unit.trim() || ing.unit,
-      costPerUnit: Number(editDraft.costPerUnit) || 0,
-      category: editDraft.category.trim() || undefined,
+      supplier: editDraft.supplier?.trim() || undefined,
+      category: editDraft.category?.trim() || undefined,
       updatedAt: new Date().toISOString(),
     });
     setEditingId(null);
+    setEditDraft(null);
   }
 
   function deleteIngredient(ing: Ingredient) {
@@ -118,8 +117,18 @@ export function IngredientLibraryModal({
     );
   }
 
-  function useSupplierPrice(ing: Ingredient, price: number) {
-    applyIngredientUpdate({ ...ing, costPerUnit: price, updatedAt: new Date().toISOString() });
+  /** Switching to a compared supplier: their per-unit price replaces the current one, so the old pack no longer applies. */
+  function useSupplierPrice(ing: Ingredient, supplierName: string, price: number) {
+    applyIngredientUpdate({
+      ...ing,
+      costPerUnit: price,
+      supplier: supplierName,
+      packagePrice: undefined,
+      qtyPerPack: undefined,
+      packUnit: undefined,
+      shippingFee: undefined,
+      updatedAt: new Date().toISOString(),
+    });
   }
 
   return (
@@ -128,15 +137,9 @@ export function IngredientLibraryModal({
       onClick={onClose}
     >
       <div
-        className="card w-full max-w-4xl my-6 sm:my-0 max-h-[90vh] overflow-y-auto p-6"
+        className="card w-full max-w-5xl my-6 sm:my-0 max-h-[90vh] overflow-y-auto p-6"
         onClick={(e) => e.stopPropagation()}
       >
-        <datalist id="calcost-units-ingredient-library">
-          {COMMON_UNITS.map((u) => (
-            <option key={u} value={u} />
-          ))}
-        </datalist>
-
         <div className="flex items-start justify-between gap-4">
           <div>
             <h2 className="font-display text-xl">{t("costForm.ingredientLibraryName")}</h2>
@@ -170,10 +173,11 @@ export function IngredientLibraryModal({
               <table className="w-full text-sm">
                 <thead>
                   <tr className="text-left text-text-muted border-b border-border">
-                    <th className="font-medium px-5 py-3">{t("ingredients.name")}</th>
-                    <th className="font-medium px-5 py-3">{t("common.unit")}</th>
-                    <th className="font-medium px-5 py-3 text-right">{t("ingredients.costPerUnit")}</th>
-                    <th className="font-medium px-5 py-3 text-right">{t("ingredients.usedIn")}</th>
+                    <th className="font-medium whitespace-nowrap px-4 py-3">{t("ingredients.name")}</th>
+                    <th className="font-medium whitespace-nowrap px-4 py-3">{t("ingredients.supplierCol")}</th>
+                    <th className="font-medium whitespace-nowrap px-4 py-3">{t("common.unit")}</th>
+                    <th className="font-medium whitespace-nowrap px-4 py-3 text-right">{t("ingredients.costPerUnit")}</th>
+                    <th className="font-medium whitespace-nowrap px-4 py-3 text-right">{t("ingredients.usedIn")}</th>
                     <th className="px-5 py-3" />
                   </tr>
                 </thead>
@@ -188,54 +192,34 @@ export function IngredientLibraryModal({
                     return (
                       <Fragment key={ing.id}>
                         <tr className="border-b border-border last:border-0">
-                          {editing ? (
-                            <>
-                              <td className="px-5 py-2.5">
-                                <input
-                                  type="text"
-                                  value={editDraft.name}
-                                  onChange={(e) => setEditDraft({ ...editDraft, name: e.target.value })}
-                                  className="w-full rounded-lg border border-border bg-surface-muted px-2 py-1.5 text-sm focus:outline-none focus:border-accent"
-                                />
-                              </td>
-                              <td className="px-5 py-2.5">
-                                <input
-                                  type="text"
-                                  list="calcost-units-ingredient-library"
-                                  value={editDraft.unit}
-                                  onChange={(e) => setEditDraft({ ...editDraft, unit: e.target.value })}
-                                  className="w-20 rounded-lg border border-border bg-surface-muted px-2 py-1.5 text-sm focus:outline-none focus:border-accent"
-                                />
-                              </td>
-                              <td className="px-5 py-2.5 text-right">
-                                <input
-                                  type="number"
-                                  inputMode="decimal"
-                                  value={editDraft.costPerUnit}
-                                  onChange={(e) => setEditDraft({ ...editDraft, costPerUnit: e.target.value })}
-                                  className="font-num w-24 rounded-lg border border-border bg-surface-muted px-2 py-1.5 text-sm text-right focus:outline-none focus:border-accent"
-                                />
-                              </td>
-                              <td className="px-5 py-2.5 text-right font-num text-text-muted">{uses}</td>
-                              <td className="px-5 py-2.5">
-                                <div className="flex items-center justify-end gap-3">
+                          {editing && editDraft ? (
+                            <td colSpan={6} className="px-5 py-4 bg-surface-muted/40">
+                              <IngredientForm value={editDraft} onChange={setEditDraft} />
+                              <div className="mt-3 flex items-center justify-between gap-3">
+                                <span className="text-xs text-text-muted">
+                                  {uses > 0 ? `${t("ingredients.usedIn")}: ${uses}` : ""}
+                                </span>
+                                <div className="flex items-center gap-3">
                                   <button
                                     type="button"
-                                    onClick={() => saveEdit(ing)}
-                                    className="text-sm font-medium text-accent hover:text-accent-strong"
-                                  >
-                                    {t("common.save")}
-                                  </button>
-                                  <button
-                                    type="button"
-                                    onClick={() => setEditingId(null)}
+                                    onClick={() => {
+                                      setEditingId(null);
+                                      setEditDraft(null);
+                                    }}
                                     className="text-sm text-text-muted hover:text-text"
                                   >
                                     {t("common.cancel")}
                                   </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => saveEdit(ing)}
+                                    className="rounded-lg bg-accent text-accent-ink px-4 py-1.5 text-sm font-medium hover:bg-accent-strong transition-colors"
+                                  >
+                                    {t("common.save")}
+                                  </button>
                                 </div>
-                              </td>
-                            </>
+                              </div>
+                            </td>
                           ) : (
                             <>
                               <td className="px-5 py-3">
@@ -252,8 +236,16 @@ export function IngredientLibraryModal({
                                   </span>
                                 )}
                               </td>
+                              <td className="px-5 py-3 text-text-muted">{ing.supplier || "—"}</td>
                               <td className="px-5 py-3 text-text-muted">{ing.unit}</td>
-                              <td className="px-5 py-3 text-right font-num">₱{peso(ing.costPerUnit)}</td>
+                              <td className="px-5 py-3 text-right font-num">
+                                ₱{peso(ing.costPerUnit)}
+                                {packCostPerUnit(ing) !== undefined && (
+                                  <span className="block text-[11px] text-text-muted whitespace-nowrap">
+                                    ₱{peso(ing.packagePrice || 0)} / {ing.qtyPerPack} {ing.packUnit || ing.unit}
+                                  </span>
+                                )}
+                              </td>
                               <td className="px-5 py-3 text-right font-num text-text-muted">
                                 {uses > 0 ? (
                                   <button
@@ -268,13 +260,13 @@ export function IngredientLibraryModal({
                                 )}
                               </td>
                               <td className="px-5 py-3">
-                                <div className="flex items-center justify-end gap-3 text-text-muted">
+                                <div className="flex items-center justify-end gap-3 text-text-muted whitespace-nowrap">
                                   <button
                                     type="button"
                                     onClick={() => setExpandedIngredientId(expanded ? null : ing.id)}
                                     className="hover:text-text transition-colors"
                                   >
-                                    {t("ingredients.suppliersPrefix")}
+                                    {t("ingredients.comparePrefix")}
                                     {ing.suppliers.length})
                                   </button>
                                   <button
@@ -298,11 +290,11 @@ export function IngredientLibraryModal({
                         </tr>
                         {expanded && !editing && (
                           <tr className="border-b border-border last:border-0 bg-surface-muted">
-                            <td colSpan={5} className="px-5 py-4">
+                            <td colSpan={6} className="px-5 py-4">
                               <div className="grid sm:grid-cols-3 gap-6">
                                 <div>
                                   <p className="text-xs font-medium uppercase tracking-wider text-text-muted mb-2">
-                                    {t("ingredients.suppliers")}
+                                    {t("ingredients.compareTitle")}
                                   </p>
                                   {ing.suppliers.length === 0 ? (
                                     <p className="text-sm text-text-muted">{t("ingredients.noSuppliers")}</p>
@@ -326,7 +318,7 @@ export function IngredientLibraryModal({
                                               {s.price !== ing.costPerUnit && (
                                                 <button
                                                   type="button"
-                                                  onClick={() => useSupplierPrice(ing, s.price)}
+                                                  onClick={() => useSupplierPrice(ing, s.supplierName, s.price)}
                                                   className="text-xs font-medium text-accent hover:text-accent-strong"
                                                 >
                                                   {t("ingredients.usePrice")}

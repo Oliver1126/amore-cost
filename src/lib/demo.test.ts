@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { computePriceBreakdown, foodCostPercent, lineCost } from "./calculator";
 import { newCatalogItem } from "./catalog";
 import { defaultState } from "./calculator";
-import { newIngredient, propagateIngredientChange } from "./ingredients";
+import { newIngredient, packCostPerUnit, propagateIngredientChange } from "./ingredients";
 import { defaultOpexSettings } from "./opex";
 import {
   clearDemoData,
@@ -99,5 +99,14 @@ describe("loadDemoData / clearDemoData", () => {
     const out = clearDemoData([own, ...loaded.catalog], loaded.ingredients, loaded.opex);
     expect(out.catalog).toEqual([own]);
     expect(out.ingredients.map((i) => i.id)).toEqual(["demo-ing-rice"]);
+  });
+});
+
+describe("demo ingredient packs", () => {
+  it("every sample pack works out to exactly its listed cost per unit", () => {
+    for (const ing of demoIngredients()) {
+      const derived = packCostPerUnit(ing);
+      if (derived !== undefined) expect(derived, ing.name).toBeCloseTo(ing.costPerUnit, 6);
+    }
   });
 });

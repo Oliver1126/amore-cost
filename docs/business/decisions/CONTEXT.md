@@ -100,7 +100,8 @@ number = latest):
 | [0039](0039-color-coded-cost-cards-and-recipe-vocabulary.md) | Color-coded cards, recipe vocabulary | Current |
 | [0040](0040-five-pages-modeled-on-reference.md) | **Five pages** (Dashboard, Input, OPEX, Receipt Sim, Margin & POS Sim) | Current — supersedes 0006 and 0015 |
 | [0041](0041-yield-rounding-sample-recipes.md) | Yield %, menu price rounding, sample recipes | Current |
-| [0042](0042-input-compact-list-and-workbench-editor.md) | Input: compact recipe list + "workbench" Edit & Breakdown (ingredients main, sticky price panel) | Current |
+| [0042](0042-input-compact-list-and-workbench-editor.md) | Input: compact recipe list + "workbench" Edit & Breakdown (ingredients main, sticky price panel) | Current (pack drawer on linked lines: see 0043) |
+| [0043](0043-library-ingredients-own-supplier-and-pack.md) | Library ingredients own their supplier + pack price; linked lines' Pack price drawer edits the library | Current |
 
 Read 0001–0020 above with 0040 in mind: several describe modules that
 no longer exist (0006's "all modules," 0015 POS, 0018's Costing &

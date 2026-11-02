@@ -10,6 +10,8 @@ import {
   propagateIngredientChange,
   removeIngredient,
   similarIngredients,
+  packCostPerUnit,
+  withPack,
   upsertIngredient,
   usageCount,
   usedInItems,
@@ -250,5 +252,32 @@ describe("similarIngredients", () => {
     const a = newIngredient("Whole milk", "L", 90);
     const b = newIngredient("Evaporated milk", "L", 70, "dairy");
     expect(similarIngredients([a, b], a)).toEqual([]);
+  });
+});
+
+describe("withPack / packCostPerUnit", () => {
+  it("derives cost per unit from a pack in the same unit", () => {
+    const oil = withPack(newIngredient("Oil", "mL", 0), { packagePrice: 80, qtyPerPack: 100 });
+    expect(oil.costPerUnit).toBeCloseTo(0.8);
+  });
+
+  it("converts a pack bought in kg to a per-g price, shipping included", () => {
+    const flour = withPack(newIngredient("Flour", "g", 0), { packagePrice: 1200, qtyPerPack: 25, packUnit: "kg", shippingFee: 50 });
+    expect(flour.costPerUnit).toBeCloseTo(0.05);
+  });
+
+  it("keeps a typed cost when no pack is set, and records the supplier", () => {
+    const eggs = withPack(newIngredient("Eggs", "pcs", 8), { supplier: "Palengke" });
+    expect(eggs.costPerUnit).toBe(8);
+    expect(eggs.supplier).toBe("Palengke");
+    expect(packCostPerUnit(eggs)).toBeUndefined();
+  });
+
+  it("cascades a pack change into every linked recipe line", () => {
+    const oil = newIngredient("Oil", "mL", 1);
+    const line = { ...newCostItem(), ingredientId: oil.id, label: "Oil", quantity: 50, unit: "mL", amount: 50 };
+    const item = newCatalogItem({ ...defaultState(), costItems: [line] });
+    const { catalog } = propagateIngredientChange([item], defaultState(), withPack(oil, { packagePrice: 80, qtyPerPack: 100 }));
+    expect(catalog[0].state.costItems[0].amount).toBeCloseTo(40);
   });
 });

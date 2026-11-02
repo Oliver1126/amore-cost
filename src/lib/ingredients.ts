@@ -1,4 +1,4 @@
-import type { CalculatorState, CostItem } from "./calculator";
+import { packageLineAmount, type CalculatorState, type CostItem } from "./calculator";
 import { newId, updateItemState, type CatalogItem } from "./catalog";
 import { convertQuantity } from "./units";
 
@@ -17,7 +17,37 @@ export interface Ingredient {
   updatedAt: string;
   /** Free-text tag (e.g. "dairy", "flour") used only to suggest substitutes — not a fixed taxonomy. */
   category?: string;
+  /** Other suppliers' per-unit prices, for comparing (the "Compare prices" list). */
   suppliers: SupplierQuote[];
+  /** Where it's bought now. Free text, shown in the library and on every recipe line linked to it. */
+  supplier?: string;
+  /**
+   * Optional pack purchase (e.g. ₱80 for a 1 L bottle + ₱0 shipping). When
+   * `qtyPerPack` is set, `costPerUnit` is derived from these by
+   * `withPack()` instead of typed directly — the library-side twin of a
+   * recipe line's own package fields (CostItem), added so lines linked to
+   * the library get a "Pack price" drawer too.
+   */
+  packagePrice?: number;
+  qtyPerPack?: number;
+  /** The pack's own unit (a 1 kg bag for an ingredient priced per g). Unset = same as `unit`. */
+  packUnit?: string;
+  shippingFee?: number;
+}
+
+export type IngredientPack = Pick<Ingredient, "supplier" | "packagePrice" | "qtyPerPack" | "packUnit" | "shippingFee">;
+
+/** Cost of one `ingredient.unit` implied by its pack, or undefined when no pack is set. */
+export function packCostPerUnit(ing: Pick<Ingredient, "unit" | "packagePrice" | "qtyPerPack" | "packUnit" | "shippingFee">): number | undefined {
+  if (!ing.qtyPerPack || ing.qtyPerPack <= 0) return undefined;
+  return packageLineAmount(ing.packagePrice || 0, ing.qtyPerPack, ing.shippingFee || 0, 1, ing.unit, ing.packUnit || ing.unit);
+}
+
+/** Applies pack/supplier changes; when a pack is set, `costPerUnit` follows it. Always run the result through `propagateIngredientChange`. */
+export function withPack(ing: Ingredient, patch: IngredientPack & Partial<Pick<Ingredient, "unit">>): Ingredient {
+  const next = { ...ing, ...patch, updatedAt: new Date().toISOString() };
+  const derived = packCostPerUnit(next);
+  return derived === undefined ? next : { ...next, costPerUnit: derived };
 }
 
 export const INGREDIENTS_STORAGE_KEY = "calcost:v0:ingredients";

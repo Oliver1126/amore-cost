@@ -87,8 +87,19 @@ and confirm the data survived.
       line links it (green "Library" chip, unit adopted, kg/L convert),
       editing the name away unlinks it without the cost jumping;
       "+ Pack price" opens supplier/pack price/qty per pack/pack
-      unit/shipping for unlinked lines and the button then summarises
-      them; Escape and Done both close; the Ingredient
+      unit/shipping and the button then summarises them ("Pack price:
+      ₱120.00 / 1 L · Puregold"). On an unlinked line it edits the line;
+      on a **linked** line (decision 0043) it shows a green "Saved to the
+      Ingredient Library" note and edits the library ingredient: change
+      sample Soy sauce's pack price 90 → 150 and its line goes ₱2.70 →
+      ₱4.50, and the library shows ₱150.00 / L with "₱150.00 / 1 L" under
+      it. **Library (0043):** Supplier column; Add and Edit use the same
+      form (name, unit, cost / unit, supplier, category, optional Pack
+      price box); filling the pack replaces cost / unit with the derived
+      figure (Calamansi ₱50 / 25 pcs → ₱2.00/pcs); Enter submits Add;
+      "Compare prices (n)" holds the old quote list and "Use this price"
+      sets supplier + price and clears the pack; TL says "Aklatan ng
+      Sangkap" everywhere; Escape and Done both close; the Ingredient
       Library button opens the shared library and a cost change there
       cascades into every linked recipe; `/input?edit=<id>` opens that
       recipe directly. **Yield %:** a line at 70% costs amount ÷ 0.7

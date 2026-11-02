@@ -4,6 +4,15 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-11-02** — Supplier + pack price in the Ingredient Library
+  (decision 0043). Library ingredients have a Supplier and an optional
+  pack (price, qty, unit, shipping) that works out cost / unit. A linked
+  line in Edit & Breakdown now has the "Pack price" drawer too, and it
+  edits the library ingredient, so every recipe using it updates.
+  Library: Supplier column, pack shown under cost, one shared Add/Edit
+  form, "Suppliers (n)" renamed "Compare prices (n)". Sample
+  ingredients have suppliers and packs at unchanged prices. TL now uses
+  "Aklatan ng Sangkap" consistently. 189 tests.
 - **2026-11-02** — Yield display fix in Edit & Breakdown (decision 0042
   amended). The unlabelled % under each line cost (share of total cost)
   read like a yield; it now says "78% of cost". Unit cost shows the

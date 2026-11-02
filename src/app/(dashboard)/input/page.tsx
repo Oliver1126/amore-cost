@@ -24,7 +24,7 @@ import {
   upsert,
   type CatalogItem,
 } from "@/lib/catalog";
-import { INGREDIENTS_STORAGE_KEY, type Ingredient } from "@/lib/ingredients";
+import { INGREDIENTS_STORAGE_KEY, propagateIngredientChange, upsertIngredient, type Ingredient } from "@/lib/ingredients";
 import { peso } from "@/lib/format";
 import { CatalogEditModal } from "@/components/CatalogEditModal";
 import { CreateCatalogModal } from "@/components/CreateCatalogModal";
@@ -102,6 +102,14 @@ function InputPageInner() {
   function saveEditorState(next: CalculatorState) {
     if (!editing) return;
     setCatalog(upsert(catalog, updateItemStateLive(editing, next)));
+  }
+
+  /** A linked line's Pack price drawer edits the library ingredient — save it and cascade to every recipe using it. */
+  function saveIngredient(next: Ingredient) {
+    setIngredients(upsertIngredient(ingredients, next));
+    const cascaded = propagateIngredientChange(catalog, draft, next);
+    setCatalog(cascaded.catalog);
+    setDraft(cascaded.draft);
   }
 
   function setTargetMargin(value: number) {
@@ -331,6 +339,7 @@ function InputPageInner() {
           ingredients={ingredients}
           onSave={saveEditorState}
           onTargetMarginChange={setTargetMargin}
+          onIngredientChange={saveIngredient}
           onClose={closeEditor}
         />
       )}

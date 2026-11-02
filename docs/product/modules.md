@@ -32,12 +32,15 @@ Delete). **"+ New recipe"** creates it and opens **"Edit breakdown"**
 straight away — a modal with the recipe name, servings and target
 margin in its header, the ingredient list as the main area
 (`IngredientLines`: 6 columns, library linking by name, pack pricing
-in a per-row drawer), other costs and pricing settings below, and a
+in a per-row drawer; on a linked line the drawer edits the library
+ingredient's own supplier/pack, decision 0043), other costs and pricing settings below, and a
 sticky live price panel (`PriceSummary`) beside it (decision 0042). Every edit
 live-saved, one Cost History snapshot per settled edit (decision 0036).
 Search, an On/Below-target filter, Duplicate, Delete, and the shared
 **Ingredient Library** (link an ingredient once; a price change cascades
-to every recipe using it — decision 0007). `/input?edit=<id>` opens a
+to every recipe using it — decision 0007; each ingredient has a
+supplier and an optional pack price that derives its cost / unit —
+decision 0043). `/input?edit=<id>` opens a
 recipe directly; old `/costing?id=<id>` links redirect there.
 
 Two pricing aids in the editor (decision 0041): a **Yield %** column per

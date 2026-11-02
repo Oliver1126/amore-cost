@@ -23,9 +23,13 @@ work vs. the shipped changelog.
   Breakdown "workbench" — ingredients as the main area (6 columns,
   library linking by name, pack pricing in a drawer) beside a sticky
   live price panel.
+- **Supplier + pack in the library** (decision 0043): library
+  ingredients store their supplier and pack price; a linked line's
+  "Pack price" drawer edits the library (cascading to every recipe).
+  189 tests.
 - **Code:** https://github.com/Oliver1126/amore-cost (`main`).
   **Live site:** https://amore-cost.vercel.app — **behind the code**:
-  it predates decisions 0040–0042 and needs a manual `vercel --prod`
+  it predates decisions 0040–0043 and needs a manual `vercel --prod`
   from this folder (no auto-deploy).
 - **Competition:** KwentaPOS also does recipe costing inside a POS —
   see [business/kwentapos-comparison.md](business/kwentapos-comparison.md)

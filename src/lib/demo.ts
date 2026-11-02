@@ -1,6 +1,6 @@
 import { defaultState, type CostItem, type PriceRounding } from "./calculator";
 import { newCatalogItem, type CatalogItem } from "./catalog";
-import { linkedCostAmount, type Ingredient } from "./ingredients";
+import { linkedCostAmount, type Ingredient, type IngredientPack } from "./ingredients";
 import type { OpexItem, OpexSettings } from "./opex";
 
 /**
@@ -34,6 +34,20 @@ const INGREDIENTS: [slug: string, name: string, unit: string, costPerUnit: numbe
   ["mix", "Halo-halo mix (beans, nata, sago)", "kg", 190, "sweets"],
 ];
 
+/** Where each sample is bought, plus a pack for the ones bought by sack/bottle/can. Every pack works out to exactly the cost per unit above, so the sample recipes' numbers (used in the marketing posts and video) don't move. */
+const SOURCING: Record<string, IngredientPack> = {
+  chicken: { supplier: "Palengke (Aling Nena)" },
+  beef: { supplier: "Palengke (Aling Nena)" },
+  rice: { supplier: "Rice dealer", packagePrice: 1450, qtyPerPack: 25, packUnit: "kg" },
+  egg: { supplier: "Egg supplier", packagePrice: 270, qtyPerPack: 30, packUnit: "pcs" },
+  garlic: { supplier: "Palengke" },
+  soy: { supplier: "Puregold", packagePrice: 90, qtyPerPack: 1, packUnit: "L" },
+  vinegar: { supplier: "Puregold", packagePrice: 60, qtyPerPack: 1, packUnit: "L" },
+  oil: { supplier: "Puregold", packagePrice: 120, qtyPerPack: 1, packUnit: "L" },
+  sugar: { supplier: "Puregold" },
+  milk: { supplier: "Puregold", packagePrice: 48.1, qtyPerPack: 370, packUnit: "mL" },
+};
+
 export function demoIngredients(): Ingredient[] {
   return INGREDIENTS.map(([slug, name, unit, costPerUnit, category]) => ({
     id: `${DEMO_PREFIX}ing-${slug}`,
@@ -43,6 +57,7 @@ export function demoIngredients(): Ingredient[] {
     category,
     updatedAt: STAMP,
     suppliers: [],
+    ...SOURCING[slug],
   }));
 }
 
