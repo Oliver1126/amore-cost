@@ -41,7 +41,10 @@ phones each row stacks: name and price, then cost and food cost.
 - **Main area:** the ingredient list (`IngredientLines` in
   `CostForm.tsx`), with 6 columns instead of 12:
   - ingredient, qty, unit, yield %, unit cost, and line cost with a
-    small share-of-cost bar;
+    small share-of-cost bar labelled "N% of cost" (2026-11-02: the
+    unlabelled % was being read as a yield; unit cost is the as-bought
+    price, and the yield's extra shows as "+₱X waste" under the Yield
+    box);
   - **one name field that also links to the library:** typing or
     picking an Ingredient Library name links the line (a green
     "Library" chip shows it), and editing the name away unlinks it.

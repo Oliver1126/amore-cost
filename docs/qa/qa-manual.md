@@ -92,8 +92,12 @@ and confirm the data survived.
       Library button opens the shared library and a cost change there
       cascades into every linked recipe; `/input?edit=<id>` opens that
       recipe directly. **Yield %:** a line at 70% costs amount ÷ 0.7
-      (unit cost, % of total, recipe cost and price all follow); blank =
-      100%; a manual line shows "₱X after yield" in orange. **Rounding:**
+      (line cost, "% of cost", recipe cost and price all follow); the
+      Unit cost column stays the as-bought price (chicken ₱0.22/g next to
+      ₱220.00/kg, *not* grossed up); "+₱X waste" shows under the Yield
+      box; blank shows a full-strength "100" = 100%; a manual line also
+      shows "= ₱X after yield" under its typed cost; the % under every
+      line cost is labelled "of cost" / "ng gastos". **Rounding:**
       the select on the green Suggested price panel (Exact / ₱1 / ₱5 /
       ₱10 / Ends in 9) always rounds *up*, shows "rounded up from ₱X",
       and profit drops/rises to match the rounded price.

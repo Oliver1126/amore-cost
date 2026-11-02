@@ -4,6 +4,13 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-11-02** — Yield display fix in Edit & Breakdown (decision 0042
+  amended). The unlabelled % under each line cost (share of total cost)
+  read like a yield; it now says "78% of cost". Unit cost shows the
+  as-bought price so it matches the library price (₱0.22/g = ₱220/kg,
+  was ₱0.31/g). Each yield below 100% shows "+₱X waste", and a blank
+  yield shows a full-strength 100. No change to any computed cost or
+  price.
 - **2026-11-01** — Input redesign (decision 0042). The recipe list is
   now compact rows (cost, food cost meter, price, ▾ quick breakdown with
   Duplicate/Delete) instead of tall cards. Edit & Breakdown is a

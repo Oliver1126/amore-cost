@@ -171,8 +171,9 @@ Tap **+ Add ingredient**. Each row is one ingredient:
   200 g).
 - **Line cost:** for an ingredient that isn't in the library and isn't
   priced by pack, type what that amount costs.
-- The small bar under each line cost shows that ingredient's share of
-  the recipe cost, so the expensive ones stand out.
+- The small bar and **"78% of cost"** under each line cost show that
+  ingredient's share of the whole recipe cost, so the expensive ones
+  stand out. This is *not* the yield; yield has its own column.
 
 **Example: Chicken Adobo with rice (one serving)**
 
@@ -187,8 +188,10 @@ Tap **+ Add ingredient**. Each row is one ingredient:
 | **Recipe cost** | | | | **₱80.08** |
 
 You can enter the recipe in **grams** even when you buy in **kilos**.
-The app converts automatically. The **Unit cost** column shows both,
-for example "₱0.31/g" with "₱220.00/kg" in green under it.
+The app converts automatically. The **Unit cost** column shows the price
+you buy at in both units, for example "₱0.22/g" with "₱220.00/kg" in
+green under it. Yield is not included there; it is added in the
+**Line cost**.
 
 ### 6.4 Yield %: count what you throw away
 
@@ -200,6 +203,10 @@ cover the waste:
 
 > 200 g of chicken at ₱220/kg = ₱44.00 bought
 > ₱44.00 ÷ 70% = **₱62.86 real cost**
+
+Under the Yield % box you'll see **"+₱18.86 waste"**: the extra the
+waste adds to this line. A blank Yield % box shows **100**, meaning no
+waste.
 
 Without yield, this adobo would look ₱19 cheaper per plate than it
 really is. Your price would be too low and you'd lose money on every

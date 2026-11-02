@@ -157,7 +157,10 @@ export function IngredientLines({
             const cost = lineCost(item);
             const share = totalCost > 0 ? (cost / totalCost) * 100 : 0;
             const yieldPct = effectiveYield(item);
-            const unitCost = cost / (item.quantity || 1);
+            // Unit cost is the as-bought price (matches the library's ₱/kg); yield's extra shows in the Yield cell.
+            const amount = Number.isFinite(item.amount) ? item.amount : 0;
+            const unitCost = amount / (item.quantity || 1);
+            const yieldLoss = cost - amount;
             const hasPack = !!item.qtyPerPack;
             const packOpen = !linked && (openPack[item.id] ?? false);
             const name = item.label || labels.itemNoun.toLowerCase();
@@ -254,10 +257,15 @@ export function IngredientLines({
                         }}
                         placeholder="100"
                         aria-label={`${t("costForm.yield")} — ${name}`}
-                        className={`font-num ${inputCls} pr-5 text-right ${yieldPct < 100 ? "text-warn" : ""}`}
+                        className={`font-num ${inputCls} pr-5 text-right placeholder:text-text! ${yieldPct < 100 ? "text-warn" : ""}`}
                       />
                       <span className="absolute right-1.5 top-1/2 -translate-y-1/2 text-text-muted text-xs">%</span>
                     </div>
+                    {yieldLoss > 0.005 && (
+                      <span className="font-num block mt-1 text-[10px] text-warn text-right" title={t("costForm.yieldHelp")}>
+                        +₱{peso(yieldLoss)} {t("editor.yieldLoss")}
+                      </span>
+                    )}
                   </label>
 
                   <div className="hidden md:block order-5 text-right font-num text-xs leading-tight">
@@ -287,22 +295,23 @@ export function IngredientLines({
                         />
                       </div>
                     )}
+                    {yieldLoss > 0.005 && !linked && !hasPack && (
+                      <span className="font-num block mt-1 text-[10px] text-warn">
+                        = ₱{peso(cost)} {t("costForm.afterYield")}
+                      </span>
+                    )}
                     {cost > 0 && (
                       <div className="mt-1 flex items-center justify-end gap-1.5" title={`${share.toFixed(1)}% ${t("costForm.percentOfCost")}`}>
-                        <span className="h-1 w-10 rounded-full bg-surface-muted overflow-hidden">
+                        <span className="h-1 w-6 rounded-full bg-surface-muted overflow-hidden" aria-hidden>
                           <span className="block h-full bg-warn" style={{ width: `${Math.min(100, share)}%` }} />
                         </span>
-                        <span className="font-num text-[10px] text-text-muted w-8 text-right">{share.toFixed(0)}%</span>
+                        <span className="font-num text-[10px] text-text-muted whitespace-nowrap">
+                          {share.toFixed(0)}% {t("editor.shareOfCost")}
+                        </span>
                       </div>
                     )}
                   </div>
                 </div>
-
-                {yieldPct < 100 && !linked && !hasPack && item.amount > 0 && (
-                  <p className="font-num text-[11px] text-warn mt-1 md:text-right">
-                    ₱{peso(cost)} {t("costForm.afterYield")}
-                  </p>
-                )}
 
                 {packOpen && (
                   <div className="mt-2 rounded-lg bg-surface-muted p-3">
