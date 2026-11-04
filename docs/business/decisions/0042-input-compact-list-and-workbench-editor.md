@@ -96,6 +96,7 @@ phones each row stacks: name and price, then cost and food cost.
   `syncCostItem` agreement, and 184 tests still pass. Remaining
   verification: live checks in EN/TL, light/dark, at 1440, 1280, 390
   and 360 px.
-- **Not done:** Pressing Enter in the New recipe box doesn't submit
-  (pre-existing; the box isn't a `<form>`). The reference's printable
+- **Fixed 2026-11-04:** Enter in the New recipe box now submits (it
+  is a `<form>`), and Escape closes it.
+- **Not done:** The reference's printable
   recipe card is still backlog 13.

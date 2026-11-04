@@ -72,6 +72,7 @@ function InputPageInner() {
   // open a recipe's breakdown directly.
   const editParam = searchParams.get("edit");
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- opens the ?edit= recipe once saved data has loaded
     if (hydrated && editParam && catalog.some((i) => i.id === editParam)) setEditingId(editParam);
   }, [hydrated, editParam, catalog]);
 

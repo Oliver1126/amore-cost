@@ -37,9 +37,17 @@ export function CreateCatalogModal({
       className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50"
       onClick={onClose}
     >
-      <div
+      <form
+        role="dialog"
+        aria-modal="true"
+        aria-label={t("catalog.createTitle")}
         className="card w-full max-w-md p-6"
         onClick={(e) => e.stopPropagation()}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleCreate();
+        }}
+        onKeyDown={(e) => e.key === "Escape" && onClose()}
       >
         <div className="flex items-start justify-between gap-4">
           <h2 className="font-display text-xl">{t("catalog.createTitle")}</h2>
@@ -103,15 +111,14 @@ export function CreateCatalogModal({
             {t("common.cancel")}
           </button>
           <button
-            type="button"
-            onClick={handleCreate}
+            type="submit"
             disabled={!itemName.trim()}
             className="rounded-xl bg-accent text-accent-ink px-4 py-2 text-sm font-medium hover:bg-accent-strong transition-colors disabled:opacity-40 disabled:hover:bg-accent"
           >
             {t("catalog.createButton")}
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

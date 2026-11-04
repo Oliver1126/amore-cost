@@ -132,7 +132,7 @@ export default function LandingPage() {
         <h2 className="font-display text-3xl text-center">Pricing</h2>
         <p className="text-text-muted text-center mt-3 max-w-xl mx-auto">
           <strong className="text-text">Nothing below is live yet</strong> —
-          this is the direction being considered, not a bill you'll get.
+          this is the direction being considered, not a bill you’ll get.
           Everything in the app is free to use today, no account required.
         </p>
         <div className="mt-12 grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
@@ -209,7 +209,7 @@ export default function LandingPage() {
               Philippine food businesses: recipe-level ingredient costing,
               food-cost % against the 28–32% industry target, and a receipt
               simulator that handles VAT and Senior/PWD rules. If you run a different kind of
-              business, this isn't the right tool for you yet.
+              business, this isn’t the right tool for you yet.
             </p>
           </div>
           <div className="pt-6 border-t border-border">
@@ -217,17 +217,16 @@ export default function LandingPage() {
             <p className="text-sm text-text-muted mt-1.5">
               Not yet — everything runs in one browser with no accounts, so
               anyone using that browser sees the same data. Separate staff
-              logins with real access control need accounts, which don't
+              logins with real access control need accounts, which don’t
               exist yet.
             </p>
           </div>
           <div className="pt-6 border-t border-border">
             <p className="font-medium">Does it work on my phone?</p>
             <p className="text-sm text-text-muted mt-1.5">
-              It'll load in a mobile browser, but the layout is still
-              desktop-first — the sidebar navigation doesn't collapse yet,
-              so it's usable but cramped on a small screen. Full mobile
-              support isn't done yet.
+              Yes. It runs in your phone’s browser, no app to install. The
+              menu folds behind the ☰ button, and the recipe editor puts
+              the ingredients first with the live price at the bottom.
             </p>
           </div>
           <div className="pt-6 border-t border-border">
@@ -237,7 +236,7 @@ export default function LandingPage() {
               <a href="#pricing" className="text-accent hover:text-accent-strong font-medium">
                 Pricing
               </a>{" "}
-              above. Nothing is decided, and everything that's free today
+              above. Nothing is decided, and everything that’s free today
               stays free regardless of what happens later.
             </p>
           </div>

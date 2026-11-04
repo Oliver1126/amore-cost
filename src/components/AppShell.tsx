@@ -6,7 +6,7 @@ import { Sidebar } from "./Sidebar";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageToggle } from "./LanguageToggle";
 import { BrandMark } from "./BrandMark";
-import { LanguageProvider } from "@/lib/i18n";
+import { LanguageProvider, useLanguage } from "@/lib/i18n";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -18,15 +18,11 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="flex-1 flex flex-col overflow-y-auto print:overflow-visible">
           <div className="flex items-center gap-3 px-4 sm:px-8 pt-4 sm:pt-6 print:hidden">
             <div className="flex items-center gap-2 lg:hidden">
-              <button
-                type="button"
-                onClick={() => setMobileNavOpen(true)}
-                aria-label="Open menu"
-                className="w-11 h-11 flex-none flex items-center justify-center rounded-lg hover:bg-surface-muted transition-colors"
-              >
-                <Menu className="w-5 h-5" aria-hidden="true" />
-              </button>
-              <BrandMark size={24} />
+              <MenuButton onClick={() => setMobileNavOpen(true)} />
+              {/* Below 390px the EN/TL + theme toggles need the room; the sidebar still shows the logo. */}
+              <span className="max-[389px]:hidden">
+                <BrandMark size={24} />
+              </span>
             </div>
             <div className="flex gap-2 ml-auto">
               <div className="w-20">
@@ -43,5 +39,20 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       </div>
     </LanguageProvider>
+  );
+}
+
+/** Lives inside LanguageProvider (unlike AppShell itself) so its label follows EN/TL. */
+function MenuButton({ onClick }: { onClick: () => void }) {
+  const { t } = useLanguage();
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={t("nav.openMenu")}
+      className="w-11 h-11 flex-none flex items-center justify-center rounded-lg hover:bg-surface-muted transition-colors"
+    >
+      <Menu className="w-5 h-5" aria-hidden="true" />
+    </button>
   );
 }

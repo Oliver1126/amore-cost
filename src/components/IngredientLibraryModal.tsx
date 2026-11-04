@@ -118,7 +118,7 @@ export function IngredientLibraryModal({
   }
 
   /** Switching to a compared supplier: their per-unit price replaces the current one, so the old pack no longer applies. */
-  function useSupplierPrice(ing: Ingredient, supplierName: string, price: number) {
+  function applySupplierPrice(ing: Ingredient, supplierName: string, price: number) {
     applyIngredientUpdate({
       ...ing,
       costPerUnit: price,
@@ -318,7 +318,7 @@ export function IngredientLibraryModal({
                                               {s.price !== ing.costPerUnit && (
                                                 <button
                                                   type="button"
-                                                  onClick={() => useSupplierPrice(ing, s.supplierName, s.price)}
+                                                  onClick={() => applySupplierPrice(ing, s.supplierName, s.price)}
                                                   className="text-xs font-medium text-accent hover:text-accent-strong"
                                                 >
                                                   {t("ingredients.usePrice")}

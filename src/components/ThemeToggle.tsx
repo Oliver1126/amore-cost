@@ -25,6 +25,7 @@ export function ThemeToggle() {
 
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration from localStorage after mount
     if (stored) setTheme(stored);
   }, []);
 

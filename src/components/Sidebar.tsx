@@ -9,7 +9,7 @@ import { useLanguage, getModuleText } from "@/lib/i18n";
 
 export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
   const pathname = usePathname();
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
 
   return (
     <>
@@ -21,9 +21,10 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
         />
       )}
       <nav
-        className={`fixed inset-y-0 left-0 z-50 w-64 flex-none bg-surface border-r border-border h-full overflow-y-auto transform transition-transform duration-200 ease-in-out ${
-          open ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 lg:static lg:z-auto print:hidden`}
+        className={`fixed inset-y-0 left-0 z-50 w-64 flex-none bg-surface border-r border-border h-full overflow-y-auto transform transition-[transform,visibility] duration-200 ease-in-out ${
+          // `invisible` when closed keeps the off-screen phone menu out of Tab order and screen readers.
+          open ? "translate-x-0 visible" : "-translate-x-full invisible"
+        } lg:translate-x-0 lg:visible lg:static lg:z-auto print:hidden`}
       >
         <div className="px-6 py-6 flex items-center justify-between gap-2.5">
           <div className="flex items-center gap-2.5">
@@ -35,7 +36,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close menu"
+            aria-label={t("nav.closeMenu")}
             className="w-11 h-11 flex-none flex items-center justify-center rounded-lg hover:bg-surface-muted transition-colors lg:hidden"
           >
             <X className="w-5 h-5" aria-hidden="true" />

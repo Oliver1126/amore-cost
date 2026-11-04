@@ -211,6 +211,8 @@ const STRINGS = {
     "costForm.yieldHelp": "How much of what you buy is actually usable after trimming, bones, peeling, or cooking loss. 1 kg of bone-in chicken that gives 700 g of meat is 70% yield — its real cost is grossed up so the price covers what you throw away. Leave blank for 100%.",
     "costForm.afterYield": "after yield",
     "editor.yieldLoss": "waste",
+    "nav.closeMenu": "Close menu",
+    "nav.openMenu": "Open menu",
     "editor.packLibraryNote": "Saved to the Ingredient Library: changing it updates every recipe that uses {name}.",
     "editor.shareOfCost": "of cost",
     "costForm.ingredientLibraryName": "Ingredient Library",
@@ -716,6 +718,8 @@ const STRINGS = {
     "costForm.yieldHelp": "Gaano karami sa binili mo ang talagang nagagamit pagkatapos tanggalin ang buto, balat, o nawala sa pagluluto. Ang 1 kg na manok na may buto na nagbibigay ng 700 g na laman ay 70% yield — itinataas ang tunay na gastos para masakop ng presyo ang nasasayang. Iwanang blangko kung 100%.",
     "costForm.afterYield": "pagkatapos ng yield",
     "editor.yieldLoss": "sayang",
+    "nav.closeMenu": "Isara ang menu",
+    "nav.openMenu": "Buksan ang menu",
     "editor.packLibraryNote": "Naka-save sa Aklatan ng Sangkap: kapag binago, mag-a-update ang lahat ng recipe na gumagamit ng {name}.",
     "editor.shareOfCost": "ng gastos",
     "costForm.ingredientLibraryName": "Aklatan ng Sangkap",
@@ -1117,6 +1121,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = window.localStorage.getItem(LANG_STORAGE_KEY);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration from localStorage after mount
     if (stored === "en" || stored === "tl") setLangState(stored);
   }, []);
 
@@ -1124,6 +1129,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLangState(next);
     window.localStorage.setItem(LANG_STORAGE_KEY, next);
   }
+
+  // Keep <html lang> in step with the toggle so screen readers pronounce Tagalog as Tagalog.
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   function t(key: StringKey) {
     return STRINGS[lang][key] ?? STRINGS.en[key];

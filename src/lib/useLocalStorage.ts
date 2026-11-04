@@ -10,13 +10,13 @@ export function useLocalStorage<T>(key: string, initial: () => T) {
     const raw = window.localStorage.getItem(key);
     if (raw) {
       try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration from localStorage after mount
         setValue(JSON.parse(raw) as T);
       } catch {
         // ignore corrupt storage, keep default
       }
     }
     setHydrated(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 
   useEffect(() => {

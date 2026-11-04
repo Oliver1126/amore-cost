@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 
 /**
  * Calls `commit` once, `delayMs` after `dep` last changed — re-arming
@@ -17,17 +17,18 @@ import { useEffect, useRef } from "react";
  */
 export function useDebouncedCommit(dep: unknown, delayMs: number, commit: () => void) {
   const commitRef = useRef(commit);
-  commitRef.current = commit;
+  // Updated after render (not during it), before any timer can fire.
+  useLayoutEffect(() => {
+    commitRef.current = commit;
+  });
 
   useEffect(() => {
     if (dep === null || dep === undefined) return;
     const timer = setTimeout(() => commitRef.current(), delayMs);
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dep, delayMs]);
 
   useEffect(() => {
     return () => commitRef.current();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 }

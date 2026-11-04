@@ -4,6 +4,24 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-11-04** — Full app check (every page, EN/TL, light/dark,
+  1440/1280/390/360 px, ~20 scripted flows incl. receipt Senior/PWD,
+  backup/restore, library, OPEX, simulator, retired-route redirects).
+  No console errors and all numbers verified by hand. Fixed:
+  - Enter in the New recipe box now submits (and Escape closes it).
+  - `<html lang>` now follows EN/TL (was always "en").
+  - The closed phone menu could still be reached with Tab and screen
+    readers; it's now hidden properly. Menu button labels are
+    translated.
+  - At 360 px the EN/TL toggle covered the top-bar logo; the logo
+    hides below 390 px.
+  - The landing page FAQ still said the phone layout "isn't done yet"
+    and the sidebar "doesn't collapse"; it does now.
+  - Lint went from 15 errors to 0: a ref written during render
+    (`useDebouncedCommit`), a function misnamed like a hook
+    (`useSupplierPrice` → `applySupplierPrice`), unescaped apostrophes,
+    stale disable comments, and the intentional localStorage
+    hydrations now marked as such.
 - **2026-11-02** — Supplier + pack price in the Ingredient Library
   (decision 0043). Library ingredients have a Supplier and an optional
   pack (price, qty, unit, shipping) that works out cost / unit. A linked

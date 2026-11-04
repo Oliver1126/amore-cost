@@ -41,7 +41,7 @@ export function LandingCalculator() {
   if (limitHit) {
     return (
       <div className="card p-6">
-        <p className="text-sm font-medium text-accent-strong">You've tried the free preview</p>
+        <p className="text-sm font-medium text-accent-strong">You’ve tried the free preview</p>
         <h3 className="font-display text-xl mt-2">Good news — the full calculator is free too.</h3>
         <p className="text-sm text-text-muted mt-2">
           No account, no card, no limits. Everything you just tried here (plus

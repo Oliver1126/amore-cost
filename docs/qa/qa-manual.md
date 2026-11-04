@@ -149,7 +149,15 @@ and confirm the data survived.
 
 - [ ] **Language toggle (EN/TL)** — switch mid-session, confirm text
       updates immediately without a reload, and nothing overflows its
-      container or shows up blank in either language.
+      container or shows up blank in either language. `<html lang>`
+      follows it (`en` / `tl`), so screen readers switch pronunciation.
+- [ ] **Phone menu (below 1024 px)** — ☰ opens the sidebar, tapping a
+      page closes it, and while closed it can't be reached with Tab
+      (it's `invisible`, not just off-screen). Both menu buttons are
+      labelled in EN and TL. At 360 px the top bar has no overlap: the
+      small logo hides below 390 px so the EN/TL and theme toggles fit.
+- [ ] **Lint** — `npx eslint src` should show 0 errors (one known
+      warning: BrandMark uses a plain `<img>` on purpose).
 - [ ] **Theme toggle (Light/Dark/Auto)** — check contrast/readability
       in both Light and Dark, and that Auto follows the OS setting.
 - [ ] **Reload persistence** — refresh the browser after entering data
