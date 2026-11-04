@@ -9,7 +9,7 @@ scale, win), and [roadmap/backlog.md](roadmap/backlog.md) /
 [roadmap/completed.md](roadmap/completed.md) for concrete not-started
 work vs. the shipped changelog.
 
-## Where this stands (as of 2026-11-01)
+## Where this stands (as of 2026-11-05)
 
 - **The app is five pages** (decision 0040): Dashboard, Input, OPEX &
   Overhead, Receipt Simulator, Margin & POS Simulator — see
@@ -28,9 +28,10 @@ work vs. the shipped changelog.
   "Pack price" drawer edits the library (cascading to every recipe).
   189 tests.
 - **Code:** https://github.com/Oliver1126/amore-cost (`main`).
-  **Live site:** https://amore-cost.vercel.app — **behind the code**:
-  it predates decisions 0040–0043 and needs a manual `vercel --prod`
-  from this folder (no auto-deploy).
+  **Live site:** https://amore-cost.vercel.app — **up to date** as of
+  2026-11-05 (commit `8d673d3`, everything through decision 0043 plus
+  the Receipt menu buttons). Still CLI-only: it only updates when
+  someone runs `vercel --prod` from this folder (no auto-deploy).
 - **Competition:** KwentaPOS also does recipe costing inside a POS —
   see [business/kwentapos-comparison.md](business/kwentapos-comparison.md)
   and [business/competitive-landscape.md](business/competitive-landscape.md).
@@ -48,7 +49,7 @@ here.
 ## Open, in priority order
 
 1. **Stage 0 — launch-ready** ([roadmap.md](roadmap/roadmap.md#stage-0-launch-ready-week-1-mostly-free)):
-   deploy the current build (`vercel --prod`), turn on analytics and add
+   ~~deploy the current build~~ (done 2026-11-05), turn on analytics and add
    an in-app feedback link ([backlog](roadmap/backlog.md) item 3),
    finish the name due-diligence checklist (backlog item 2), create the
    Facebook page and one short-video account.

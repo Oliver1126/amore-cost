@@ -118,8 +118,8 @@ more.
 
 ### Stage 0: Launch-ready (week 1, mostly free)
 
-1. **Deploy** the current build (`vercel --prod`). The live site is
-   behind the code (no yield, rounding or sample recipes yet).
+1. ~~**Deploy** the current build (`vercel --prod`).~~ Done
+   2026-11-05: the live site now matches `main` (`8d673d3`).
 2. **Turn on privacy-friendly analytics.** Vercel Web Analytics is free
    at this scale. Track visits, "Try with sample recipes" clicks, and
    "+ New recipe" clicks.

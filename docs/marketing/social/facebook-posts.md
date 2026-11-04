@@ -7,9 +7,10 @@ rendered from [post-images.html](post-images.html) by `render-posts.cjs`. Taglis
 comes from the app's sample recipes (Post 5 is the video) (`src/lib/demo.ts`), so anyone who
 taps "Try with sample recipes" sees the same figures.
 
-Before posting, make sure https://amore-cost.vercel.app is deployed
-(`vercel --prod`). Otherwise people land on the old version, without the
-sample recipes, yield or rounding.
+https://amore-cost.vercel.app was redeployed on 2026-11-05 and has
+everything these posts and the video mention (sample recipes, yield,
+rounding). After any new app change, redeploy (`vercel --prod`) before
+posting about it.
 
 ---
 

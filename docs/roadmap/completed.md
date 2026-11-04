@@ -4,6 +4,11 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-11-05** — Production deploy: https://amore-cost.vercel.app now
+  serves `8d673d3` (decisions 0040–0043, the full-app-check fixes and
+  Receipt menu buttons). Verified live: all six pages 200, old routes
+  redirect, sample recipes → Edit & Breakdown and Receipt menu buttons
+  work, no console errors.
 - **2026-11-04** — Receipt Simulator "Menu buttons" (optional): a
   Dropdown / Menu buttons switch on Build an order. Menu buttons shows
   every recipe as a rounded POS-style tile with its price; a tap adds

@@ -10,9 +10,9 @@ because it's ready to do.
 
 - [x] **Deploy the app** so there's a real link to share — done
       2026-08-21: **https://amore-cost.vercel.app** (decision 0031).
-- [ ] **Redeploy the current build** (`vercel --prod`) — the live site
-      predates the five-page app and sample recipes (decisions
-      0040/0041). Don't send anyone the link until this is done.
+- [x] **Redeploy the current build** — done 2026-11-05 (commit
+      `8d673d3`): the live site has the five-page app, sample recipes,
+      yield, supplier/pack and Receipt menu buttons. Safe to share.
 - [ ] **Analytics + in-app feedback link** ([backlog](../roadmap/backlog.md)
       item 3) — without them Stage 1's gate can't be measured.
 - [ ] **Name due-diligence** (backlog item 2) and a Facebook page + one
