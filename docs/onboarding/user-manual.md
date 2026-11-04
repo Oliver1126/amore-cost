@@ -338,8 +338,8 @@ price list.
    - Bought by the pack, bottle or sack? Fill in the **Pack price** box
      instead (for example, ₱1,450 for a 25 kg sack of rice). The cost
      per unit is worked out for you (₱58.00/kg).
-2. In a recipe, pick that ingredient from the small dropdown above the
-   ingredient name. The row is now **linked**.
+2. In a recipe, type or pick that ingredient's name in the ingredient
+   name box. The row is now **linked** and shows a green **Library** tag.
 3. When the price changes at the market, update it **once** in the
    library, and every recipe that uses it recalculates.
 
@@ -402,8 +402,13 @@ lose money even though it "has profit."
 Practice an order and see exactly what the receipt would show. **Nothing
 is saved, and nothing counts as a sale.**
 
-1. **Build an order:** pick a recipe, set the quantity, tap **Add to
-   order**. Repeat for more dishes.
+1. **Build an order,** in either of two ways (switch at the top right of
+   the card; the app remembers your choice on this device):
+   - **Dropdown** (the default): pick a recipe, set the quantity, tap
+     **Add to order**. Repeat for more dishes.
+   - **Menu buttons:** every recipe appears as a rounded button with its
+     price, like a POS screen. Tap a dish to add one. A green badge shows
+     how many are in the order. Change quantities in the order list below.
 2. **Pricing model:**
    - **VAT inclusive:** your menu price already includes VAT. Most
      Philippine restaurants do this.

@@ -118,7 +118,13 @@ and confirm the data survived.
       buffered OPEX ÷ monthly dishes, and reads ₱0.00 (not a crash or
       NaN) when dishes is blank. Items saved before categories existed
       show as "Other."
-- [ ] **Receipt Simulator** (`/receipt`) — add the same recipe twice and
+- [ ] **Receipt Simulator** (`/receipt`) — Dropdown is the default
+      picker; switch to **Menu buttons**: one rounded tile per recipe
+      with its price, a tap adds one, the badge counts it (2 × Adobo +
+      1 × Halo-Halo = ₱788.00 VAT-inclusive), the choice survives a
+      reload, and a dish added by tile and by dropdown merges into one
+      line (1 + 2 Adobo = 3, ₱897.00); 2 tiles per row at 360 px with
+      long names wrapping. Add the same recipe twice and
       confirm it merges into one line; edit a line's quantity; VAT
       inclusive vs. exclusive changes how prices display and the total;
       Senior/PWD removes VAT and takes 20% off the VAT-exclusive amount

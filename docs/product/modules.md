@@ -70,7 +70,10 @@ Dashboard and is the Margin & POS Simulator's default volume.
 ## 4. Receipt Simulator — `/receipt`
 
 A sandbox order — nothing is saved or recorded as a sale. Pick recipes
-and quantities, choose VAT inclusive/exclusive pricing, VAT rate, service
+and quantities from a dropdown (default) or, optionally, POS-style
+**Menu buttons**: one rounded tile per recipe with its price; a tap adds
+one and a badge counts it (the choice is a per-device preference in
+`calcost:v0:receipt-order-view`, deliberately not in backups), choose VAT inclusive/exclusive pricing, VAT rate, service
 charge %, and Standard vs. Senior/PWD. Renders a **thermal-receipt-style
 slip** (monospace, double/dashed rules, scalloped tear-off edge — layout
 from the reference's POS receipt): the owner's own business name /

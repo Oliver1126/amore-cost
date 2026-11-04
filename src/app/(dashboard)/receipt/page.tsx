@@ -14,7 +14,7 @@ import {
   type ReceiptLine,
   type ReceiptProfile,
 } from "@/lib/receipt";
-import { UtensilsCrossed } from "lucide-react";
+import { UtensilsCrossed, List, LayoutGrid } from "lucide-react";
 import { peso } from "@/lib/format";
 import { useLanguage, getModuleText } from "@/lib/i18n";
 import { PageSkeleton } from "@/components/PageSkeleton";
@@ -23,6 +23,9 @@ import { MODULES } from "@/lib/modules";
 
 const inputClass =
   "rounded-xl border border-border bg-surface-muted px-3 py-2 text-sm focus:outline-none focus:border-accent";
+
+type OrderView = "dropdown" | "tiles";
+const ORDER_VIEW_STORAGE_KEY = "calcost:v0:receipt-order-view";
 
 function segmentClass(active: boolean) {
   return `flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
@@ -44,8 +47,10 @@ export default function ReceiptSimulatorPage() {
   const [vatRate, setVatRate] = useState(12);
   const [serviceCharge, setServiceCharge] = useState(0);
   const [seniorPwd, setSeniorPwd] = useState(false);
+  // How "Build an order" picks dishes: a dropdown (default) or POS-style menu tiles. A per-device preference, so it's kept out of backups.
+  const [orderView, setOrderView, viewHydrated] = useLocalStorage<OrderView>(ORDER_VIEW_STORAGE_KEY, () => "dropdown");
 
-  if (!catalogHydrated || !profileHydrated) return <PageSkeleton />;
+  if (!catalogHydrated || !profileHydrated || !viewHydrated) return <PageSkeleton />;
 
   const title = getModuleText(lang, MODULES.find((m) => m.slug === "receipt")!).name;
   const inputName = getModuleText(lang, MODULES.find((m) => m.slug === "input")!).name;
@@ -53,12 +58,22 @@ export default function ReceiptSimulatorPage() {
   const shownPrice = (net: number) => menuUnitPrice(net, { pricingModel, vatRate });
   const itemCount = lines.reduce((s, l) => s + l.quantity, 0);
 
+  /** Same dish at the same price merges into one line, whichever picker added it. */
+  function sameLine(l: ReceiptLine, item: CatalogItem) {
+    return l.name === (item.state.itemName || t("common.untitled")) && l.unitNetPrice === computePriceBreakdown(item.state).priceBeforeTax;
+  }
+
   function addLine() {
     const item = catalog.find((c) => c.id === selectedId);
     if (!item || quantity <= 0) return;
+    addItem(item, quantity);
+    setQuantity(1);
+  }
+
+  function addItem(item: CatalogItem, quantity: number) {
     const b = computePriceBreakdown(item.state);
     setLines((current) => {
-      const existing = current.find((l) => l.name === item.state.itemName && l.unitNetPrice === b.priceBeforeTax);
+      const existing = current.find((l) => sameLine(l, item));
       if (existing) return current.map((l) => (l === existing ? { ...l, quantity: l.quantity + quantity } : l));
       return [
         ...current,
@@ -71,7 +86,6 @@ export default function ReceiptSimulatorPage() {
         },
       ];
     });
-    setQuantity(1);
   }
 
   const now = new Date();
@@ -108,7 +122,57 @@ export default function ReceiptSimulatorPage() {
         <div className="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_24rem] gap-6 items-start">
           <div className="space-y-6 min-w-0 print:hidden">
             <div className="card p-5">
-              <p className="text-sm font-medium">{t("receipt.addTitle")}</p>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-sm font-medium">{t("receipt.addTitle")}</p>
+                <div className="flex gap-1 bg-surface-muted rounded-xl p-1" role="radiogroup" aria-label={t("receipt.orderView")}>
+                  {(["dropdown", "tiles"] as OrderView[]).map((v) => (
+                    <button
+                      key={v}
+                      type="button"
+                      role="radio"
+                      aria-checked={orderView === v}
+                      onClick={() => setOrderView(v)}
+                      className={`${segmentClass(orderView === v)} flex-none flex items-center gap-1.5`}
+                    >
+                      {v === "dropdown" ? <List className="w-3.5 h-3.5" aria-hidden /> : <LayoutGrid className="w-3.5 h-3.5" aria-hidden />}
+                      {v === "dropdown" ? t("receipt.viewDropdown") : t("receipt.viewTiles")}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {orderView === "tiles" ? (
+                <div className="mt-4">
+                  <p className="text-xs text-text-muted">{t("receipt.tilesHint")}</p>
+                  <ul className="mt-2 grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2">
+                    {catalog.map((c) => {
+                      const name = c.state.itemName || t("common.untitled");
+                      const inOrder = lines.filter((l) => sameLine(l, c)).reduce((s, l) => s + l.quantity, 0);
+                      return (
+                        <li key={c.id}>
+                          <button
+                            type="button"
+                            onClick={() => addItem(c, 1)}
+                            aria-label={`${t("receipt.addOne")} ${name}${inOrder ? ` (${inOrder} ${t("receipt.inOrder")})` : ""}`}
+                            className={`relative w-full h-full min-h-[5.5rem] rounded-2xl border p-3 text-left flex flex-col justify-between gap-2 transition-all active:scale-[0.97] ${
+                              inOrder ? "border-accent bg-accent-soft" : "border-border bg-surface hover:border-accent hover:bg-accent-soft/40"
+                            }`}
+                          >
+                            <span className="text-sm font-medium leading-snug line-clamp-3 pr-6">{name}</span>
+                            <span className="font-num text-sm font-semibold text-accent-strong">
+                              ₱{peso(shownPrice(computePriceBreakdown(c.state).priceBeforeTax))}
+                            </span>
+                            {inOrder > 0 && (
+                              <span className="font-num absolute top-2 right-2 min-w-6 h-6 px-1.5 rounded-full bg-accent text-accent-ink text-xs font-bold flex items-center justify-center" aria-hidden>
+                                {inOrder}
+                              </span>
+                            )}
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              ) : (
               <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] sm:grid-cols-[minmax(0,1fr)_6rem_auto] gap-2">
                 <select
                   value={selectedId}
@@ -142,6 +206,7 @@ export default function ReceiptSimulatorPage() {
                   {t("receipt.addToOrder")}
                 </button>
               </div>
+              )}
 
               <div className="mt-5">
                 <div className="flex items-center justify-between">
@@ -160,7 +225,7 @@ export default function ReceiptSimulatorPage() {
                   <ul className="mt-2 divide-y divide-border">
                     {lines.map((l) => (
                       <li key={l.id} className="flex items-center gap-2 py-2 text-sm">
-                        <span className="flex-1 min-w-0 truncate">{l.name}</span>
+                        <span className="flex-1 min-w-0 break-words leading-snug">{l.name}</span>
                         <input
                           type="number"
                           inputMode="numeric"
@@ -173,7 +238,7 @@ export default function ReceiptSimulatorPage() {
                           aria-label={`${t("receipt.quantity")} — ${l.name}`}
                           className={`${inputClass} font-num w-16 text-right py-1`}
                         />
-                        <span className="font-num w-24 text-right">₱{peso(shownPrice(l.unitNetPrice) * l.quantity)}</span>
+                        <span className="font-num w-20 sm:w-24 flex-none text-right">₱{peso(shownPrice(l.unitNetPrice) * l.quantity)}</span>
                         <button
                           type="button"
                           onClick={() => setLines((cur) => cur.filter((x) => x.id !== l.id))}

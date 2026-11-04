@@ -4,6 +4,14 @@ What's actually shipped, newest first — a flat changelog, not a plan.
 See [../business/decisions/](../business/decisions/CONTEXT.md) for
 *why* each of these happened, not just that they did.
 
+- **2026-11-04** — Receipt Simulator "Menu buttons" (optional): a
+  Dropdown / Menu buttons switch on Build an order. Menu buttons shows
+  every recipe as a rounded POS-style tile with its price; a tap adds
+  one, and a badge counts it. Dropdown stays the default; the choice is
+  remembered per device. Order-list names now wrap on phones instead of
+  being cut to "Chicke…". Also fixed the user manual still describing a
+  "small dropdown" for linking library ingredients (it's the name box
+  since decision 0042).
 - **2026-11-04** — Full app check (every page, EN/TL, light/dark,
   1440/1280/390/360 px, ~20 scripted flows incl. receipt Senior/PWD,
   backup/restore, library, OPEX, simulator, retired-route redirects).
